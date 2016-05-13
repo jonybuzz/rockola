@@ -22,7 +22,8 @@ var agregarTema = function (videoId, titulo, thumbnail) {
 var obtenerTemas = function (res) {
     var temas;
     return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
-        if (docs != undefined) {
+
+        if (docs != undefined && docs.length !== 0) {
             temas = docs[0].temas;
             res.json({temas: temas});
         } else

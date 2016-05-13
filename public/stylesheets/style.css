@@ -1,5 +1,9 @@
 .body-image {
-  background-image: url("../img/rockola.jpg");
-  background-size: cover;
-  color: white; 
+    background-image: url("../img/rockola.jpg");
+    background-size: cover;
+    color: white; 
+}
+
+.cliente-titulo-video{
+    vertical-align: middle;
 }
