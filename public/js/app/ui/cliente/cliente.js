@@ -19,6 +19,7 @@ rockola.ui.cliente = (function () {
     }
 
     function obtenerRespuesta(respuesta) {
+        $("#link-tema").val("");
         if (respuesta.agregado == false) {
             alert("Ingresá la url completa, con youtube!");
         }
