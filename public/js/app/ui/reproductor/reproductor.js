@@ -1,20 +1,22 @@
 rockola.ui.reproductor = (function () {
 
-    var listaDeReproduccion;
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
     var player = $("#player");
-    var done = false;
+    var listaReproduccion;
 
-    function onYouTubeIframeAPIReady() {
+    var done = false;
+    function onYouTubeIframeAPIReady(data) {
         player = new YT.Player('player', {
             height: '390',
             width: '640',
-            videoId: 'koAnIdfXtp8',
-            playerVars: {
-                controls: 0,
-                disablekb: 1
-            },
+            videoId: data.temas.videoId
+//            ,
+//            playerVars: {
+//                controls: 0,
+//                disablekb: 1
+//            }
+            ,
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -33,8 +35,16 @@ rockola.ui.reproductor = (function () {
         }
 
         if (event.data === YT.PlayerState.ENDED) {
-            console.log('ESTADO: FINALIZADO');
+            console.log('ESTADO: SIGUIENTE VIDEO');
+            rockola.service.tema.obtenerSiguiente().done(reproducir);
+            obtenerListaTemas();
         }
+    }
+
+    function reproducir(data) {
+        player.loadVideoById({
+            videoId: data.temas.videoId
+        });
     }
 
     function initFrame() {
@@ -43,7 +53,7 @@ rockola.ui.reproductor = (function () {
         $.getScript("//www.youtube.com/player_api", function () {
             yt_int = setInterval(function () {
                 if (typeof YT === "object") {
-                    onYouTubeIframeAPIReady();
+                    rockola.service.tema.obtenerSiguiente().done(onYouTubeIframeAPIReady);
                     clearInterval(yt_int);
                 }
             }, 500);
@@ -55,7 +65,8 @@ rockola.ui.reproductor = (function () {
     }
 
     function renderizarListaTemas(lista) {
-        var html = $("#bodyListaTemplate").render(lista.temas);
+        listaReproduccion = lista.temas;
+        var html = $("#bodyListaTemplate").render(listaReproduccion);
         $("#body-lista-reproductor").html(html);
     }
 

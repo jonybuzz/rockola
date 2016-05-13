@@ -15,17 +15,24 @@ rockola.service.tema = (function () {
         return rockola.service.get(urlObtenerLista);
     }
 
-    function obtenerDatos(videoId) {
+    function obtenerNombre(videoId) {
         var urlObtenerNombreApiYoutube =
                 "https://www.googleapis.com/youtube/v3/videos?part=snippet&key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo&id="
-        + videoId;
+                + videoId;
         return rockola.service.get(urlObtenerNombreApiYoutube);
+    }
+
+    function obtenerSiguiente() {
+        var urlObtenerLista = rockola.service.url() + "tema/siguiente";
+        return rockola.service.get(urlObtenerLista);
     }
 
     return {
         enviarTema: enviarTema,
         obtenerLista: obtenerLista,
-        obtenerDatos: obtenerDatos
+        obtenerNombre: obtenerNombre,
+        obtenerSiguiente: obtenerSiguiente
     };
+
 })();
 
