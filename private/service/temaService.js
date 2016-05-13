@@ -2,7 +2,7 @@ var databaseUrl = "rockola";
 var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
 
-var agregarTema = function (videoId, titulo, thumbnail) {
+var agregarTema = function (videoId, titulo, thumbnail, nombreUsuario) {
     db.rockola.update(
             {nombre: "RockolaPNT"},
             {
@@ -10,7 +10,8 @@ var agregarTema = function (videoId, titulo, thumbnail) {
                     temas: {
                         videoId: videoId,
                         titulo: titulo,
-                        thumbnail: thumbnail
+                        thumbnail: thumbnail,
+                        nombreUsuario: nombreUsuario
                     }
                 }
             },
