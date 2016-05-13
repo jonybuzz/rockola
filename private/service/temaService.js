@@ -15,25 +15,42 @@ var agregarTema = function (temaUrl) {
                         }
                     }
                 },
-                {upsert:true,safe:false}
+                {upsert: true, safe: false}
         );
         return true;
     }
     return false;
 };
 
+//Nota: Hacer Sincronico este metodo
 var obtenerTemas = function (res) {
-    
-    var e;
-    return db.rockola.find({nombre: "RockolaPNT"},function(err, docs){
-        e = docs[0].temas;
-        res.json({temas: e});   
+
+    var temas;
+    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+        temas = docs[0].temas;
+        res.json({temas: temas});
     });
 };
 
-var obtenerSiguiente = function () {
+var obtenerSiguiente = function (res) {
+    var tema;
+    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+        tema = docs[0].temas[0];
+        res.json({temas: tema});
+        db.rockola.update(
+                {nombre: "RockolaPNT"},
+                {
+                    $pull: {
+                        temas: {
+                            videoId: tema.videoId
+                        }
+                    }
+                }
+        );
+    });
 
 };
 
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;
+module.exports.obtenerSiguiente = obtenerSiguiente;
