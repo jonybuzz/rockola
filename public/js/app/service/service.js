@@ -1,6 +1,6 @@
 rockola.service = (function () {
     function uriService() {
-        url = "http://localhost:3000/";
+        url =  rockola.url();
         return url + "api/";
     }
 
