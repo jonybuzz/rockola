@@ -5,16 +5,29 @@ rockola.ui.cliente = (function () {
         $("#js-boton-enviar").on("click", enviarTema)
     }
     
-    function enviarTema(){
+    function enviarTema(event){
+        event.preventDefault();
         var urlTema = $("#link-tema").val();
-        rockola.service.cliente.enviarTema(urlTema);
+        rockola.service.tema.enviarTema(urlTema)
+                .done(obtenerRespuesta)
+                .fail(mostrarErrorServicioTema);
         obtenerLista();
     }
     
+    function mostrarErrorServicioTema(){
+        alert("ERROR con el servicio de Tema");
+    }
+    
+    function obtenerRespuesta(respuesta){
+        if ( respuesta.agregado == false){
+            alert("Ingresá la url completa, con youtube!");
+        }
+    }
+    
     function obtenerLista(){
-        rockola.service.cliente.obtenerLista()
+        rockola.service.tema.obtenerLista()
                 .done(actualizarListaTemas)
-                .fail(alert("ERROR al obtener la lista de temas"))
+                .fail(mostrarErrorServicioTema)
     }
     
     function actualizarListaTemas(temas){
