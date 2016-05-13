@@ -1,6 +1,6 @@
 var rockola = (function () {
     function url() {
-        return document.baseURI;
+        return location.protocol + '//' + location.host + '/';//document.baseURI;
     }
 
     return {

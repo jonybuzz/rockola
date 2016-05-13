@@ -4,8 +4,8 @@ rockola.ui.cliente = (function () {
         obtenerLista();
         $("#js-boton-enviar").on("click", enviarTema)
     }
-    
-    function enviarTema(event){
+
+    function enviarTema(event) {
         event.preventDefault();
         var urlTema = $("#link-tema").val();
         rockola.service.tema.enviarTema(urlTema)
@@ -13,29 +13,27 @@ rockola.ui.cliente = (function () {
                 .fail(mostrarErrorServicioTema);
         obtenerLista();
     }
-    
-    function mostrarErrorServicioTema(){
+
+    function mostrarErrorServicioTema() {
         alert("ERROR con el servicio de Tema");
     }
-    
-    function obtenerRespuesta(respuesta){
-        if ( respuesta.agregado == false){
+
+    function obtenerRespuesta(respuesta) {
+        $("#link-tema").val("");
+        if (respuesta.agregado == false) {
             alert("Ingresá la url completa, con youtube!");
         }
     }
-    
-    function obtenerLista(){
+
+    function obtenerLista() {
         rockola.service.tema.obtenerLista()
                 .done(actualizarListaTemas)
                 .fail(mostrarErrorServicioTema)
     }
-    
-    function actualizarListaTemas(temas){
-        $("#body-lista-reproduccion").html("<tr>");
-        $.each(temas , function(tema){
-            $("#body-lista-reproduccion").append("<td>" + tema + "</td>");
-        })
-        $("#body-lista-reproduccion").append("</tr>");
+
+    function actualizarListaTemas(lista) {
+        var html = $("#bodyListaTemplate").render(lista.temas);
+        $("#body-lista-reproduccion").html(html);
     }
 
     return {
