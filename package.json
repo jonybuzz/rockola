@@ -14,6 +14,10 @@
     "method-override": "^2.3.5",
     "mongojs": "^2.4.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "youtube-api": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
