@@ -3,7 +3,6 @@ rockola.ui.reproductor = (function () {
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
     var player = $("#player");
-    var listaReproduccion;
 
     var done = false;
     function onYouTubeIframeAPIReady(data) {
@@ -65,8 +64,7 @@ rockola.ui.reproductor = (function () {
     }
 
     function renderizarListaTemas(lista) {
-        listaReproduccion = lista.tema;
-        var html = $("#bodyListaTemplate").render(listaReproduccion);
+        var html = $("#bodyListaTemplate").render(lista.temas);
         $("#body-lista-reproductor").html(html);
     }
 
