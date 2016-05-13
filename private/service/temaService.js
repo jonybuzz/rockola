@@ -22,8 +22,13 @@ var agregarTema = function (temaUrl) {
     return false;
 };
 
-var obtenerTemas = function () {
-
+var obtenerTemas = function (res) {
+    
+    var e;
+    return db.rockola.find({nombre: "RockolaPNT"},function(err, docs){
+        e = docs[0].temas;
+        res.json({temas: e});   
+    });
 };
 
 var obtenerSiguiente = function () {
@@ -31,3 +36,4 @@ var obtenerSiguiente = function () {
 };
 
 module.exports.agregarTema = agregarTema;
+module.exports.obtenerTemas = obtenerTemas;
