@@ -1,31 +1,10 @@
 rockola.ui.reproductor = (function () {
-
-    function init() {
-
-    }
-
-})();
-
-$(document).ready(function () {
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
-    var player;
+    var player = $("#player");
     var done = false;
-    
-    tag.src = "https://www.youtube.com/iframe_api";
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    $.getScript("//www.youtube.com/player_api", function () {
-        yt_int = setInterval(function () {
-            if (typeof YT === "object") {
-                onYouTubeIframeAPIReady();
-                clearInterval(yt_int);
-            }
-        }, 500);
-    });
 
     function onYouTubeIframeAPIReady() {
-        var player = $("#player");
         player = new YT.Player('player', {
             height: '390',
             width: '640',
@@ -56,8 +35,30 @@ $(document).ready(function () {
         }
     }
 
-    function stopVideo() {
-        player.stopVideo();
+    function initFrame() {
+        tag.src = "https://www.youtube.com/iframe_api";
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        $.getScript("//www.youtube.com/player_api", function () {
+            yt_int = setInterval(function () {
+                if (typeof YT === "object") {
+                    onYouTubeIframeAPIReady();
+                    clearInterval(yt_int);
+                }
+            }, 500);
+        });
     }
+
+    function init() {
+        initFrame();
+    }
+
+    return {
+        init: init
+    };
+
+})();
+
+$(document).ready(function () {
+    rockola.ui.reproductor.init();
 });
 
