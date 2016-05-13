@@ -13,6 +13,7 @@
 .listado {
     max-height: 600px;    
     overflow: auto;
+    background: rgba(0,0,0,0.35);
 }
 
 /*
