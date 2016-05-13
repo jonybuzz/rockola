@@ -15,4 +15,9 @@ router.get('/', function (req, res, next) {
 router.get('/reproductor', function (req, res) {
     res.render('reproductor');
 });
+
+router.get('/cliente', function(req, res, next) {
+  res.render('cliente');
+});
+
 module.exports = router;
