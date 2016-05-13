@@ -12,6 +12,8 @@ describe('TemaService', function () {
         expect(resultado).to.equal(true);
     });
 
+//Nota: Por Sincronia este test no se pudo hacerlo pasar
+//Pista: Promises
 //    it('obtenerTemas() debe retornar todos los temas de la rockola', function (done) {
 //        var temas = temaService.obtenerTemas().then(
 //                function (temas) {

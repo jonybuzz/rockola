@@ -11,4 +11,8 @@ routerA.route('/todos').get(function(req,res,next){
     temaService.obtenerTemas(res);
 });
 
+routerA.route('/siguiente').get(function(req,res,next){
+    temaService.obtenerSiguiente(res);
+});
+
 module.exports = routerA;
