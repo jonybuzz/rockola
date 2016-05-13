@@ -10,23 +10,26 @@ rockola.ui.cliente = (function () {
         var urlTema = $("#link-tema").val();
 
         var tokens = urlTema.split("=");
-        var videoId = tokens[1];
-        
-        rockola.service.tema.obtenerNombre(videoId)
-                .done(obtenerNombreSuccess);
+        if (tokens[0].includes("www.youtube.com/watch?v")) {
+            var videoId = tokens[1];
 
+            rockola.service.tema.obtenerDatos(videoId)
+                    .done(obtenerNombreSuccess);
+        } else{
+            alert("La URL no es válida");
+        }
     }
 
-    function obtenerNombreSuccess(data){
-        
-        if(data.pageInfo.totalResults === 0){
+    function obtenerNombreSuccess(data) {
+
+        if (data.pageInfo.totalResults === 0) {
             alert('No existe el video!!');
         }
-        
+
         var videoId = data.items[0].id;
         var titulo = data.items[0].snippet.title;
         var urlThumbnail = data.items[0].snippet.thumbnails.default.url;
-        
+
         rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail)
                 .done(obtenerRespuestaDelServidor)
                 .fail(mostrarErrorServicioTema);
