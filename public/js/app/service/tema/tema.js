@@ -10,10 +10,16 @@ rockola.service.tema = (function () {
         var urlObtenerLista = rockola.service.url() + "tema/todos";
         return rockola.service.get( urlObtenerLista);
     }
+    
+    function obtenerSiguiente(){
+        var urlObtenerLista = rockola.service.url() + "tema/siguiente";
+        return rockola.service.get(urlObtenerLista);
+    }
 
     return {
         enviarTema: enviarTema,
-        obtenerLista: obtenerLista
+        obtenerLista: obtenerLista,
+        obtenerSiguiente: obtenerSiguiente
     };
 })();
 
