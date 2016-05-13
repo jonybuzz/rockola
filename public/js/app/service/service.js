@@ -1,6 +1,6 @@
 rockola.service = (function () {
     function uriService() {
-        url = hubi.url();
+        url = "http://localhost:3000/";
         return url + "api/";
     }
 
@@ -11,10 +11,9 @@ rockola.service = (function () {
 
     function post(uri, data) {
         return $.ajax({
-            contentType: 'application/json; charset=UTF-8',
             url: uri,
             type: 'POST',
-            data: JSON.stringify(data)
+            data: data
         });
     }
 
