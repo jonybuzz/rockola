@@ -3,14 +3,13 @@ rockola.ui.reproductor = (function () {
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
     var player = $("#player");
-    var listaReproduccion;
 
     var done = false;
     function onYouTubeIframeAPIReady(data) {
         player = new YT.Player('player', {
             height: '390',
             width: '640',
-            videoId: data.temas.videoId
+            videoId: data.tema.videoId
 //            ,
 //            playerVars: {
 //                controls: 0,
@@ -43,7 +42,7 @@ rockola.ui.reproductor = (function () {
 
     function reproducir(data) {
         player.loadVideoById({
-            videoId: data.temas.videoId
+            videoId: data.tema.videoId
         });
     }
 
@@ -65,8 +64,7 @@ rockola.ui.reproductor = (function () {
     }
 
     function renderizarListaTemas(lista) {
-        listaReproduccion = lista.temas;
-        var html = $("#bodyListaTemplate").render(listaReproduccion);
+        var html = $("#bodyListaTemplate").render(lista.temas);
         $("#body-lista-reproductor").html(html);
     }
 

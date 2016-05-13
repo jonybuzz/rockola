@@ -28,6 +28,9 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <div id="js-titulo-tema"></div>
+            </div>
         </div>
 
         <script src="/js/lib/jquery-2.2.3.min.js" type="text/javascript"></script>
@@ -42,7 +45,12 @@
 
     <script id="bodyListaTemplate" type="text/html" >
         <tr>
-            <td>{{:videoId}}</td>
+            <td>
+                <img src="{{:thumbnail}}">
+            </td>
+            <td>
+                <h4>{{:titulo}}</h4>
+            </td>
         </tr>
     </script>
 </html>
