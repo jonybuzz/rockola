@@ -8,10 +8,11 @@ rockola.ui.reproductor = (function () {
 
 $(document).ready(function () {
     var tag = document.createElement('script');
+    var firstScriptTag = $('script')[0];
     var player;
     var done = false;
+    
     tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     $.getScript("//www.youtube.com/player_api", function () {
