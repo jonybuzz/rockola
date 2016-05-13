@@ -7,9 +7,11 @@ rockola.ui.login = (function () {
 
     function setearCookie() {
         $("#js-boton-logear").on('click', function () {
-            nombreUsuario = $("#js-input-usuario").val();
-            document.cookie = "rockolito=" + nombreUsuario;
-            window.location.href = "/cliente";
+            nombreUsuario = $("#js-input-usuario").val().trim();
+            if (nombreUsuario !== ""){
+                document.cookie = "rockolito=" + nombreUsuario;
+                window.location.href = "/cliente";
+            }
         });
     }
 

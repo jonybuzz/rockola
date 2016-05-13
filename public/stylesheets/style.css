@@ -16,6 +16,11 @@
     background: rgba(0,0,0,0.35);
 }
 
+.nombre-usuario{
+    color: whitesmoke;
+    font-weight: bold;
+}
+
 /*
  *  STYLE 15
  */

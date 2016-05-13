@@ -31,7 +31,7 @@ rockola.ui.cliente = (function () {
         var titulo = data.items[0].snippet.title;
         var urlThumbnail = data.items[0].snippet.thumbnails.default.url;
 
-        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail,nombreUsuario)
+        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario)
                 .done(obtenerRespuestaDelServidor)
                 .fail(mostrarErrorServicioTema);
         obtenerLista();
