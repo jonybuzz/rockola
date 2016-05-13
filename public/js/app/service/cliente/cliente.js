@@ -1,17 +1,18 @@
 rockola.service.cliente = (function () {
 
     function enviarTema(urlTema){
-        var urlAgregar = "/tema/agergar";
-        rockola.service.post(rockola.url() + urlAgregar , urlTema);        
+        var urlAgregar = rockola.url() + "/tema/agregar";
+        rockola.service.post(urlAgregar , urlTema);        
     }
     
     function obtenerLista(){
-        
-//        rockola.service.get(rockola.url() + )
+        var urlObtenerLista = rockola.url() + "/tema/todos";
+        return rockola.service.get( urlObtenerLista);
     }
 
     return {
-        enviarTema: enviarTema
+        enviarTema: enviarTema,
+        obtenerLista: obtenerLista
     };
 })();
 
