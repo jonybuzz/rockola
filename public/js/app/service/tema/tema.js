@@ -3,9 +3,9 @@ rockola.service.tema = (function () {
     function enviarTema(videoId, titulo, thumbnail) {
         var urlAgregar = rockola.service.url() + "tema/agregar";
         var tema = {
-            'temaUrl': videoId,
-            'titulo': titulo,
-            'thumbnail': thumbnail
+            'videoId': videoId,
+            'titulo' : titulo,
+            'thumbnail' : thumbnail
         };
         return rockola.service.post(urlAgregar, tema);
     }

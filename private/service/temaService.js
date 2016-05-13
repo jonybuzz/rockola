@@ -2,24 +2,20 @@ var databaseUrl = "rockola";
 var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
 
-var agregarTema = function (temaUrl) {
-    var tokens = temaUrl.split("=");
-    var videoId = tokens[1];
-    if (tokens[0].includes("www.youtube.com/watch?v") && videoId.length > 10) {
-        db.rockola.update(
-                {nombre: "RockolaPNT"},
-                {
-                    $push: {
-                        temas: {
-                            videoId: videoId
-                        }
+var agregarTema = function (videoId, titulo, thumbnail) {
+    db.rockola.update(
+            {nombre: "RockolaPNT"},
+            {
+                $push: {
+                    temas: {
+                        videoId: videoId,
+                        titulo: titulo,
+                        thumbnail: thumbnail
                     }
-                },
-                {upsert: true, safe: false}
-        );
-        return true;
-    }
-    return false;
+                }
+            },
+            {upsert: true, safe: false}
+    );
 };
 
 //Nota: Hacer Sincronico este metodo
@@ -39,7 +35,7 @@ var obtenerSiguiente = function (res) {
     return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
         tema = docs[0].temas[0];
         if (tema !== undefined) {
-            res.json({temas: tema});
+            res.json({tema: tema});
             db.rockola.update(
                     {nombre: "RockolaPNT"},
                     {
@@ -50,8 +46,8 @@ var obtenerSiguiente = function (res) {
                         }
                     }
             );
-        }
-        else res.json({temas: []});
+        } else
+            res.json({tema: {}});
     });
 
 };
