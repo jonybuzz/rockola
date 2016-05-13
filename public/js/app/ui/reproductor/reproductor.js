@@ -25,6 +25,8 @@ rockola.ui.reproductor = (function () {
 
     function onPlayerReady(event) {
         event.target.playVideo();
+        $(".lista-reproduccion tbody tr").first().css("color","mediumaquamarine")
+        $(".lista-reproduccion tbody tr").first().find("td").last().append("<h6>Reproduciendo</h6>")
     }
 
     function onPlayerStateChange(event) {
