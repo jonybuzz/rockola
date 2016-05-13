@@ -1,4 +1,6 @@
 rockola.ui.reproductor = (function () {
+
+    var listaDeReproduccion;
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
     var player = $("#player");
@@ -48,7 +50,17 @@ rockola.ui.reproductor = (function () {
         });
     }
 
+    function obtenerListaTemas() {
+        rockola.service.tema.obtenerLista().done(renderizarListaTemas);
+    }
+
+    function renderizarListaTemas(lista) {
+        var html = $("#bodyListaTemplate").render(lista.temas);
+        $("#body-lista-reproductor").html(html);
+    }
+
     function init() {
+        obtenerListaTemas();
         initFrame();
     }
 

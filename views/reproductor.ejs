@@ -9,18 +9,42 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h1>reprodutc</h1>
+                    <h1>Reproductor</h1>
+                </div>
+                <div class="col-md-4">
+                    <h1>Lista</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
                     <div id="player"></div>
                 </div>
                 <div class="col-md-4">
-                    <h1>lista</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tema</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-lista-reproductor"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
         <script src="/js/lib/jquery-2.2.3.min.js" type="text/javascript"></script>
+        <script src="/js/lib/jsrender.min.js" type="text/javascript"></script>
+
         <script src="/js/app/rockola.js" type="text/javascript"></script>
+        <script src="/js/app/service/service.js" type="text/javascript"></script>
+        <script src="/js/app/service/tema/tema.js" type="text/javascript"></script>
         <script src="/js/app/ui/ui.js" type="text/javascript"></script>
         <script src="/js/app/ui/reproductor/reproductor.js" type="text/javascript"></script>
     </body>
+
+    <script id="bodyListaTemplate" type="text/html" >
+        <tr>
+            <td>{{:videoId}}</td>
+        </tr>
+    </script>
 </html>
