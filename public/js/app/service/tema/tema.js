@@ -1,19 +1,31 @@
 rockola.service.tema = (function () {
 
-    function enviarTema(urlTema){
+    function enviarTema(videoId, titulo, thumbnail) {
         var urlAgregar = rockola.service.url() + "tema/agregar";
-        var tema = { 'temaUrl' : urlTema};
-        return rockola.service.post(urlAgregar , tema);        
+        var tema = {
+            'temaUrl': videoId,
+            'titulo' : titulo,
+            'thumbnail' : thumbnail
+        };
+        return rockola.service.post(urlAgregar, tema);
     }
-    
-    function obtenerLista(){
+
+    function obtenerLista() {
         var urlObtenerLista = rockola.service.url() + "tema/todos";
-        return rockola.service.get( urlObtenerLista);
+        return rockola.service.get(urlObtenerLista);
+    }
+
+    function obtenerNombre(videoId) {
+        var urlObtenerNombreApiYoutube =
+                "https://www.googleapis.com/youtube/v3/videos?part=snippet&key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo&id="
+        + videoId;
+        return rockola.service.get(urlObtenerNombreApiYoutube);
     }
 
     return {
         enviarTema: enviarTema,
-        obtenerLista: obtenerLista
+        obtenerLista: obtenerLista,
+        obtenerNombre: obtenerNombre
     };
 })();
 
