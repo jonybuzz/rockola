@@ -3,3 +3,9 @@
   background-size: cover;
   color: white; 
 }
+
+.logo {
+font-family: 'Oleo Script Swash Caps', cursive;
+font-size: 64px;
+font-weight: 700;
+}
