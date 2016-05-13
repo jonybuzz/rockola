@@ -24,11 +24,13 @@ var agregarTema = function (temaUrl) {
 
 //Nota: Hacer Sincronico este metodo
 var obtenerTemas = function (res) {
-
     var temas;
     return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
-        temas = docs[0].temas;
-        res.json({temas: temas});
+        if (docs !== undefined) {
+            temas = docs[0].temas;
+            res.json({temas: temas});
+        } else
+            res.json({temas: []});
     });
 };
 
@@ -36,17 +38,20 @@ var obtenerSiguiente = function (res) {
     var tema;
     return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
         tema = docs[0].temas[0];
-        res.json({temas: tema});
-        db.rockola.update(
-                {nombre: "RockolaPNT"},
-                {
-                    $pull: {
-                        temas: {
-                            videoId: tema.videoId
+        if (tema !== undefined) {
+            res.json({temas: tema});
+            db.rockola.update(
+                    {nombre: "RockolaPNT"},
+                    {
+                        $pull: {
+                            temas: {
+                                videoId: tema.videoId
+                            }
                         }
                     }
-                }
-        );
+            );
+        }
+        else res.json({temas: []});
     });
 
 };

@@ -8,17 +8,35 @@ rockola.ui.cliente = (function () {
     function enviarTema(event) {
         event.preventDefault();
         var urlTema = $("#link-tema").val();
-        rockola.service.tema.enviarTema(urlTema)
-                .done(obtenerRespuesta)
+
+        var tokens = urlTema.split("=");
+        var videoId = tokens[1];
+        
+        rockola.service.tema.obtenerNombre(videoId)
+                .done(obtenerNombreSuccess);
+
+    }
+
+    function obtenerNombreSuccess(data){
+        
+        if(data.pageInfo.totalResults === 0){
+            alert('No existe el video!!');
+        }
+        
+        var videoId = data.items[0].id;
+        var titulo = data.items[0].snippet.title;
+        var urlThumbnail = data.items[0].snippet.thumbnails.default.url;
+        
+        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail)
+                .done(obtenerRespuestaDelServidor)
                 .fail(mostrarErrorServicioTema);
         obtenerLista();
     }
-
     function mostrarErrorServicioTema() {
         alert("ERROR con el servicio de Tema");
     }
 
-    function obtenerRespuesta(respuesta) {
+    function obtenerRespuestaDelServidor(respuesta) {
         $("#link-tema").val("");
         if (respuesta.agregado == false) {
             alert("Ingresá la url completa, con youtube!");
