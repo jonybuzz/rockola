@@ -5,35 +5,43 @@
 <body class="body-image">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h1 class="logo">Rockola</h1>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <h1>Lista</h1>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="link-tema">Url:</label>
-                        <input type="text" class="form-control" id="link-tema" placeholder="Ingresá la url de tu tema!!"/>
+            <div class="col-md-6">
+                <div class="form-inline">
+                    <div class="form-group col-md-9">
+                        <label for="busqueda">Url:</label>
+                        <input type="text" class="form-control" id="busqueda" placeholder="Buscueda por banda"/>
                     </div>
-                    <button class="btn btn-primary" id="js-boton-enviar">Agregar!</button>
-                </form>
+                    <button class="btn btn-primary" id="js-boton-enviar">Buscar!</button>
+                </div>
             </div>
-            <div class="listado col-md-8">
+            <div class="listado col-md-5">
                 <table class="table" id="lista-reproduccion">
                     <thead>
                         <tr>
-                            <th>Tema</th>
+                            <th>Lista temas en reproducción</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody id="body-lista-reproduccion">
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <div id="grid" class="col-md-6 grid listado">
+               
+            </div>
+            <div class="listado col-md-5">
+              
             </div>
         </div>
     </div>
@@ -60,3 +68,16 @@
         </td>
     </tr>
 </script>
+
+<script id="bodyGridTemplate" type="text/html" >
+        <div class="col-md-3" >
+            <div calss="imagen">
+                <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
+            </div>
+            <div class="titulo">
+                <span>{{:video.titulo}}</span>
+            </div>  
+        </div>
+                  
+</script>
+
