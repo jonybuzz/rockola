@@ -2,46 +2,42 @@ rockola.ui.cliente = (function () {
 
     function init() {
         obtenerLista();
-        $("#js-boton-enviar").on("click", enviarTema)
+        $("#js-boton-enviar").on("click", buscarPlayList);
+        $('#busqueda').bind("enterKey",function(e){
+            buscarPlayList();
+        });
+        $('#busqueda').keyup(function(e){
+            if(e.keyCode == 13)
+            {
+                $(this).trigger("enterKey");
+            }
+        });
+
     }
 
     function enviarTema(event) {
-        event.preventDefault();
-        var urlTema = $("#link-tema").val();
-        var tokens = urlTema.split("=");
-
-        if (tokens[0].includes("www.youtube.com/watch?v")) {
-            var videoId = tokens[1];
-
-            rockola.service.tema.obtenerDatos(videoId)
-                    .done(obtenerNombreSuccess);
-        } else {
-            alert("La URL no es válida");
-        }
-    }
-
-    function obtenerNombreSuccess(data) {
-
-        if (data.pageInfo.totalResults === 0) {
-            alert('No existe el video!!');
-        }
-
+        event.preventDefault();                
         var nombreUsuario = getCookie("rockolito");
-        var videoId = data.items[0].id;
-        var titulo = data.items[0].snippet.title;
-        var urlThumbnail = data.items[0].snippet.thumbnails.default.url;
+
+        var videoId = this.id;
+        var titulo = this.alt;
+        var urlThumbnail = this.src;
+
+        console.log(videoId);
+        console.log(titulo);
+        console.log(urlThumbnail);
 
         rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario)
                 .done(obtenerRespuestaDelServidor)
                 .fail(mostrarErrorServicioTema);
         obtenerLista();
     }
+
     function mostrarErrorServicioTema() {
         alert("ERROR con el servicio de Tema");
     }
 
     function obtenerRespuestaDelServidor(respuesta) {
-        $("#link-tema").val("");
         if (respuesta.agregado == false) {
             alert("Ingresá la url completa, con youtube!");
         }
@@ -72,6 +68,58 @@ rockola.ui.cliente = (function () {
         }
         return "";
     }
+
+    function buscarPlayList(){
+        var busqueda = $("#busqueda").val().trim();
+        if(busqueda !== ""){
+            rockola.service.tema.buscarTemas(busqueda)
+                .done(renderizarVideos)
+                .fail(error)
+        }
+        
+    }
+
+    function renderizarVideos(data){
+        $("#grid").html("");
+        var items = data.items;
+        var videos = [];
+        $.each(items , function(index, item){
+            var urlImagen = "";
+            if(item.snippet.thumbnails != undefined){
+                urlImagen = item.snippet.thumbnails.default.url;
+            }
+            if(item.snippet.title!="Deleted video"){
+                videos[index] = {
+                    "video" : {
+                        "titulo" : item.snippet.title,
+                        "urlImagen" : urlImagen,
+                        "videoId" :item.id.videoId
+                    }
+                }
+            }
+        }
+        )        
+        while(videos.length) {
+            var partVideos = videos.splice(0,4);
+            var html = $("#bodyGridTemplate").render(partVideos);
+            $("#grid").append("<div class='row'>"+html+"</div> ");
+        }
+        $(".grid-tema").on("click", enviarTema)
+
+        $('.grid-tema').on("mouseover",function(){
+            $(this).addClass("transition");
+        })
+        
+        $('.grid-tema').on("mouseout",function(){
+            $(this).removeClass("transition");
+        })
+       
+    }
+
+    function error(){
+        alert("ERROR");
+    }
+
 
     return {
         init: init
