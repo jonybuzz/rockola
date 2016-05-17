@@ -1,3 +1,5 @@
+# README #
+
 Info para configurar y correr el proyecto local
 
 ### Que necesito tener instalado? ###
@@ -22,7 +24,7 @@ Info para configurar y correr el proyecto local
 * Insertar datos de prueba
 ```
 #!script
->db.rockola.insert({nombre:'RockolaPNT', temas:[{nombreUsuario:'Lucas', titulo:'AC/DC - Thunderstruck Live HD', thumbnail:'https://i.ytimg.com/vi/n_GFN3a0yj0/hqdefault.jpg?custom=true&w=196&h=110&stc=true&jpg444=true&jpgq=90&sp=68&sigh=wbmZFQryv0VYanw1miqknt5w2ms', videoId:'https://www.youtube.com/watch?v=n_GFN3a0yj0'}]})
+>db.rockola.insert({nombre:'RockolaPNT', temas:[{nombreUsuario:'Lucas', titulo:'AC/DC - Thunderstruck Live HD', thumbnail:'https://i.ytimg.com/vi/n_GFN3a0yj0/hqdefault.jpg?custom=true&w=196&h=110&stc=true&jpg444=true&jpgq=90&sp=68&sigh=wbmZFQryv0VYanw1miqknt5w2ms', videoId:'n_GFN3a0yj0'}]})
 ```
 ### Iniciar el servidor Node ###
 En el directorio del proyecto
