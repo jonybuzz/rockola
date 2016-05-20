@@ -72,7 +72,11 @@ rockola.ui.cliente = (function () {
     function buscarPlayList(){
         var busqueda = $("#busqueda").val().trim();
         if(busqueda !== ""){
-            rockola.service.tema.buscarTemas(busqueda)
+            $("#grid").html("");
+            rockola.service.tema.buscarTemas(busqueda, "short")
+                .done(renderizarVideos)
+                .fail(error)
+            rockola.service.tema.buscarTemas(busqueda, "medium")
                 .done(renderizarVideos)
                 .fail(error)
         }
@@ -80,7 +84,6 @@ rockola.ui.cliente = (function () {
     }
 
     function renderizarVideos(data){
-        $("#grid").html("");
         var items = data.items;
         var videos = [];
         $.each(items , function(index, item){
