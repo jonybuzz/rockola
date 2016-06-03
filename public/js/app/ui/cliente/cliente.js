@@ -73,10 +73,7 @@ rockola.ui.cliente = (function () {
         var busqueda = $("#busqueda").val().trim();
         if(busqueda !== ""){
             $("#grid").html("");
-            rockola.service.tema.buscarTemas(busqueda, "short")
-                .done(renderizarVideos)
-                .fail(error)
-            rockola.service.tema.buscarTemas(busqueda, "medium")
+            rockola.service.tema.buscarTemas(busqueda)
                 .done(renderizarVideos)
                 .fail(error)
         }

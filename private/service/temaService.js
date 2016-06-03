@@ -54,6 +54,20 @@ var obtenerSiguiente = function (res) {
 
 };
 
+var eliminarTema = function (videoId) {
+    db.rockola.update(
+            {nombre: "RockolaPNT"},
+            {
+                $pull: {
+                    temas: {
+                        videoId: videoId
+                    }
+                }
+            }
+    );
+}
+
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;
 module.exports.obtenerSiguiente = obtenerSiguiente;
+module.exports.eliminarTema = eliminarTema;
