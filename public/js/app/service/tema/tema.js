@@ -3,7 +3,6 @@ rockola.service.tema = (function () {
     var socket = io();
 
     function enviarTema(videoId, titulo, thumbnail, nombreUsuario) {
-        var urlAgregar = rockola.service.url() + "tema/agregar";
         var tema = {
             'videoId': videoId,
             'titulo': titulo,
@@ -21,6 +20,7 @@ rockola.service.tema = (function () {
     function obtenerSiguiente() {
         var urlObtenerLista = rockola.service.url() + "tema/siguiente";
         return rockola.service.get(urlObtenerLista);
+
     }
 
     function obtenerPrimerTema() {

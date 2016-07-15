@@ -3,6 +3,7 @@ rockola.ui.reproductor = (function () {
     var tag = document.createElement('script');
     var firstScriptTag = $('script')[0];
     var player = $("#player");
+    var socket = io();
 
     var done = false;
     function onYouTubeIframeAPIReady(data) {
@@ -31,8 +32,9 @@ rockola.ui.reproductor = (function () {
             console.log('ESTADO: SIGUIENTE VIDEO');
             rockola.service.tema.obtenerSiguiente()
                     .done(function (data) {
+                        socket.emit("actualizame");
                         reproducir(data);
-                        obtenerListaTemas();
+
                     });
 
         }
@@ -58,23 +60,13 @@ rockola.ui.reproductor = (function () {
         });
     }
 
-    function obtenerListaTemas() {
-        //rockola.service.tema.obtenerLista().done(renderizarListaTemas);
-    }
-
     function renderizarListaTemas(lista) {
         var html = $("#bodyListaTemplate").render(lista.temas);
         $("#body-lista-reproductor").html(html);
-        resaltarPrimerTema();
-    }
-
-    function init() {
-        obtenerListaTemas();
-        initFrame();
     }
 
     return {
-        init: init
+        init: initFrame
     };
 
 })();
