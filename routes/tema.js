@@ -19,4 +19,12 @@ routerA.route('/eliminar').delete(function(req,res){
     temaService.eliminarTema(req.body.videoId);
 });
 
+routerA.route('/temaAReproducir').get(function(req,res){
+    temaService.obtenerTemaAReproducir(res);
+});
+
+routerA.route('/eliminarTemaActual').delete(function(req,res){
+    temaService.eliminarTemaActual();
+});
+
 module.exports = routerA;

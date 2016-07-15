@@ -9,13 +9,7 @@ rockola.ui.reproductor = (function () {
         player = new YT.Player('player', {
             height: '390',
             width: '640',
-            videoId: data.tema.videoId
-//            ,
-//            playerVars: {
-//                controls: 0,
-//                disablekb: 1
-//            }
-            ,
+            videoId: data.tema.videoId,
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -25,7 +19,7 @@ rockola.ui.reproductor = (function () {
 
     function onPlayerReady(event) {
         event.target.playVideo();
-        $(".lista-reproduccion tbody tr").first().css("color","mediumaquamarine")
+        $(".lista-reproduccion tbody tr").first().css("color", "mediumaquamarine")
         $(".lista-reproduccion tbody tr").first().find("td").last().append("<h6>Reproduciendo</h6>")
     }
 
@@ -37,12 +31,18 @@ rockola.ui.reproductor = (function () {
 
         if (event.data === YT.PlayerState.ENDED) {
             console.log('ESTADO: SIGUIENTE VIDEO');
-            rockola.service.tema.obtenerSiguiente().done(reproducir);
-            obtenerListaTemas();
+            rockola.service.tema.obtenerSiguiente()
+                    .done(function (data) {
+                        reproducir(data);
+                        obtenerListaTemas();
+                    });
+
         }
     }
 
     function reproducir(data) {
+        console.log('REPRODUCIENDO: ' + data.tema.titulo);
+
         player.loadVideoById({
             videoId: data.tema.videoId
         });
@@ -54,7 +54,8 @@ rockola.ui.reproductor = (function () {
         $.getScript("//www.youtube.com/player_api", function () {
             yt_int = setInterval(function () {
                 if (typeof YT === "object") {
-                    rockola.service.tema.obtenerSiguiente().done(onYouTubeIframeAPIReady);
+                    rockola.service.tema.obtenerTemaAReproducir()
+                            .done(onYouTubeIframeAPIReady);
                     clearInterval(yt_int);
                 }
             }, 500);
