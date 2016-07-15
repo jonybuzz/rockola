@@ -3,20 +3,69 @@ var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
 
 var agregarTema = function (tema, callback) {
-    db.rockola.update(
-            {nombre: "RockolaPNT"},
-            {
-                $push: {
-                    temas: {
-                        videoId: tema.videoId,
-                        titulo: tema.titulo,
-                        thumbnail: tema.thumbnail,
-                        nombreUsuario: tema.nombreUsuario
-                    }
-                }
-            },
-            {upsert: true, safe: false}, callback);
+    var temaNuevo = {
+        videoId: tema.videoId,
+        titulo: tema.titulo,
+        thumbnail: tema.thumbnail,
+        nombreUsuario: tema.nombreUsuario
+    };
+    insertarOrdenado(temaNuevo, callback);
 };
+
+function insertarOrdenado(temaNuevo, callback) {
+    db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+        var arrayTemas = [];
+        var indice;
+        var listaTemasUsuarios = {};
+        var tema = {};
+
+        try {
+            arrayTemas = docs[0].temas;
+        } catch (err) {
+        }
+        var cantidadDeTemasInsertadosDeUsuario = obtenerTemasDeUsuario(temaNuevo.nombreUsuario, arrayTemas);
+
+        if (arrayTemas.length > 0) {
+
+            for (indice = 0; indice < arrayTemas.length; indice++) {
+                tema = arrayTemas[indice];
+
+                if (tema.nombreUsuario in listaTemasUsuarios) {
+                    listaTemasUsuarios[tema.nombreUsuario]++;
+                } else {
+                    listaTemasUsuarios[tema.nombreUsuario] = 1;
+                }
+
+                if (temaNuevo.nombreUsuario !== tema.nombreUsuario
+                        && listaTemasUsuarios[tema.nombreUsuario] > cantidadDeTemasInsertadosDeUsuario + 1) {
+                    break;
+                }
+
+            }
+
+            if (indice === arrayTemas.length) {
+                arrayTemas.push(temaNuevo);
+            } else {
+                arrayTemas.splice(indice, 0, temaNuevo);
+            }
+        } else {
+            arrayTemas.push(temaNuevo);
+        }
+        db.rockola.update({nombre: "RockolaPNT"}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
+    });
+
+}
+
+function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
+    var cantidad = 0;
+    arrayTemas.forEach(function (tema) {
+        if (nombreUsuario === tema.nombreUsuario) {
+            cantidad++;
+        }
+    });
+
+    return cantidad;
+}
 
 //Nota: Hacer Sincronico este metodo
 var obtenerTemas = function (callback) {
