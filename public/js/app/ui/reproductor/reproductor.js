@@ -63,7 +63,7 @@ rockola.ui.reproductor = (function () {
     }
 
     function obtenerListaTemas() {
-        rockola.service.tema.obtenerLista().done(renderizarListaTemas);
+        //rockola.service.tema.obtenerLista().done(renderizarListaTemas);
     }
 
     function renderizarListaTemas(lista) {
@@ -85,4 +85,3 @@ rockola.ui.reproductor = (function () {
 $(document).ready(function () {
     rockola.ui.reproductor.init();
 });
-

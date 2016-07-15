@@ -4,10 +4,11 @@ $(document).ready(function(){
 
   function actualizarListaTemas(temas) {
     var html = $("#bodyListaTemplate").render(temas);
-    $("#body-lista-reproduccion").html(html);
+    $("#body-lista-reproductor").html(html);
   }
 
-  socket.on('actualizarLista', function(docs) {
+  socket.on('actualizarLista', function(docs){
     actualizarListaTemas(docs);
-  });
+  })
+
 });
