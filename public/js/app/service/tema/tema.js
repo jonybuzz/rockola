@@ -21,15 +21,11 @@ rockola.service.tema = (function () {
         return rockola.service.get(urlObtenerLista);
     }
     
-    function obtenerTemaAReproducir() {
-        var uri = rockola.service.url() + "tema/temaAReproducir";
+    function obtenerPrimerTema() {
+        var uri = rockola.service.url() + "tema/obtenerPrimerTema";
         return rockola.service.get(uri);
     }
 
-    function eliminarTemaActual() {
-        var uri = rockola.service.url() + "tema/eliminarTemaActual";
-        return rockola.service.eliminar(uri);
-    }
 
     function buscarTemas(busqueda) {
         var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
@@ -45,8 +41,7 @@ rockola.service.tema = (function () {
         enviarTema: enviarTema,
         obtenerLista: obtenerLista,
         buscarTemas: buscarTemas,
-        obtenerTemaAReproducir: obtenerTemaAReproducir,
-        eliminarTemaActual: eliminarTemaActual,
+        obtenerPrimerTema: obtenerPrimerTema,
         obtenerSiguiente: obtenerSiguiente
     };
 

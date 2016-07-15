@@ -54,7 +54,7 @@ rockola.ui.reproductor = (function () {
         $.getScript("//www.youtube.com/player_api", function () {
             yt_int = setInterval(function () {
                 if (typeof YT === "object") {
-                    rockola.service.tema.obtenerTemaAReproducir()
+                    rockola.service.tema.obtenerPrimerTema()
                             .done(onYouTubeIframeAPIReady);
                     clearInterval(yt_int);
                 }

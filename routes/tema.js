@@ -15,16 +15,10 @@ routerA.route('/siguiente').get(function(req,res,next){
     temaService.obtenerSiguiente(res);
 });
 
-routerA.route('/eliminar').delete(function(req,res){
-    temaService.eliminarTema(req.body.videoId);
+
+routerA.route('/obtenerPrimerTema').get(function(req,res){
+    temaService.obtenerPrimerTema(res);
 });
 
-routerA.route('/temaAReproducir').get(function(req,res){
-    temaService.obtenerTemaAReproducir(res);
-});
-
-routerA.route('/eliminarTemaActual').delete(function(req,res){
-    temaService.eliminarTemaActual();
-});
 
 module.exports = routerA;
