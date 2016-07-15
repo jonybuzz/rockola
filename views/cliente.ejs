@@ -12,16 +12,24 @@
             </nav>
         </div>
     </header>
-    <div class="container-fluid container-rockola-cliente">
+    <div class="container-fluid container-rockola">
         <div class="row">
 
             <div class="col s7">
                 <h3>Busqueda</h3>
                 <div class="form-inline">
-                    <div class="form-group col-md-9">
-                        <input type="text" class="form-control" id="busqueda" placeholder="Buscar"/>
+                    <div class="form-group">
+
+                        <div class="input-field col s9">
+                            <i class="material-icons prefix">queue_music</i>
+                            <input id="icon_prefix" class="rockola-busqueda" id="busqueda" type="text" class="validate">
+                            <label for="icon_prefix">Ingrese el tema</label>
+                        </div>
+                        
+                        <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-boton-enviar" type="submit" name="action">Buscar!
+                            <i class="material-icons right">send</i>
+                        </button>
                     </div>
-                    <button class="btn btn-primary" id="js-boton-enviar">Buscar!</button>
                 </div>
 
                 <div id="grid" class="col l12 grid listado collection">
@@ -58,7 +66,7 @@
         <div class="col l3">
             <img src="{{:thumbnail}}">
         </div>
-        <div class="col l8">
+        <div class="col l7">
             <span class="title">{{:titulo}}</span>
             <p></p>
         </div>
@@ -77,14 +85,14 @@
                 <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">
+                <span class="card-title activator">
                     <span>{{:video.titulo}}</span>
                 </span>
             </div>
         </div>
     </div>
 
-   
+
 
 </script>
 
