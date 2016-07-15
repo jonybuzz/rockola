@@ -15,6 +15,19 @@ rockola.ui.reproductor = (function () {
                 'onStateChange': onPlayerStateChange
             }
         });
+
+        $('#js-btn-siguiente').on('click', function () {
+            pasarAlSiguienteTema();
+        });
+
+    }
+
+    function pasarAlSiguienteTema() {
+        rockola.service.tema.obtenerSiguiente()
+                .done(function (data) {
+                    reproducir(data);
+                    obtenerListaTemas();
+                });
     }
 
     function onPlayerReady(event) {
@@ -34,12 +47,7 @@ rockola.ui.reproductor = (function () {
 
         if (event.data === YT.PlayerState.ENDED) {
             console.log('ESTADO: SIGUIENTE VIDEO');
-            rockola.service.tema.obtenerSiguiente()
-                    .done(function (data) {
-                        reproducir(data);
-                        obtenerListaTemas();
-                    });
-
+            pasarAlSiguienteTema();
         }
     }
 
@@ -87,4 +95,3 @@ rockola.ui.reproductor = (function () {
 $(document).ready(function () {
     rockola.ui.reproductor.init();
 });
-

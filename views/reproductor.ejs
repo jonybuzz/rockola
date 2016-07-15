@@ -2,7 +2,7 @@
     <head>
         <% include ./partials/head %>
     </head>
-    <body class="rockola-container">  
+    <body class="rockola-container">
         <header>
             <div class="navbar-fixed">
                 <nav>
@@ -18,8 +18,15 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col s12 l7">
-                        <div class="video-container">
-                            <div id="player"></div>
+                        <div class="row">
+                          <div class="video-container">
+                              <div id="player"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div id="js-btn-siguiente" class="col s12 m3 right">
+                            <a class="waves-effect waves-light btn purple"><i class="material-icons right">fast_forward</i>siguiente</a>
+                          </div>
                         </div>
                     </div>
                     <div class="col s12 l5">
