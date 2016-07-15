@@ -1,7 +1,29 @@
 .rockola-container{
     background-image: url("../img/fondo-rockola2.jpg");
     background-size: cover;
-     
+
+}
+
+.nav-rockola{
+    background-color: rgba(82,7,76,1) !important;
+}
+
+.collection .collection-item {
+    background-color: rgba(193, 193, 193, 0.33);
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid rgba(187, 179, 179, 0.27);
+}
+
+.collection {
+    border: none !important;
+    overflow-y: scroll;
+    max-height: 460px;
+}
+
+.collection .collection-item.avatar .title {
+    color: white;
 }
 
 .logo {
@@ -31,18 +53,18 @@
  *  STYLE 15
  */
 
-.listado::-webkit-scrollbar-track
+.collection::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
     border-radius: 10px;
 }
 
-.listado::-webkit-scrollbar
+.collection::-webkit-scrollbar
 {
     width: 10px;
 }
 
-.listado::-webkit-scrollbar-thumb
+.collection::-webkit-scrollbar-thumb
 {
     border-radius: 10px;    
     background-image: -webkit-gradient(linear,
@@ -65,7 +87,7 @@
     margin-top: 30px;
     max-height: 400px;        
 }
- 
+
 .transition {
     cursor: pointer;
     -ms-transform: scale(1.2,1.2); /* IE 9 */
