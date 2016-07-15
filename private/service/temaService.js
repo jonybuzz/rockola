@@ -32,42 +32,41 @@ var obtenerTemas = function (res) {
     });
 };
 
-var obtenerSiguiente = function (res) {
+var obtenerPrimerTema = function (res) {
     var tema;
     return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
         tema = docs[0].temas[0];
-        if (tema != undefined) {
-            res.json({tema: tema});
-            db.rockola.update(
-                    {nombre: "RockolaPNT"},
-                    {
-                        $pull: {
-                            temas: {
-                                videoId: tema.videoId
-                            }
-                        }
-                    }
-            );
-        } else
-            res.json({tema: {}});
+        res.json({tema: tema});
     });
 
 };
 
-var eliminarTema = function (videoId) {
-    db.rockola.update(
-            {nombre: "RockolaPNT"},
-            {
-                $pull: {
-                    temas: {
-                        videoId: videoId
+var obtenerSiguiente = function (res) {
+    var tema;
+    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+        tema = docs[0].temas[0];
+        db.rockola.update(
+                {nombre: "RockolaPNT"},
+                {
+                    $pull: {
+                        temas: {
+                            videoId: tema.videoId
+                        }
                     }
-                }
-            }
-    );
-}
+                }, function () {
+            var temaActual;
+            return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+                temaActual = docs[0].temas[0];
+                res.json({tema: temaActual});
+            });
+
+        }
+        );
+    });
+};
+
 
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;
+module.exports.obtenerPrimerTema = obtenerPrimerTema;
 module.exports.obtenerSiguiente = obtenerSiguiente;
-module.exports.eliminarTema = eliminarTema;
