@@ -77,10 +77,4 @@
 </script>
 
 <script src="js/lib/socket.io.js"></script>
-
-<script>
-  var socket = io();
-    $('#js-boton-enviar').on('click', function(){
-      socket.emit('agregarTema', $('#busqueda').val());
-    })
-</script>
+<script src="js/app/sockets/cliente/cliente.js"></script>
