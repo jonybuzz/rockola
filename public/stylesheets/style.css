@@ -1,13 +1,19 @@
-.body-image {
-    background-image: url("../img/rockola.jpg");
+.rockola-container{
+    background-image: url("../img/fondo-rockola2.jpg");
     background-size: cover;
-    color: white; 
+     
 }
 
 .logo {
     font-family: 'Oleo Script Swash Caps', cursive;
-    font-size: 64px;
+    font-size: 45px;
     font-weight: 700;
+}
+
+.collection .collection-item.avatar {
+    min-height: 115px;
+    padding-left: 0px;
+    position: relative;
 }
 
 .listado {

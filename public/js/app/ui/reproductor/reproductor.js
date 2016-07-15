@@ -22,8 +22,8 @@ rockola.ui.reproductor = (function () {
     }
 
     function resaltarPrimerTema() {
-        $(".lista-reproduccion tbody tr").first().css("color", "mediumaquamarine")
-        $(".lista-reproduccion tbody tr").first().find("td").last().append("<h6>Reproduciendo</h6>")
+        $(".lista-de-temas .collection-item").first().find("p").css("color", "mediumaquamarine")
+        $(".lista-de-temas .collection-item").first().find("p").last().append("Reproduciendo")
     }
 
     function onPlayerStateChange(event) {
