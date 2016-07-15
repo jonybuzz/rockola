@@ -16,23 +16,27 @@
         <div class="row">
 
             <div class="col s7">
-                <h1>Lista de Resultados</h1>
+                <h3>Busqueda</h3>
                 <div class="form-inline">
                     <div class="form-group col-md-9">
-                        <input type="text" class="form-control" id="busqueda" placeholder="Busqueda por banda"/>
+                        <input type="text" class="form-control" id="busqueda" placeholder="Buscar"/>
                     </div>
                     <button class="btn btn-primary" id="js-boton-enviar">Buscar!</button>
                 </div>
-                <div id="grid" class="col-md-12 grid listado">
+
+                <div id="grid" class="col l12 grid listado collection">
+
+
                 </div>
             </div>
+
             <div class="listado col s5">
-                <span class="blue-text text-darken-2">
-                    <h2>
+                <span class="white-text">
+                    <h3>
                         Listado de Temas
-                    </h2>
+                    </h3>
                 </span>
-                <ul class="collection lista-de-temas" id="body-lista-reproduccion">
+                <ul class="collection lista-de-temas lista-de-temas-clientes" id="body-lista-reproduccion">
                 </ul>
             </div>
         </div>
@@ -67,14 +71,20 @@
 </script>
 
 <script id="bodyGridTemplate" type="text/html" >
-    <div class="col-md-3" >
-        <div calss="imagen">
-            <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
+    <div class="col l3 ">
+        <div class="z-depth-3 card small">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <span>{{:video.titulo}}</span>
+                </span>
+            </div>
         </div>
-        <div class="titulo">
-            <span>{{:video.titulo}}</span>
-        </div>  
     </div>
+
+   
 
 </script>
 
