@@ -1,5 +1,7 @@
 rockola.service.tema = (function () {
 
+    var socket = io();
+
     function enviarTema(videoId, titulo, thumbnail, nombreUsuario) {
         var urlAgregar = rockola.service.url() + "tema/agregar";
         var tema = {
@@ -8,7 +10,7 @@ rockola.service.tema = (function () {
             'thumbnail': thumbnail,
             'nombreUsuario': nombreUsuario
         };
-        return rockola.service.post(urlAgregar, tema);
+        socket.emit('agregarTema', tema);
     }
 
     function obtenerLista() {
@@ -20,7 +22,7 @@ rockola.service.tema = (function () {
         var urlObtenerLista = rockola.service.url() + "tema/siguiente";
         return rockola.service.get(urlObtenerLista);
     }
-    
+
     function obtenerPrimerTema() {
         var uri = rockola.service.url() + "tema/obtenerPrimerTema";
         return rockola.service.get(uri);
@@ -46,4 +48,3 @@ rockola.service.tema = (function () {
     };
 
 })();
-

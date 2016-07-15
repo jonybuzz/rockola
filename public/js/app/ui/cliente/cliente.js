@@ -16,7 +16,7 @@ rockola.ui.cliente = (function () {
     }
 
     function enviarTema(event) {
-        event.preventDefault();                
+        event.preventDefault();
         var nombreUsuario = getCookie("rockolito");
 
         var videoId = this.id;
@@ -77,7 +77,7 @@ rockola.ui.cliente = (function () {
                 .done(renderizarVideos)
                 .fail(error)
         }
-        
+
     }
 
     function renderizarVideos(data){
@@ -98,7 +98,7 @@ rockola.ui.cliente = (function () {
                 }
             }
         }
-        )        
+        )
         while(videos.length) {
             var partVideos = videos.splice(0,4);
             var html = $("#bodyGridTemplate").render(partVideos);
@@ -109,11 +109,11 @@ rockola.ui.cliente = (function () {
         $('.grid-tema').on("mouseover",function(){
             $(this).addClass("transition");
         })
-        
+
         $('.grid-tema').on("mouseout",function(){
             $(this).removeClass("transition");
         })
-       
+
     }
 
     function error(){

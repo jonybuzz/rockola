@@ -2,34 +2,26 @@ var databaseUrl = "rockola";
 var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
 
-var agregarTema = function (videoId, titulo, thumbnail, nombreUsuario) {
+var agregarTema = function (tema,callback) {
     db.rockola.update(
             {nombre: "RockolaPNT"},
             {
                 $push: {
                     temas: {
-                        videoId: videoId,
-                        titulo: titulo,
-                        thumbnail: thumbnail,
-                        nombreUsuario: nombreUsuario
+                        videoId: tema.videoId,
+                        titulo: tema.titulo,
+                        thumbnail: tema.thumbnail,
+                        nombreUsuario: tema.nombreUsuario
                     }
                 }
             },
-            {upsert: true, safe: false}
-    );
+            {upsert: true, safe: false}, callback);
 };
 
 //Nota: Hacer Sincronico este metodo
-var obtenerTemas = function (res) {
+var obtenerTemas = function (callback) {
     var temas;
-    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
-
-        if (docs != undefined && docs.length !== 0) {
-            temas = docs[0].temas;
-            res.json({temas: temas});
-        } else
-            res.json({temas: []});
-    });
+    db.rockola.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
 };
 
 var obtenerPrimerTema = function (res) {

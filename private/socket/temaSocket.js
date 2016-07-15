@@ -1,10 +1,16 @@
+var temaService = require('../service/temaService');
+
+
 module.exports = function(io){
 
   io.on('connection', function(socket){
 
-    socket.on('agregarTema', function(msg){
-      io.emit('teRespondo', "hola soy milleeeeeeeer! aqui!")
-      console.log('Agregaron: ' + msg);
+    socket.on('agregarTema', function(tema){
+      temaService.agregarTema(tema, function(err,doc) {
+          temaService.obtenerTemas(function(err, docs){
+              io.emit('actualizarLista', docs[0].temas);
+          })
+      });
     });
 
   });

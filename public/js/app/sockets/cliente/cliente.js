@@ -2,12 +2,12 @@ $(document).ready(function(){
 
   var socket = io();
 
-  $('#js-boton-enviar').on('click', function(){
-    socket.emit('agregarTema', $('#busqueda').val());
-  });
+function actualizarListaTemas(temas) {
+      var html = $("#bodyListaTemplate").render(temas);
+      $("#body-lista-reproduccion").html(html);
+  }
 
-  socket.on('teRespondo', function(msg) {
-    console.log(msg);
+  socket.on('actualizarLista',function(docs) {
+    actualizarListaTemas(docs);
   });
-
 });
