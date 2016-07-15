@@ -1,13 +1,41 @@
-.body-image {
-    background-image: url("../img/rockola.jpg");
+.rockola-container{
+    background-image: url("../img/fondo-rockola2.jpg");
     background-size: cover;
-    color: white; 
+
+}
+
+.nav-rockola{
+    background-color: rgba(82,7,76,1) !important;
+}
+
+.collection .collection-item {
+    background-color: rgba(193, 193, 193, 0.33);
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid rgba(187, 179, 179, 0.27);
+}
+
+.collection {
+    border: none !important;
+    overflow-y: scroll;
+    max-height: 460px;
+}
+
+.collection .collection-item.avatar .title {
+    color: white;
 }
 
 .logo {
     font-family: 'Oleo Script Swash Caps', cursive;
-    font-size: 64px;
+    font-size: 45px;
     font-weight: 700;
+}
+
+.collection .collection-item.avatar {
+    min-height: 115px;
+    padding-left: 0px;
+    position: relative;
 }
 
 .listado {
@@ -21,30 +49,34 @@
     font-weight: bold;
 }
 
+html {
+    color: #ffffff !important
+}
+
 /*
  *  STYLE 15
  */
 
-.listado::-webkit-scrollbar-track
+.collection::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
     border-radius: 10px;
 }
 
-.listado::-webkit-scrollbar
+.collection::-webkit-scrollbar
 {
     width: 10px;
 }
 
-.listado::-webkit-scrollbar-thumb
+.collection::-webkit-scrollbar-thumb
 {
     border-radius: 10px;    
     background-image: -webkit-gradient(linear,
         40% 0%,
         75% 84%,
-        from(#4D9C41),
-        to(#19911D),
-        color-stop(.6,#54DE5D))
+        from(rgba(82,7,76,1)),
+        to(rgba(82,7,76,1)),
+        color-stop(.6,rgb(136, 68, 160)))
 }
 
 .form-group input{
@@ -59,7 +91,7 @@
     margin-top: 30px;
     max-height: 400px;        
 }
- 
+
 .transition {
     cursor: pointer;
     -ms-transform: scale(1.2,1.2); /* IE 9 */

@@ -1,20 +1,42 @@
 <!DOCTYPE html>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <head>
     <% include ./partials/head %>
 </head>
-<body class="body-image">
-    <section class="container">
+<body class="rockola-container">  
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper nav-rockola center">
+                    <a href="#!" class="logo">Rockola</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
         <div class="row">
             <div class="form-signin">
-                <h1 class="logo">Bienvenido!</h1>
+                <span class="white-text">
+                    <h1 class="logo">Bienvenido!</h1>
+                </span>
                 <div class="row">
-                    <input type="text" name="login" class="form-control" id="js-input-usuario" placeholder="Ingresa tu nombre" required>
-                    <br>
-                    <button class="btn btn-lg btn-primary btn-block" id="js-boton-logear">Ingresa</button>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" name="login" type="text" class="rockola-input-login validate form-control" id="js-input-usuario" placeholder="Ingresa tu nombre" required>
+                            <label for="icon_prefix">Ingresa</label>
+                        </div>
+                    </div>
+                    <button class="btn waves-effect waves-light" id="js-boton-logear" type="submit" name="action">Ingresa
+                        <i class="material-icons right">fast_forward</i>
+                    </button>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script src="/js/lib/jquery-2.2.3.min.js" type="text/javascript"></script>
     <script src="js/app/rockola.js"></script>

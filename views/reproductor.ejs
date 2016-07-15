@@ -2,35 +2,38 @@
     <head>
         <% include ./partials/head %>
     </head>
-    <body class="body-image">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <h1 class="logo">Rockola</h1>
-                </div>
-                <div class="col-md-4">
-                    <h1>Lista</h1>
+    <body class="rockola-container">  
+        <header>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper nav-rockola center">
+                        <a href="#!" class="logo">Rockola</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <br>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col s12 l7">
+                        <div class="video-container">
+                            <div id="player"></div>
+                        </div>
+                    </div>
+                    <div class="col s12 l5">
+                        <span class="blue-text text-darken-2">
+                            <h2>
+                                Listado de Temas
+                            </h2>
+                        </span>
+                        <ul class="collection lista-de-temas" id="body-lista-reproductor">
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-7">
-                    <div id="player"></div>
-                </div>
-                <div class="listado col-md-5">
-                    <table class="table lista-reproduccion">
-                        <thead>
-                            <tr>
-                                <th>Tema</th>
-                            </tr>
-                        </thead>
-                        <tbody id="body-lista-reproductor"></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div id="js-titulo-tema"></div>
-            </div>
-        </div>
+        </main>
 
         <script src="/js/lib/jquery-2.2.3.min.js" type="text/javascript"></script>
         <script src="/js/lib/jsrender.min.js" type="text/javascript"></script>
@@ -42,19 +45,22 @@
         <script src="/js/app/ui/ui.js" type="text/javascript"></script>
         <script src="/js/app/ui/reproductor/reproductor.js" type="text/javascript"></script>
     </body>
-
     <script id="bodyListaTemplate" type="text/html" >
-        <tr>
-            <td>
+
+        <li class="collection-item avatar">
+            <div class="col l3">
                 <img src="{{:thumbnail}}">
-            </td>
-            <td>
-                <h4>{{:titulo}}</h4>
-            </td>
-            <td>
-                <h5 class="nombre-usuario">{{:nombreUsuario}}</h5>
-            </td>
-        </tr>
+            </div>
+            <div class="col l8">
+                <span class="title">{{:titulo}}</span>
+                <p></p>
+            </div>
+            <div class="col l1">
+                <a href="#!" class="secondary-content">
+                    <i class="chip material-icons">{{:nombreUsuario}}</i>
+                </a>
+            </div>
+        </li>
     </script>
 
     <script src="js/app/sockets/reproductor/reproductor.js"></script>
