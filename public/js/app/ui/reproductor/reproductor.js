@@ -19,6 +19,9 @@ rockola.ui.reproductor = (function () {
 
     function onPlayerReady(event) {
         event.target.playVideo();
+    }
+
+    function resaltarPrimerTema() {
         $(".lista-reproduccion tbody tr").first().css("color", "mediumaquamarine")
         $(".lista-reproduccion tbody tr").first().find("td").last().append("<h6>Reproduciendo</h6>")
     }
@@ -41,8 +44,6 @@ rockola.ui.reproductor = (function () {
     }
 
     function reproducir(data) {
-        console.log('REPRODUCIENDO: ' + data.tema.titulo);
-
         player.loadVideoById({
             videoId: data.tema.videoId
         });
@@ -69,6 +70,7 @@ rockola.ui.reproductor = (function () {
     function renderizarListaTemas(lista) {
         var html = $("#bodyListaTemplate").render(lista.temas);
         $("#body-lista-reproductor").html(html);
+        resaltarPrimerTema();
     }
 
     function init() {
