@@ -2,19 +2,21 @@
 <head>
     <% include ./partials/head %>
 </head>
-<body class="body-image">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="logo">Rockola</h1>
-            </div>
-            <div class="col-md-5">
-                <h1>Lista</h1>
-            </div>
+<body class="rockola-container">
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper nav-rockola center">
+                    <a href="#!" class="logo">Rockola</a>
+                </div>
+            </nav>
         </div>
-        <br>
+    </header>
+    <div class="container-fluid container-rockola-cliente">
         <div class="row">
-            <div class="col-md-6">
+
+            <div class="col s7">
+                <h1>Lista de Resultados</h1>
                 <div class="form-inline">
                     <div class="form-group col-md-9">
                         <input type="text" class="form-control" id="busqueda" placeholder="Busqueda por banda"/>
@@ -22,20 +24,16 @@
                     <button class="btn btn-primary" id="js-boton-enviar">Buscar!</button>
                 </div>
                 <div id="grid" class="col-md-12 grid listado">
-
                 </div>
             </div>
-            <div class="listado col-md-5">
-                <table class="table" id="lista-reproduccion">
-                    <thead>
-                        <tr>
-                            <th>Lista temas en reproducción</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="body-lista-reproduccion">
-                    </tbody>
-                </table>
+            <div class="listado col s5">
+                <span class="blue-text text-darken-2">
+                    <h2>
+                        Listado de Temas
+                    </h2>
+                </span>
+                <ul class="collection lista-de-temas" id="body-lista-reproduccion">
+                </ul>
             </div>
         </div>
 
@@ -51,17 +49,21 @@
 </body>
 
 <script id="bodyListaTemplate" type="text/html" >
-    <tr>
-        <td>
+
+    <li class="collection-item avatar">
+        <div class="col l3">
             <img src="{{:thumbnail}}">
-        </td>
-        <td>
-            <h4>{{:titulo}}</h4>
-        </td>
-        <td>
-            <h5 class="nombre-usuario">{{:nombreUsuario}}</h5>
-        </td>
-    </tr>
+        </div>
+        <div class="col l8">
+            <span class="title">{{:titulo}}</span>
+            <p></p>
+        </div>
+        <div class="col l1">
+            <a href="#!" class="secondary-content">
+                <div class="chip ">{{:nombreUsuario}}</div>
+            </a>
+        </div>
+    </li>
 </script>
 
 <script id="bodyGridTemplate" type="text/html" >
