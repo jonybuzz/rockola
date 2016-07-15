@@ -70,9 +70,9 @@
     background-image: -webkit-gradient(linear,
         40% 0%,
         75% 84%,
-        from(#4D9C41),
-        to(#19911D),
-        color-stop(.6,#54DE5D))
+        from(rgba(82,7,76,1)),
+        to(rgba(82,7,76,1)),
+        color-stop(.6,rgb(136, 68, 160)))
 }
 
 .form-group input{
