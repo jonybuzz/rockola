@@ -47,7 +47,7 @@
     <script src="js/app/service/service.js"></script>
     <script src="js/app/service/tema/tema.js"></script>
     <script src="js/app/ui/ui.js"></script>
-    <script src="js/app/ui/cliente/cliente.js"></script>    
+    <script src="js/app/ui/cliente/cliente.js"></script>
 </body>
 
 <script id="bodyListaTemplate" type="text/html" >
@@ -71,8 +71,16 @@
         </div>
         <div class="titulo">
             <span>{{:video.titulo}}</span>
-        </div>  
+        </div>
     </div>
 
 </script>
 
+<script src="js/lib/socket.io.js"></script>
+
+<script>
+  var socket = io();
+    $('#js-boton-enviar').on('click', function(){
+      socket.emit('agregarTema', $('#busqueda').val());
+    })
+</script>
