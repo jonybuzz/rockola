@@ -3,10 +3,10 @@ rockola.ui.cliente = (function () {
     function init() {
         obtenerLista();
         $("#js-boton-enviar").on("click", buscarPlayList);
-        $('#busqueda').bind("enterKey",function(e){
+        $('.rockola-busqueda').bind("enterKey",function(e){
             buscarPlayList();
         });
-        $('#busqueda').keyup(function(e){
+        $('.rockola-busqueda').keyup(function(e){
             if(e.keyCode == 13)
             {
                 $(this).trigger("enterKey");
@@ -70,7 +70,7 @@ rockola.ui.cliente = (function () {
     }
 
     function buscarPlayList(){
-        var busqueda = $("#busqueda").val().trim();
+        var busqueda = $(".rockola-busqueda").val().trim();
         if(busqueda !== ""){
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)

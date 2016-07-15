@@ -10,6 +10,11 @@
 
 }
 
+.rockola-boton-buscar-tema{
+    margin-top: 23px;
+    margin-left: 13px;
+}
+
 .nav-rockola{
     background-color: rgba(82,7,76,1) !important;
 }
