@@ -5,6 +5,7 @@ Info para configurar y correr el proyecto local
 ### Que necesito tener instalado? ###
 
 * Node.js (https://docs.npmjs.com/getting-started/installing-node)
+* Nodemon (http://nodemon.io/)
 * MongoDB (https://docs.mongodb.com/manual/installation/)
 * Mocha
 
