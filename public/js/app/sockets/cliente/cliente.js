@@ -6,9 +6,9 @@ $(document).ready(function () {
         var html = $("#bodyListaTemplate").render(temas);
         $("#body-lista-reproduccion").html(html);
 
-        $(".lista-de-temas .collection-item").first().find("p").css("color", "mediumaquamarine");
-        $(".lista-de-temas .collection-item").first().find("p").last().append("Reproduciendo");
-
+        var itemReproduciendo = $(".lista-de-temas .collection-item").first();
+        itemReproduciendo.find("span").last().css("color", "mediumaquamarine");
+        itemReproduciendo.find("span").last().append("Reproduciendo");
     }
 
     socket.on('actualizarLista', function (docs) {

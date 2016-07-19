@@ -3,11 +3,11 @@ rockola.ui.cliente = (function () {
     function init() {
         obtenerLista();
         $("#js-boton-enviar").on("click", buscarPlayList);
-        $('.rockola-busqueda').bind("enterKey",function(e){
+        $('.rockola-busqueda').bind("enterKey", function (e) {
             buscarPlayList();
         });
-        $('.rockola-busqueda').keyup(function(e){
-            if(e.keyCode == 13)
+        $('.rockola-busqueda').keyup(function (e) {
+            if (e.keyCode == 13)
             {
                 $(this).trigger("enterKey");
             }
@@ -46,7 +46,7 @@ rockola.ui.cliente = (function () {
     function obtenerLista() {
         rockola.service.tema.obtenerLista()
                 .done(actualizarListaTemas)
-                .fail(mostrarErrorServicioTema)
+                .fail(mostrarErrorServicioTema);
     }
 
     function actualizarListaTemas(lista) {
@@ -69,54 +69,54 @@ rockola.ui.cliente = (function () {
         return "";
     }
 
-    function buscarPlayList(){
+    function buscarPlayList() {
         var busqueda = $(".rockola-busqueda").val().trim();
-        if(busqueda !== ""){
+        if (busqueda !== "") {
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)
-                .done(renderizarVideos)
-                .fail(error)
+                    .done(renderizarVideos)
+                    .fail(error);
         }
 
     }
 
-    function renderizarVideos(data){
+    function renderizarVideos(data) {
         var items = data.items;
         var videos = [];
-        $.each(items , function(index, item){
+        $.each(items, function (index, item) {
             var urlImagen = "";
-            if(item.snippet.thumbnails != undefined){
+            if (item.snippet.thumbnails != undefined) {
                 urlImagen = item.snippet.thumbnails.default.url;
             }
-            if(item.snippet.title!="Deleted video"){
+            if (item.snippet.title != "Deleted video") {
                 videos[index] = {
-                    "video" : {
-                        "titulo" : item.snippet.title,
-                        "urlImagen" : urlImagen,
-                        "videoId" :item.id.videoId
+                    "video": {
+                        "titulo": item.snippet.title,
+                        "urlImagen": urlImagen,
+                        "videoId": item.id.videoId
                     }
-                }
+                };
             }
         }
-        )
-        while(videos.length) {
-            var partVideos = videos.splice(0,4);
+        );
+        while (videos.length) {
+            var partVideos = videos.splice(0, 4);
             var html = $("#bodyGridTemplate").render(partVideos);
-            $("#grid").append("<div class='row'>"+html+"</div> ");
+            $("#grid").append("<div class='row'>" + html + "</div> ");
         }
-        $(".grid-tema").on("click", enviarTema)
+        $(".grid-tema").on("click", enviarTema);
 
-        $('.grid-tema').on("mouseover",function(){
+        $('.grid-tema').on("mouseover", function () {
             $(this).addClass("transition");
-        })
+        });
 
-        $('.grid-tema').on("mouseout",function(){
+        $('.grid-tema').on("mouseout", function () {
             $(this).removeClass("transition");
-        })
+        });
 
     }
 
-    function error(){
+    function error() {
         alert("ERROR");
     }
 

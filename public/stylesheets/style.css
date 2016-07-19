@@ -1,11 +1,24 @@
 .rockola-container{
     background-image: url("../img/fondo-rockola4.jpeg");
     background-size: cover;
-
 }
 
 .nav-rockola{
     background-color: rgba(82,7,76,1) !important;
+}
+
+h3{
+    font-size: 36px;
+}
+@media only screen and (max-width: 992px) {
+    h3{
+        font-size: 25px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    h3{
+        font-size: 20px;
+    }
 }
 
 .collection .collection-item {
@@ -49,11 +62,10 @@
     font-size: 45px;
     font-weight: 700;
 }
-
-.collection .collection-item.avatar {
-    min-height: 115px;
-    padding-left: 0px;
-    position: relative;
+@media only screen and (max-width: 600px) {
+    .logo {
+        font-size: 40px;
+    }
 }
 
 .listado {
