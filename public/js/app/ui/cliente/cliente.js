@@ -100,9 +100,9 @@ rockola.ui.cliente = (function () {
         }
         );
         while (videos.length) {
-            var partVideos = videos.splice(0, 4);
+            var partVideos = videos.splice(0, 12);
             var html = $("#bodyGridTemplate").render(partVideos);
-            $("#grid").append("<div class='row'>" + html + "</div> ");
+            $("#grid").append(html);
         }
         $(".grid-tema").on("click", enviarTema);
 

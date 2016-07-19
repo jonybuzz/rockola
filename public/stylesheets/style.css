@@ -9,16 +9,23 @@
 
 h3{
     font-size: 36px;
+    font-weight: 300;
 }
 @media only screen and (max-width: 992px) {
     h3{
         font-size: 25px;
+        font-weight: 400;
     }
 }
 @media only screen and (max-width: 600px) {
     h3{
         font-size: 20px;
+        font-weight: 400;
     }
+}
+
+.chip {
+    margin-top: 5px;
 }
 
 .collection .collection-item {
@@ -29,13 +36,14 @@ h3{
     border-bottom: 1px solid rgba(187, 179, 179, 0.27);
 }
 
-.card.small {
-    height: 232px;
-    width: 180px;
+.listado.collection .card {
     border-radius: 5px;
     border-color: rgba(255, 255, 255, 0.60);
-    margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.60);
+}
+
+.card.small {
+    height: 200px;
 }
 
 .card .card-content .card-title {
@@ -49,7 +57,7 @@ h3{
 
 .collection {
     border: none !important;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 460px;
 }
 
@@ -124,9 +132,7 @@ html {
 
 .grid.listado {
     margin-top: 30px;
-    max-height: 400px;     
-    padding-left: 0px;
-    padding-right: 0px;
+    max-height: 400px;
     background-color: rgba(82, 7, 76, 0.28);
 }
 
@@ -135,8 +141,4 @@ html {
     -ms-transform: scale(1.2,1.2); /* IE 9 */
     -webkit-transform: scale(1.2,1.2); /* Safari */
     transform: scale(1.2,1.2);
-}
-
-#busqueda{
-    width: 350px;
 }
