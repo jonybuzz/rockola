@@ -12,23 +12,25 @@
             </nav>
         </div>
     </header>
-    <div class="container-fluid container-rockola">
+    <div class="container">
         <div class="row">
 
-            <div class="col s7">
-                <h3>Busqueda</h3>
+            <div class="col s12 m7">
+                <h3>Búsqueda</h3>
                 <div class="form-inline">
                     <div class="form-group">
 
-                        <div class="input-field col s9">
+                        <div class="input-field col s12 m6 l8">
                             <i class="material-icons prefix">queue_music</i>
                             <input id="icon_prefix" class="rockola-busqueda" id="busqueda" type="text" class="validate">
-                            <label for="icon_prefix">Ingrese el tema</label>
+                            <label for="icon_prefix">Ingresá el tema</label>
                         </div>
-                        
-                        <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-boton-enviar" type="submit" name="action">Buscar!
-                            <i class="material-icons right">search</i>
-                        </button>
+
+                        <div class="input-field col s12 m6 l4">
+                            <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-boton-enviar" type="submit" name="action">Buscar
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -38,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="listado col s5">
+            <div class="listado col s12 m5">
                 <span class="white-text">
                     <h3>
                         Listado de Temas
@@ -83,14 +85,14 @@
     <div class="col l3 ">
         <div class="z-depth-3 card small">
             <div class="card-image waves-effect waves-block waves-light">
-            <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
-        </div>
+                <img id="{{:video.videoId}}" class="grid-tema" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
+            </div>
             <div class="card-content">
                 <span class="card-title activator">
-            <span>{{:video.titulo}}</span>
+                    <span>{{:video.titulo}}</span>
                 </span>
+            </div>
         </div>
-    </div>
     </div>
 
 
