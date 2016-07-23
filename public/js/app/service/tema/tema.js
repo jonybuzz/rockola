@@ -1,3 +1,5 @@
+/* global rockola */
+
 rockola.service.tema = (function () {
 
     var socket = io();

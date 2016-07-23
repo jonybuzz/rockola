@@ -1,13 +1,17 @@
-var databaseUrl = "rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@45.79.204.210:27017/rockola";
+/* global module */
+
+var databaseUrl = "mongo rockola -u rockola -p deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d --authenticationDatabase admin";
+//var databaseUrl = "localhost:27017/rockola";
 var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
+var xss = require('xss');
 
 var agregarTema = function (tema, callback) {
     var temaNuevo = {
         videoId: tema.videoId,
         titulo: tema.titulo,
         thumbnail: tema.thumbnail,
-        nombreUsuario: tema.nombreUsuario
+        nombreUsuario: xss(tema.nombreUsuario)
     };
     insertarOrdenado(temaNuevo, callback);
 };
@@ -67,9 +71,7 @@ function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
     return cantidad;
 }
 
-//Nota: Hacer Sincronico este metodo
 var obtenerTemas = function (callback) {
-    var temas;
     db.rockola.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
 };
 

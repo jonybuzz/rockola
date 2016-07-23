@@ -1,3 +1,5 @@
+/* global rockola */
+
 rockola.ui.cliente = (function () {
 
     function init() {

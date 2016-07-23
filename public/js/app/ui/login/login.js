@@ -1,3 +1,5 @@
+/* global rockola */
+
 rockola.ui.login = (function () {
     var nombreUsuario;
 
