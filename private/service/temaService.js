@@ -1,6 +1,6 @@
 /* global module */
 
-var databaseUrl = "mongo rockola -u rockola -p deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d --authenticationDatabase admin";
+var databaseUrl = "rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
 //var databaseUrl = "localhost:27017/rockola";
 var collections = ["rockola"];
 var db = require("mongojs")(databaseUrl, collections);
