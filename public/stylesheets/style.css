@@ -131,9 +131,10 @@ html {
     width : inherit;
 }
 
-.grid.listado {
+.rockola-container .grid.listado {
     max-height: 400px;
     background-color: rgba(82, 7, 76, 0.28);
+    margin-bottom: 0;
 }
 
 .transition {
@@ -148,7 +149,7 @@ html {
 }
 
 .rockola-container .container .fila-criterio-de-busqueda{
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 
 .rockola-container .container .pagination li.active {
@@ -166,4 +167,8 @@ html {
 .rockola-container .container .boton-agregar-todos{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.collection-item .row{
+    margin-bottom: 0;
 }
