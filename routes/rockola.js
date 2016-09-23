@@ -3,8 +3,9 @@ var routerB = express.Router();
 var rockolaService = require('../private/service/rockolaService');
 
 routerB.put('/', function (req, res) {
-    rockolaService.initRockola(req.cookies.rockola);
-    res.status(204).send();
+    rockolaService.initRockola(req.body.nombreRockola, function (rockola) {
+        res.status(201).send(rockola);
+    });
 });
 
 module.exports = routerB;

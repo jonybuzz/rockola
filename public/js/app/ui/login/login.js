@@ -34,9 +34,7 @@ rockola.ui.login = (function () {
     function ingresarRockola(){
         nombreRockola = $('.js-input-rockola.reproductor').val().trim();
         if (nombreRockola !== ""){
-            var put = rockola.service.reproductor.initRockola(nombreRockola);
-            document.cookie = "rockola=" + nombreRockola;
-            window.location.href = "/reproductor";
+            rockola.service.reproductor.initRockola(nombreRockola);
         }
     }
 

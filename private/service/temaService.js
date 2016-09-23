@@ -77,18 +77,20 @@ var obtenerTemas = function (nombreRockola, callback) {
     RockolaModel.find({nombre: nombreRockola}, {temas: true, _id: false}, callback);
 };
 
-var obtenerPrimerTema = function (res) {
+var obtenerPrimerTema = function (req, res) {
     var tema;
-    return RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+    var nombreRockola = req.cookies.rockola;
+    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
         tema = rockola.temas[0];
         res.json({tema: tema});
     });
 
 };
 
-var obtenerSiguiente = function (res) {
+var obtenerSiguiente = function (req, res) {
     var tema;
-    return RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+    var nombreRockola = req.cookies.rockola;
+    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
         tema = rockola.temas[0];
         if (tema !== undefined && tema.videoId !== undefined) {
             rockola.update(
@@ -100,7 +102,7 @@ var obtenerSiguiente = function (res) {
                         }
                     }, function () {
                 var temaActual;
-                RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+                RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
                     temaActual = rockola.temas[0];
                     res.json({tema: temaActual});
                 });

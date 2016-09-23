@@ -20,7 +20,6 @@ rockola.service = (function () {
     //revisar put
     function put(uri, data) {
         return $.ajax({
-            contentType: 'text/plain; charset=UTF-8',
             url: uri,
             type: 'PUT',
             data: data
@@ -29,7 +28,6 @@ rockola.service = (function () {
 
     function eliminar(uri, data) {
         return $.ajax({
-            contentType: 'application/json; charset=UTF-8',
             url: uri,
             type: 'DELETE',
             data: JSON.stringify(data)
