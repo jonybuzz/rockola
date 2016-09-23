@@ -25,7 +25,7 @@ rockola.ui.cliente = (function () {
         if ($("#busqueda-por-tema").filter(':checked').val() === 'on') {
             buscarTema();
         }
-        if ($("#busqueda-por-playlist").filter(':checked').val() === 'on') {
+        else if ($("#busqueda-por-playlist").filter(':checked').val() === 'on') {
             buscarPlaylist();
         }
     }
@@ -85,6 +85,7 @@ rockola.ui.cliente = (function () {
     function buscarTema() {
         var busqueda = $(".busqueda-tema").val().trim();
         if (busqueda !== "") {
+            $("#paginado-playlist").empty();
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)
                     .done(renderizarTemas)
@@ -144,7 +145,6 @@ rockola.ui.cliente = (function () {
         renderizarPaginador(data);
     }
     function renderizarPaginador(playlists) {
-        
         $('#paginado-playlist').pagination({
             dataSource: [1, 2, 3, 4, 5, 6, 7],
             pageSize: 1,

@@ -15,41 +15,40 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m7">
-                    <div class="row fila-contenedor-busqueda">
-                        <div class="col s12">
-                            <h3>Búsqueda</h3>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <div class="input-field col s6 m6 l8">
-                                            <i class="material-icons prefix">queue_music</i>
-                                            <input id="icon_prefix" class="rockola-busqueda busqueda-tema" id="busqueda-tema" type="text" class="validate">
-                                            <label for="icon_prefix">Ingresá tu búsqueda</label>
-                                        </div>
-                                        <div class="input-field col s12 m6 l4 center-align">
-                                            <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-tema" type="submit" name="action">Buscar
-                                                <i class="material-icons right">search</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col l12 right">
-                            <span>Criterio de Busqueda:</span>
-                            <input class="filled-in-box" name="group1" type="radio" id="busqueda-por-tema" checked/>
-                            <label for="busqueda-por-tema">Temas</label>
-                            <input class="filled-in-box" name="group1" type="radio" id="busqueda-por-playlist" />
-                            <label for="busqueda-por-playlist">Playlist</label>
-                        </div>
-                    </div>
+                <div class="row fila-contenedor-busqueda">
                     <div class="col s12">
-                        <div id="grid" class="grid listado collection">
-
-                        </div>
-                        <div id="paginado-playlist">
+                        <h3>Búsqueda</h3>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <div class="input-field col s6 m6 l8">
+                                    <i class="material-icons prefix">queue_music</i>
+                                    <input id="icon_prefix" class="rockola-busqueda busqueda-tema" id="busqueda-tema" type="text" class="validate">
+                                    <label for="icon_prefix">Ingresá tu búsqueda</label>
+                                </div>
+                                <div class="input-field col s12 m6 l4 center-align">
+                                    <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-tema" type="submit" name="action">Buscar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col l12 right">
+                        <span>Criterio de Busqueda:</span>
+                        <input class="filled-in-box" name="group1" type="radio" id="busqueda-por-tema" checked/>
+                        <label for="busqueda-por-tema">Temas</label>
+                        <input class="filled-in-box" name="group1" type="radio" id="busqueda-por-playlist" />
+                        <label for="busqueda-por-playlist">Playlist</label>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <ul id="paginado-playlist" class="pagination">
+                    </ul>
+                    <div id="grid" class="grid listado collection">
+                    </div>
+                </div>
             </div>
             <div class="listado col s12 m5">
                 <span class="white-text">
