@@ -2,13 +2,22 @@
 
 var RockolaModel = require("../model/Rockola.model.js");
 
-var initRockola = function (nombreRockola) {
+var initRockola = function (nombreRockola, callback) {
+    console.log(nombreRockola);
     return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        var rockolaNueva = new RockolaModel({nombre: nombreRockola});
-        rockolaNueva.save(function (err) {
-            if (err)
-                console.log(err);
-        });
+        if (rockola === null) {
+            var rockolaNueva = new RockolaModel({nombre: nombreRockola});
+            rockolaNueva.save(function (err, rockola) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(rockola);
+                    callback(rockola);
+                }
+            });
+        } else {
+            callback(rockola);
+        }
     });
 };
 
