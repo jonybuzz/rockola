@@ -10,24 +10,31 @@ rockola.ui.login = (function () {
     }
 
     function setearCookie() {
-        $("#js-boton-logear-cliente").on('click',unirseARockola);
-        
-        $("#js-boton-ingresar-rockola").on('click',ingresarRockola);
+        $("#js-boton-logear-cliente").on('click', unirseARockola);
+
+        $("#js-boton-ingresar-rockola").on('click', ingresarRockola);
     }
 
-    function unirseARockola(){
+    function unirseARockola() {
         nombreUsuario = $('.rockola-input-nombre.cliente').val().trim();
         nombreRockola = $('.rockola-input-rockola.cliente').val().trim();
-        if (nombreUsuario !== ""){
+        if (nombreUsuario !== "") {
             document.cookie = "rockolito=" + nombreUsuario;
-            document.cookie = "rockola=" + nombreRockola;
-            window.location.href = "/cliente";
+            rockola.service.reproductor.existe(nombreRockola).done(function (existeRockola) {
+                if (existeRockola.existe === true) {
+                    document.cookie = "rockola=" + nombreRockola;
+                    window.location.href = "/cliente";
+                } else {
+                    alert("No existe una rockola con ese nombre");
+                }
+
+            });
         }
     }
 
     function ingresarRockola() {
         nombreRockola = $('.js-input-rockola.reproductor').val().trim();
-        if (nombreRockola !== ""){
+        if (nombreRockola !== "") {
             rockola.service.reproductor.initRockola(nombreRockola);
         }
     }

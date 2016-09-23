@@ -8,4 +8,10 @@ routerB.put('/', function (req, res) {
     });
 });
 
+routerB.post('/existe', function (req, res) {
+    rockolaService.existeRockola(req.body.nombreRockola, function (rockola) {
+        res.status(200).send({existe : rockola});
+    });
+});
+
 module.exports = routerB;

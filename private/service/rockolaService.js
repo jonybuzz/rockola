@@ -21,5 +21,16 @@ var initRockola = function (nombreRockola, callback) {
     });
 };
 
+var existeRockola = function (nombreRockola, callback){
+    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
+        if (rockola === null) {
+            callback(false);
+        } else {
+            callback(true);
+        };
+    });
+};
+
 module.exports.initRockola = initRockola;
+module.exports.existeRockola = existeRockola;
 
