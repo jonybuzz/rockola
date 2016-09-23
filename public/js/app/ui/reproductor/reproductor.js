@@ -4,6 +4,8 @@ rockola.ui.reproductor = (function () {
     var firstScriptTag = $('script')[0];
     var player = $("#player");
     var socket = io();
+    var tiempoLimitePorDefecto = 600;
+   
 
     var done = false;
     function onYouTubeIframeAPIReady(data) {
@@ -49,7 +51,7 @@ rockola.ui.reproductor = (function () {
         if (data !== undefined && data.tema !== undefined) {
             player.loadVideoById({
                 videoId: data.tema.videoId,
-                endSeconds:20
+                endSeconds:tiempoLimitePorDefecto
             });
         }
     }
