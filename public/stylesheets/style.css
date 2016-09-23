@@ -147,3 +147,11 @@ html {
 .rockola-container .container .fila-contenedor-busqueda{
     margin-bottom: 0;
 }
+
+.rockola-container .container .pagination li.active {
+    background-color: rgba(82,7,76,1);
+}
+
+.rockola-container .container .pagination li a {
+    color: gainsboro;
+}

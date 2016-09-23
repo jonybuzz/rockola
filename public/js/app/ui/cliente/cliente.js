@@ -7,8 +7,8 @@ rockola.ui.cliente = (function () {
         bindearTeclaEnter();
         $("#js-buscar-tema").on("click", buscarContenido);
     }
-    
-    function bindearTeclaEnter(){
+
+    function bindearTeclaEnter() {
         $('.rockola-busqueda').bind("enterKey", function (e) {
             buscarContenido();
         });
@@ -19,13 +19,12 @@ rockola.ui.cliente = (function () {
             }
         });
     }
-    
-    
-    function buscarContenido(){
+
+
+    function buscarContenido() {
         if ($("#busqueda-por-tema").filter(':checked').val() === 'on') {
             buscarTema();
-        }
-        else if ($("#busqueda-por-playlist").filter(':checked').val() === 'on') {
+        } else if ($("#busqueda-por-playlist").filter(':checked').val() === 'on') {
             buscarPlaylist();
         }
     }
@@ -88,21 +87,21 @@ rockola.ui.cliente = (function () {
             $("#paginado-playlist").empty();
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)
-                    .done(renderizarTemas)
+                    .done(renderizarTemasBusquedaComun)
                     .fail(error);
         }
 
     }
 
-    function renderizarTemas(data) {
+    function armarListaDeVideos(data) {
         var items = data.items;
         var videos = [];
         $.each(items, function (index, item) {
             var urlImagen = "";
-            if (item.snippet.thumbnails != undefined) {
+            if (item.snippet.thumbnails !== undefined) {
                 urlImagen = item.snippet.thumbnails.default.url;
             }
-            if (item.snippet.title != "Deleted video") {
+            if (item.snippet.title !== "Deleted video") {
                 videos[index] = {
                     "video": {
                         "titulo": item.snippet.title,
@@ -111,8 +110,37 @@ rockola.ui.cliente = (function () {
                     }
                 };
             }
-        }
-        );
+        });
+        return videos;
+    }
+
+    function renderizarTemasBusquedaComun(data){
+        $(".boton-agregar-todos").addClass("hide");
+        renderizarTemas(data);
+    }
+    
+    function renderizarTemas(data) {
+        var videos = armarListaDeVideos(data);
+        appenderElementosRenderizado(videos);
+        bindearEventosGrillaTema();
+    }
+
+    function renderizarTemasDeLaPlaylist(data) {
+        $(".boton-agregar-todos").removeClass("hide");
+        renderizarTemas(data);
+    }
+    
+    function bindearEventosGrillaTema() {
+        $('.grid-tema').on("mouseover", function () {
+            $(this).addClass("transition");
+        });
+
+        $('.grid-tema').on("mouseout", function () {
+            $(this).removeClass("transition");
+        });
+    }
+
+    function appenderElementosRenderizado(videos) {
         $("#grid").empty();
         while (videos.length) {
             var partVideos = videos.splice(0, 12);
@@ -121,36 +149,25 @@ rockola.ui.cliente = (function () {
         }
         $(".grid-tema").on("click", enviarTema);
 
-        $('.grid-tema').on("mouseover", function () {
-            $(this).addClass("transition");
-        });
-
-        $('.grid-tema').on("mouseout", function () {
-            $(this).removeClass("transition");
-        });
-
     }
     function buscarPlaylist() {
         var busqueda = $(".busqueda-tema").val().trim();
         if (busqueda !== "") {
             $("#grid").html("");
             rockola.service.tema.buscarPlayListPorBanda(busqueda)
-                    .done(buscarTemasIndividualesDeLaPlaylist)
+                    .done(inicializarPaginadoPlaylist)
                     .fail(error);
         }
-
     }
 
-    function buscarTemasIndividualesDeLaPlaylist(data) {
-        renderizarPaginador(data);
-    }
-    function renderizarPaginador(playlists) {
+    function inicializarPaginadoPlaylist(playlists) {
+        $(".boton-agregar-todos").removeClass("hidden");
         $('#paginado-playlist').pagination({
             dataSource: Array.from(Array(playlists.items.length).keys()),
             pageSize: 1,
             callback: function (data) {
                 rockola.service.tema.buscarTemasDePlayList(playlists, data[0])
-                        .done(renderizarTemas)
+                        .done(renderizarTemasDeLaPlaylist)
                         .fail(error);
                 console.log(data[0]);
             }
