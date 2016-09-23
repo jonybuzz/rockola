@@ -10,7 +10,7 @@ rockola.ui.cliente = (function () {
     
     function bindearTeclaEnter(){
         $('.rockola-busqueda').bind("enterKey", function (e) {
-            buscarTema();
+            buscarContenido();
         });
         $('.rockola-busqueda').keyup(function (e) {
             if (e.keyCode === 13)
@@ -146,7 +146,7 @@ rockola.ui.cliente = (function () {
     }
     function renderizarPaginador(playlists) {
         $('#paginado-playlist').pagination({
-            dataSource: [1, 2, 3, 4, 5, 6, 7],
+            dataSource: Array.from(Array(playlists.items.length).keys()),
             pageSize: 1,
             callback: function (data) {
                 rockola.service.tema.buscarTemasDePlayList(playlists, data[0])
