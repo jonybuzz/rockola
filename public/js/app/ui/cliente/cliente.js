@@ -6,6 +6,13 @@ rockola.ui.cliente = (function () {
         obtenerLista();
         bindearTeclaEnter();
         $("#js-buscar-tema").on("click", buscarContenido);
+        $(".boton-agregar-todos").on("click", agregarTodos);
+    }
+
+    function agregarTodos() {
+        $(".grid-tema").each(function (index, data) {
+            $(this).click();
+        });
     }
 
     function bindearTeclaEnter() {
@@ -38,20 +45,12 @@ rockola.ui.cliente = (function () {
         console.log(videoId);
         console.log(titulo);
         console.log(urlThumbnail);
-        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario)
-                .done(obtenerRespuestaDelServidor)
-                .fail(mostrarErrorServicioTema);
+        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario);
         obtenerLista();
     }
 
     function mostrarErrorServicioTema() {
         alert("ERROR con el servicio de Tema");
-    }
-
-    function obtenerRespuestaDelServidor(respuesta) {
-        if (respuesta.agregado == false) {
-            alert("Ingresá la url completa, con youtube!");
-        }
     }
 
     function obtenerLista() {
@@ -106,7 +105,7 @@ rockola.ui.cliente = (function () {
                     "video": {
                         "titulo": item.snippet.title,
                         "urlImagen": urlImagen,
-                        "videoId": item.id.videoId
+                        "videoId": item.id.videoId ? item.id.videoId : item.snippet.resourceId.videoId
                     }
                 };
             }
@@ -114,11 +113,11 @@ rockola.ui.cliente = (function () {
         return videos;
     }
 
-    function renderizarTemasBusquedaComun(data){
+    function renderizarTemasBusquedaComun(data) {
         $(".boton-agregar-todos").addClass("hide");
         renderizarTemas(data);
     }
-    
+
     function renderizarTemas(data) {
         var videos = armarListaDeVideos(data);
         appenderElementosRenderizado(videos);
@@ -129,7 +128,7 @@ rockola.ui.cliente = (function () {
         $(".boton-agregar-todos").removeClass("hide");
         renderizarTemas(data);
     }
-    
+
     function bindearEventosGrillaTema() {
         $('.grid-tema').on("mouseover", function () {
             $(this).addClass("transition");
@@ -169,7 +168,6 @@ rockola.ui.cliente = (function () {
                 rockola.service.tema.buscarTemasDePlayList(playlists, data[0])
                         .done(renderizarTemasDeLaPlaylist)
                         .fail(error);
-                console.log(data[0]);
             }
         });
     }
