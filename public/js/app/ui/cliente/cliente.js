@@ -83,7 +83,7 @@ rockola.ui.cliente = (function () {
         }
 
     }
-    
+
     function renderizarTemas(data) {
         var items = data.items;
         var videos = [];
@@ -103,10 +103,11 @@ rockola.ui.cliente = (function () {
             }
         }
         );
+        $("#grid").empty();
         while (videos.length) {
             var partVideos = videos.splice(0, 12);
-            var html = $("#resultadosTemasTemplate").render(partVideos);
-            $("#grid").append(html);
+            var elementosRenderizados = $("#resultadosTemasTemplate").render(partVideos);
+            $("#grid").append(elementosRenderizados);
         }
         $(".grid-tema").on("click", enviarTema);
 
@@ -124,17 +125,27 @@ rockola.ui.cliente = (function () {
         if (busqueda !== "") {
             $("#grid").html("");
             rockola.service.tema.buscarPlayListPorBanda(busqueda)
-                    .done(renderizarPlaylist)
+                    .done(buscarTemasIndividualesDeLaPlaylist)
                     .fail(error);
         }
 
     }
 
-    function renderizarPlaylist(data) {
-        rockola.service.tema.buscarTemasDePlayList(data,0)
-                .done(renderizarTemas)
-                .fail(error);
+    function buscarTemasIndividualesDeLaPlaylist(data) {
+        renderizarPaginador(data);
+    }
+    function renderizarPaginador(playlists) {
         
+        $('#paginado-playlist').pagination({
+            dataSource: [1, 2, 3, 4, 5, 6, 7],
+            pageSize: 1,
+            callback: function (data) {
+                rockola.service.tema.buscarTemasDePlayList(playlists, data[0])
+                        .done(renderizarTemas)
+                        .fail(error);
+                console.log(data[0]);
+            }
+        });
     }
 
     function error() {
