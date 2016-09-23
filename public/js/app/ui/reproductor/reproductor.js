@@ -4,7 +4,6 @@ rockola.ui.reproductor = (function () {
     var firstScriptTag = $('script')[0];
     var player = $("#player");
     var socket = io();
-    var tiempoLimitePorDefecto = 600;
    
 
     var done = false;
@@ -51,12 +50,13 @@ rockola.ui.reproductor = (function () {
         if (data !== undefined && data.tema !== undefined) {
             player.loadVideoById({
                 videoId: data.tema.videoId,
-                endSeconds:tiempoLimitePorDefecto
+                endSeconds:$("#tiempo-de-reproduccion").val()
             });
         }
     }
 
     function initFrame() {
+        $('select').material_select();
         tag.src = "https://www.youtube.com/iframe_api";
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         $.getScript("//www.youtube.com/player_api", function () {
