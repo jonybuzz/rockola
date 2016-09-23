@@ -16,14 +16,14 @@ rockola.service = (function () {
             data: data
         });
     }
-
+    
+    //revisar put
     function put(uri, data) {
         return $.ajax({
-            contentType: 'application/json; charset=UTF-8',
+            contentType: 'text/plain; charset=UTF-8',
             url: uri,
             type: 'PUT',
-            data: JSON.stringify(data),
-            dataType: 'json'
+            data: data
         });
     }
 

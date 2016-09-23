@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var routesTema = require('./routes/tema');
+var routesRockola = require('./routes/rockola');
 var app = express();
 
 // view engine setup
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/tema', routesTema);
+app.use('/api/rockola', routesRockola);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
