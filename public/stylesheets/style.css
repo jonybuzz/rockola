@@ -159,3 +159,8 @@ html {
 .rockola-container .container .contenedor-criterio-busqueda{
     margin-left: 55px;
 }
+
+.rockola-container .container .boton-agregar-todos{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
