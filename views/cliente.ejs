@@ -25,8 +25,8 @@
                                     <input id="icon_prefix" class="rockola-busqueda busqueda-tema" id="busqueda-tema" type="text" class="validate">
                                     <label for="icon_prefix">Ingresá tu búsqueda</label>
                                 </div>
-                                <div class="input-field col s12 m6 l4 center-align">
-                                    <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-tema" type="submit" name="action">Buscar
+                                <div class="input-field col s12 m6 l4">
+                                    <button class="right btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-tema" type="submit" name="action">Buscar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col l12 right">
+                    <div class="col l12 contenedor-criterio-busqueda">
                         <span>Criterio de Busqueda:</span>
                         <input class="filled-in-box" name="group1" type="radio" id="busqueda-por-tema" checked/>
                         <label for="busqueda-por-tema">Temas</label>
@@ -43,14 +43,21 @@
                         <label for="busqueda-por-playlist">Playlist</label>
                     </div>
                 </div>
-                <div class="col s12">
-                    
-                    <ul id="paginado-playlist" class="pagination">
-                    </ul>
-                    <button class="btn waves-effect waves-light boton-agregar-todos hide" type="submit" name="action">Agregar Todos
-                        <i class="material-icons right">send</i>
-                    </button>
-                    <div id="grid" class="grid listado collection">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col s6">
+                            <ul id="paginado-playlist" class="pagination">
+                            </ul>
+                        </div>
+                        <div class="col s6">
+                            <button class="btn right waves-effect waves-light boton-agregar-todos hide" type="submit" name="action">Agregar Todos
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                        <div class="col l12">
+                            <div id="grid" class="grid listado collection">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

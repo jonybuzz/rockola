@@ -155,3 +155,7 @@ html {
 .rockola-container .container .pagination li a {
     color: gainsboro;
 }
+
+.rockola-container .container .contenedor-criterio-busqueda{
+    margin-left: 55px;
+}
