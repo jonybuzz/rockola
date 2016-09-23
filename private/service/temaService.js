@@ -8,7 +8,7 @@ var RockolaModel = require("../model/Rockola.model.js");
 var mongoose = require('mongoose');
 mongoose.connect(databaseUrl);
 
-var agregarTema = function (tema, callback) {
+var agregarTema = function (tema, nombreRockola, callback) {
 
     var temaNuevo = new TemaModel({
         videoId: tema.videoId,
@@ -16,11 +16,11 @@ var agregarTema = function (tema, callback) {
         thumbnail: tema.thumbnail,
         nombreUsuario: xss(tema.nombreUsuario)
     });
-    insertarOrdenado(temaNuevo, callback);
+    insertarOrdenado(temaNuevo, nombreRockola, callback);
 };
 
-function insertarOrdenado(temaNuevo, callback) {
-    RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+function insertarOrdenado(temaNuevo, nombreRockola, callback) {
+    RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
         var arrayTemas = [];
         var indice;
         var listaTemasUsuarios = {};
@@ -57,7 +57,7 @@ function insertarOrdenado(temaNuevo, callback) {
         } else {
             arrayTemas.push(temaNuevo);
         }
-        RockolaModel.update({nombre: "RockolaPNT"}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
+        RockolaModel.update({nombre: nombreRockola}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
     });
 
 }
@@ -73,8 +73,8 @@ function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
     return cantidad;
 }
 
-var obtenerTemas = function (callback) {
-    RockolaModel.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
+var obtenerTemas = function (nombreRockola, callback) {
+    RockolaModel.find({nombre: nombreRockola}, {temas: true, _id: false}, callback);
 };
 
 var obtenerPrimerTema = function (res) {

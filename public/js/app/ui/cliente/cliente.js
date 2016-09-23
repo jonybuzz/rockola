@@ -20,6 +20,7 @@ rockola.ui.cliente = (function () {
     function enviarTema(event) {
         event.preventDefault();
         var nombreUsuario = getCookie("rockolito");
+        var nombreRockola = getCookie("rockola");
 
         var videoId = this.id;
         var titulo = this.alt;
@@ -29,7 +30,7 @@ rockola.ui.cliente = (function () {
         console.log(titulo);
         console.log(urlThumbnail);
 
-        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario)
+        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario, nombreRockola)
                 .done(obtenerRespuestaDelServidor)
                 .fail(mostrarErrorServicioTema);
         obtenerLista();
