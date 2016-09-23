@@ -1,14 +1,12 @@
 /* global module */
 
-var databaseUrl = "localhost:27017/rockola";
-//var databaseUrl = "localhost:27017/rockola";
-var collections = ["rockolas"];
-var db = require("mongojs")(databaseUrl, collections);
+//var databaseUrl = "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
+var databaseUrl = "mongodb://localhost:27017/rockola";
 var xss = require('xss');
 var TemaModel = require("../model/Tema.model.js").TemaModel;
 var RockolaModel = require("../model/Rockola.model.js");
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/rockola");
+mongoose.connect(databaseUrl);
 
 var agregarTema = function (tema, callback) {
 
@@ -76,13 +74,13 @@ function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
 }
 
 var obtenerTemas = function (callback) {
-    db.rockolas.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
+    RockolaModel.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
 };
 
 var obtenerPrimerTema = function (res) {
     var tema;
-    return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
-        tema = docs[0].temas[0];
+    return RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+        tema = rockola.temas[0];
         res.json({tema: tema});
     });
 
@@ -90,11 +88,10 @@ var obtenerPrimerTema = function (res) {
 
 var obtenerSiguiente = function (res) {
     var tema;
-    return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
-        tema = docs[0].temas[0];
+    return RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+        tema = rockola.temas[0];
         if (tema !== undefined && tema.videoId !== undefined) {
-            db.rockolas.update(
-                    {nombre: "RockolaPNT"},
+            rockola.update(
                     {
                         $pull: {
                             temas: {
@@ -103,8 +100,8 @@ var obtenerSiguiente = function (res) {
                         }
                     }, function () {
                 var temaActual;
-                return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
-                    temaActual = docs[0].temas[0];
+                RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
+                    temaActual = rockola.temas[0];
                     res.json({tema: temaActual});
                 });
 
