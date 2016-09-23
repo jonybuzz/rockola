@@ -11,9 +11,10 @@ rockola.ui.reproductor = (function () {
             player = new YT.Player('player', {
                 height: '390',
                 width: '640',
-                videoId: data.tema.videoId,
                 events: {
-                    'onReady': onPlayerReady,
+                    'onReady': function (){
+                        reproducir(data);
+                    },
                     'onStateChange': onPlayerStateChange
                 }
             });
@@ -32,10 +33,6 @@ rockola.ui.reproductor = (function () {
                 });
     }
 
-    function onPlayerReady(event) {
-        event.target.playVideo();
-    }
-
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
             done = true;
@@ -51,7 +48,8 @@ rockola.ui.reproductor = (function () {
     function reproducir(data) {
         if (data !== undefined && data.tema !== undefined) {
             player.loadVideoById({
-                videoId: data.tema.videoId
+                videoId: data.tema.videoId,
+                endSeconds:20
             });
         }
     }
@@ -68,11 +66,6 @@ rockola.ui.reproductor = (function () {
                 }
             }, 500);
         });
-    }
-
-    function renderizarListaTemas(lista) {
-        var html = $("#bodyListaTemplate").render(lista.temas);
-        $("#body-lista-reproductor").html(html);
     }
 
     return {
