@@ -1,36 +1,39 @@
 /* global module */
 
-var databaseUrl = "rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
+var databaseUrl = "localhost:27017/rockola";
 //var databaseUrl = "localhost:27017/rockola";
-var collections = ["rockola"];
+var collections = ["rockolas"];
 var db = require("mongojs")(databaseUrl, collections);
 var xss = require('xss');
+var TemaModel = require("../model/Tema.model.js").TemaModel;
+var RockolaModel = require("../model/Rockola.model.js");
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/rockola");
 
 var agregarTema = function (tema, callback) {
-    var temaNuevo = {
+
+    var temaNuevo = new TemaModel({
         videoId: tema.videoId,
         titulo: tema.titulo,
         thumbnail: tema.thumbnail,
         nombreUsuario: xss(tema.nombreUsuario)
-    };
+    });
     insertarOrdenado(temaNuevo, callback);
 };
 
 function insertarOrdenado(temaNuevo, callback) {
-    db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+    RockolaModel.findOne({nombre: "RockolaPNT"}, function (err, rockola) {
         var arrayTemas = [];
         var indice;
         var listaTemasUsuarios = {};
         var tema = {};
-
         try {
-            arrayTemas = docs[0].temas;
+            arrayTemas = rockola.temas;
         } catch (err) {
         }
         var cantidadDeTemasInsertadosDeUsuario = obtenerTemasDeUsuario(temaNuevo.nombreUsuario, arrayTemas);
 
         if (arrayTemas.length > 0) {
-
             for (indice = 0; indice < arrayTemas.length; indice++) {
                 tema = arrayTemas[indice];
 
@@ -52,10 +55,11 @@ function insertarOrdenado(temaNuevo, callback) {
             } else {
                 arrayTemas.splice(indice, 0, temaNuevo);
             }
+
         } else {
             arrayTemas.push(temaNuevo);
         }
-        db.rockola.update({nombre: "RockolaPNT"}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
+        RockolaModel.update({nombre: "RockolaPNT"}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
     });
 
 }
@@ -72,12 +76,12 @@ function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
 }
 
 var obtenerTemas = function (callback) {
-    db.rockola.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
+    db.rockolas.find({nombre: "RockolaPNT"}, {temas: true, _id: false}, callback);
 };
 
 var obtenerPrimerTema = function (res) {
     var tema;
-    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+    return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
         tema = docs[0].temas[0];
         res.json({tema: tema});
     });
@@ -86,10 +90,10 @@ var obtenerPrimerTema = function (res) {
 
 var obtenerSiguiente = function (res) {
     var tema;
-    return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+    return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
         tema = docs[0].temas[0];
         if (tema !== undefined && tema.videoId !== undefined) {
-            db.rockola.update(
+            db.rockolas.update(
                     {nombre: "RockolaPNT"},
                     {
                         $pull: {
@@ -99,7 +103,7 @@ var obtenerSiguiente = function (res) {
                         }
                     }, function () {
                 var temaActual;
-                return db.rockola.find({nombre: "RockolaPNT"}, function (err, docs) {
+                return db.rockolas.find({nombre: "RockolaPNT"}, function (err, docs) {
                     temaActual = docs[0].temas[0];
                     res.json({tema: temaActual});
                 });
