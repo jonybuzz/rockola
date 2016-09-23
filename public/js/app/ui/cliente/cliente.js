@@ -4,12 +4,13 @@ rockola.ui.cliente = (function () {
 
     function init() {
         obtenerLista();
-        $("#js-boton-enviar").on("click", buscarPlayList);
+        $("#js-buscar-tema").on("click", buscarTema);
+        $("#js-buscar-playlist").on("click", buscarPlaylist);
         $('.rockola-busqueda').bind("enterKey", function (e) {
-            buscarPlayList();
+            buscarTema();
         });
         $('.rockola-busqueda').keyup(function (e) {
-            if (e.keyCode == 13)
+            if (e.keyCode === 13)
             {
                 $(this).trigger("enterKey");
             }
@@ -71,18 +72,19 @@ rockola.ui.cliente = (function () {
         return "";
     }
 
-    function buscarPlayList() {
-        var busqueda = $(".rockola-busqueda").val().trim();
+
+    function buscarTema() {
+        var busqueda = $(".busqueda-tema").val().trim();
         if (busqueda !== "") {
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)
-                    .done(renderizarVideos)
+                    .done(renderizarTemas)
                     .fail(error);
         }
 
     }
-
-    function renderizarVideos(data) {
+    
+    function renderizarTemas(data) {
         var items = data.items;
         var videos = [];
         $.each(items, function (index, item) {
@@ -103,7 +105,7 @@ rockola.ui.cliente = (function () {
         );
         while (videos.length) {
             var partVideos = videos.splice(0, 12);
-            var html = $("#bodyGridTemplate").render(partVideos);
+            var html = $("#resultadosTemasTemplate").render(partVideos);
             $("#grid").append(html);
         }
         $(".grid-tema").on("click", enviarTema);
@@ -116,6 +118,23 @@ rockola.ui.cliente = (function () {
             $(this).removeClass("transition");
         });
 
+    }
+    function buscarPlaylist() {
+        var busqueda = $(".busqueda-playlist").val().trim();
+        if (busqueda !== "") {
+            $("#grid").html("");
+            rockola.service.tema.buscarPlayListPorBanda(busqueda)
+                    .done(renderizarPlaylist)
+                    .fail(error);
+        }
+
+    }
+
+    function renderizarPlaylist(data) {
+        rockola.service.tema.buscarTemasDePlayList(data,0)
+                .done(renderizarTemas)
+                .fail(error);
+        
     }
 
     function error() {

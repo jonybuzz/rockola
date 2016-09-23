@@ -21,21 +21,35 @@
                         <h3>Búsqueda</h3>
                         <div class="form-inline">
                             <div class="form-group">
-
                                 <div class="input-field col s12 m6 l8">
                                     <i class="material-icons prefix">queue_music</i>
-                                    <input id="icon_prefix" class="rockola-busqueda" id="busqueda" type="text" class="validate">
-                                    <label for="icon_prefix">Ingresá el tema</label>
+                                    <input id="icon_prefix" class="rockola-busqueda busqueda-tema" id="busqueda-tema" type="text" class="validate">
+                                    <label for="icon_prefix">Ingresá el nombre del tema</label>
                                 </div>
-
                                 <div class="input-field col s12 m6 l4 center-align">
-                                    <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-boton-enviar" type="submit" name="action">Buscar
+                                    <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-tema" type="submit" name="action">Buscar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col s12">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <div class="input-field col s12 m6 l8">
+                                    <i class="material-icons prefix">queue_music</i>
+                                    <input id="icon_prefix" class="rockola-busqueda busqueda-playlist" id="busqueda-playlist" type="text" class="validate">
+                                    <label for="icon_prefix">Ingresá el nombre de la playlist</label>
+                                </div>
+                                <div class="input-field col s12 m6 l4 center-align">
+                                    <button class="btn waves-effect waves-light rockola-boton-buscar-tema" id="js-buscar-playlist" type="submit" name="action">Buscar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
                     <div class="col s12">
                         <div id="grid" class="grid listado collection">
 
@@ -86,7 +100,20 @@
     </li>
 </script>
 
-<script id="bodyGridTemplate" type="text/html" >
+<script id="resultadosTemasTemplate" type="text/html" >
+    <div class="col m6 l4">
+        <div class="card small z-depth-3">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img id="{{:video.videoId}}" class="grid-tema responsive-img" src="{{:video.urlImagen}}" alt="{{:video.titulo}}">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator"><p>{{:video.titulo}}</p></span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="resultadosPlaylistTemplate" type="text/html" >
     <div class="col m6 l4">
         <div class="card small z-depth-3">
             <div class="card-image waves-effect waves-block waves-light">

@@ -41,10 +41,33 @@ rockola.service.tema = (function () {
         return rockola.service.get(link);
     }
 
+    function buscarPlayListPorBanda(busqueda) {        
+        var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
+        var urlBase = "https://www.googleapis.com/youtube/v3/search";
+        var type = "type=playlist&";
+        var filtros = "part=snippet&maxResults=50";
+        var q = "q=" + busqueda.replace(" ", "+");
+        var link = urlBase + "?" + type + filtros + "&" + q + "&" + key;
+        console.log(link);
+        return rockola.service.get(link);
+    }
+
+    function buscarTemasDePlayList(playListItems, pagina) {
+        var playListId = playListItems.items[pagina].id.playlistId;
+        var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
+        var urlBase = "https://www.googleapis.com/youtube/v3/playlistItems";
+        var filtros = "part=snippet&maxResults=50";
+        var q = "playlistId=" + playListId;
+        var link = urlBase + "?" + filtros + "&" + q + "&" + key;
+        console.log(link);
+        return rockola.service.get(link);
+    }  
     return {
         enviarTema: enviarTema,
         obtenerLista: obtenerLista,
         buscarTemas: buscarTemas,
+        buscarPlayListPorBanda: buscarPlayListPorBanda,
+        buscarTemasDePlayList: buscarTemasDePlayList,
         obtenerPrimerTema: obtenerPrimerTema,
         obtenerSiguiente: obtenerSiguiente
     };
