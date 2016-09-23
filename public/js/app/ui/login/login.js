@@ -6,10 +6,11 @@ rockola.ui.login = (function () {
 
     function init() {
         setearCookie();
+        bindearEventos();
     }
 
     function setearCookie() {
-        $("#js-boton-logear").on('click',ingresar);
+        $("#js-boton-logear").on('click', ingresar);
 //        $('.rockola-input-nombre.cliente').bind("enterKey",function(e){
 //            ingresar();
 //        });
@@ -19,25 +20,35 @@ rockola.ui.login = (function () {
 //                $(this).trigger("enterKey");
 //            }
 //        });
-        
-        $("#js-boton-ingresar-rockola").on('click',ingresarRockola);
+
+        $("#js-boton-ingresar-rockola").on('click', ingresarRockola);
     }
 
-    function ingresar(){
+    function ingresar() {
         nombreUsuario = $('.rockola-input-login.cliente').val().trim();
-        if (nombreUsuario !== ""){
+        if (nombreUsuario !== "") {
             document.cookie = "rockolito=" + nombreUsuario;
             window.location.href = "/cliente";
         }
     }
-    
-    function ingresarRockola(){
+
+    function ingresarRockola() {
         nombreRockola = $('.js-input-rockola.reproductor').val().trim();
-        if (nombreRockola !== ""){
+        if (nombreRockola !== "") {
             var put = rockola.service.reproductor.initRockola(nombreRockola);
             document.cookie = "rockola=" + nombreRockola;
             window.location.href = "/reproductor";
         }
+    }
+
+    function bindearEventos() {
+
+        $(".rockola-reproductor .activator").on('click', function () {
+            $(".rockola-cliente .deactivator").click()
+        });
+        $(".rockola-cliente .activator").on('click', function () {
+            $(".rockola-reproductor .deactivator").click()
+        });
     }
 
     return{
