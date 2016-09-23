@@ -22,7 +22,6 @@ rockola.service.tema = (function () {
     function obtenerSiguiente() {
         var urlObtenerLista = rockola.service.url() + "tema/siguiente";
         return rockola.service.get(urlObtenerLista);
-
     }
 
     function obtenerPrimerTema() {

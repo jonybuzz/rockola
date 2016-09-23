@@ -9,24 +9,17 @@ rockola.ui.login = (function () {
     }
 
     function setearCookie() {
-        $("#js-boton-logear").on('click',ingresar);
-//        $('.rockola-input-nombre.cliente').bind("enterKey",function(e){
-//            ingresar();
-//        });
-//        $('.rockola-input-nombre.cliente').keyup(function(e){
-//            if(e.keyCode == 13)
-//            {
-//                $(this).trigger("enterKey");
-//            }
-//        });
+        $("#js-boton-logear-cliente").on('click',unirseARockola);
         
         $("#js-boton-ingresar-rockola").on('click',ingresarRockola);
     }
 
-    function ingresar(){
-        nombreUsuario = $('.rockola-input-login.cliente').val().trim();
+    function unirseARockola(){
+        nombreUsuario = $('.rockola-input-nombre.cliente').val().trim();
+        nombreRockola = $('.rockola-input-rockola.cliente').val().trim();
         if (nombreUsuario !== ""){
             document.cookie = "rockolito=" + nombreUsuario;
+            document.cookie = "rockola=" + nombreRockola;
             window.location.href = "/cliente";
         }
     }
