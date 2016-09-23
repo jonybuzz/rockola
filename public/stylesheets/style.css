@@ -132,7 +132,6 @@ html {
 }
 
 .grid.listado {
-    margin-top: 30px;
     max-height: 400px;
     background-color: rgba(82, 7, 76, 0.28);
 }
@@ -145,6 +144,10 @@ html {
 }
 
 .rockola-container .container .fila-contenedor-busqueda{
+    margin-bottom: 0;
+}
+
+.rockola-container .container .fila-criterio-de-busqueda{
     margin-bottom: 0;
 }
 
