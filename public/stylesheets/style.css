@@ -143,3 +143,19 @@ html {
     -webkit-transform: scale(1.2,1.2); /* Safari */
     transform: scale(1.2,1.2);
 }
+
+.rockola-imagen-cliente{
+    background-image: url("../img/cliente.jpg");
+}
+
+.rockola-imagen-servidor{
+    background-image: url("../img/servidor.jpg");
+}
+
+.rockola-container .container .input-field .prefix{
+   color:  rgba(82,7,76,1);
+}
+
+.rockola-container .container .card .row input{
+    color: black;
+}
