@@ -32,7 +32,7 @@ rockola.ui.reproductor = (function () {
                     reproducir(data);
                 });
     }
-    
+
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');

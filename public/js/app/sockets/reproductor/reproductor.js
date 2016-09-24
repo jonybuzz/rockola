@@ -12,13 +12,11 @@ $(document).ready(function () {
     }
     
     var nombreRockola = getCookie("rockola");
-    socket.emit('actualizame', nombreRockola);
-
     socket.emit('unirse', nombreRockola);
+
+    socket.emit('actualizame', nombreRockola);
     
-    socket.on('actualizarLista', function (docs) {
-        actualizarListaTemas(docs);
-    });
+    socket.on('actualizarLista', actualizarListaTemas);
 
 
     function getCookie(cname) {
