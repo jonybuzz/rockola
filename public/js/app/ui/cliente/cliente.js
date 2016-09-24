@@ -4,17 +4,36 @@ rockola.ui.cliente = (function () {
 
     function init() {
         obtenerLista();
-        $("#js-boton-enviar").on("click", buscarPlayList);
+        bindearTeclaEnter();
+        $("#js-buscar-tema").on("click", buscarContenido);
+        $(".boton-agregar-todos").on("click", agregarTodos);
+    }
+
+    function agregarTodos() {
+        $(".grid-tema").each(function (index, data) {
+            $(this).click();
+        });
+    }
+
+    function bindearTeclaEnter() {
         $('.rockola-busqueda').bind("enterKey", function (e) {
-            buscarPlayList();
+            buscarContenido();
         });
         $('.rockola-busqueda').keyup(function (e) {
-            if (e.keyCode == 13)
+            if (e.keyCode === 13)
             {
                 $(this).trigger("enterKey");
             }
         });
+    }
 
+
+    function buscarContenido() {
+        if ($("#busqueda-por-tema").filter(':checked').val() === 'on') {
+            buscarTema();
+        } else if ($("#busqueda-por-playlist").filter(':checked').val() === 'on') {
+            buscarPlaylist();
+        }
     }
 
     function enviarTema(event) {
@@ -26,24 +45,12 @@ rockola.ui.cliente = (function () {
         var titulo = this.alt;
         var urlThumbnail = this.src;
 
-        console.log(videoId);
-        console.log(titulo);
-        console.log(urlThumbnail);
-
-        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario, nombreRockola)
-                .done(obtenerRespuestaDelServidor)
-                .fail(mostrarErrorServicioTema);
+        rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario, nombreRockola);
         obtenerLista();
     }
 
     function mostrarErrorServicioTema() {
         alert("ERROR con el servicio de Tema");
-    }
-
-    function obtenerRespuestaDelServidor(respuesta) {
-        if (respuesta.agregado == false) {
-            alert("Ingresá la url completa, con youtube!");
-        }
     }
 
     function obtenerLista() {
@@ -72,43 +79,57 @@ rockola.ui.cliente = (function () {
         return "";
     }
 
-    function buscarPlayList() {
-        var busqueda = $(".rockola-busqueda").val().trim();
+
+    function buscarTema() {
+        var busqueda = $(".busqueda-tema").val().trim();
         if (busqueda !== "") {
+            $("#paginado-playlist").empty();
             $("#grid").html("");
             rockola.service.tema.buscarTemas(busqueda)
-                    .done(renderizarVideos)
+                    .done(renderizarTemasBusquedaComun)
                     .fail(error);
         }
 
     }
 
-    function renderizarVideos(data) {
+    function armarListaDeVideos(data) {
         var items = data.items;
         var videos = [];
         $.each(items, function (index, item) {
             var urlImagen = "";
-            if (item.snippet.thumbnails != undefined) {
+            if (item.snippet.thumbnails !== undefined) {
                 urlImagen = item.snippet.thumbnails.default.url;
             }
-            if (item.snippet.title != "Deleted video") {
+            if (item.snippet.title !== "Deleted video") {
                 videos[index] = {
                     "video": {
                         "titulo": item.snippet.title,
                         "urlImagen": urlImagen,
-                        "videoId": item.id.videoId
+                        "videoId": item.id.videoId ? item.id.videoId : item.snippet.resourceId.videoId
                     }
                 };
             }
-        }
-        );
-        while (videos.length) {
-            var partVideos = videos.splice(0, 12);
-            var html = $("#bodyGridTemplate").render(partVideos);
-            $("#grid").append(html);
-        }
-        $(".grid-tema").on("click", enviarTema);
+        });
+        return videos;
+    }
 
+    function renderizarTemasBusquedaComun(data) {
+        $(".boton-agregar-todos").addClass("hide");
+        renderizarTemas(data);
+    }
+
+    function renderizarTemas(data) {
+        var videos = armarListaDeVideos(data);
+        appenderElementosRenderizado(videos);
+        bindearEventosGrillaTema();
+    }
+
+    function renderizarTemasDeLaPlaylist(data) {
+        $(".boton-agregar-todos").removeClass("hide");
+        renderizarTemas(data);
+    }
+
+    function bindearEventosGrillaTema() {
         $('.grid-tema').on("mouseover", function () {
             $(this).addClass("transition");
         });
@@ -116,7 +137,39 @@ rockola.ui.cliente = (function () {
         $('.grid-tema').on("mouseout", function () {
             $(this).removeClass("transition");
         });
+    }
 
+    function appenderElementosRenderizado(videos) {
+        $("#grid").empty();
+        while (videos.length) {
+            var partVideos = videos.splice(0, 12);
+            var elementosRenderizados = $("#resultadosTemasTemplate").render(partVideos);
+            $("#grid").append(elementosRenderizados);
+        }
+        $(".grid-tema").on("click", enviarTema);
+
+    }
+    function buscarPlaylist() {
+        var busqueda = $(".busqueda-tema").val().trim();
+        if (busqueda !== "") {
+            $("#grid").html("");
+            rockola.service.tema.buscarPlayListPorBanda(busqueda)
+                    .done(inicializarPaginadoPlaylist)
+                    .fail(error);
+        }
+    }
+
+    function inicializarPaginadoPlaylist(playlists) {
+        $(".boton-agregar-todos").removeClass("hidden");
+        $('#paginado-playlist').pagination({
+            dataSource: Array.from(Array(playlists.items.length).keys()),
+            pageSize: 1,
+            callback: function (data) {
+                rockola.service.tema.buscarTemasDePlayList(playlists, data[0])
+                        .done(renderizarTemasDeLaPlaylist)
+                        .fail(error);
+            }
+        });
     }
 
     function error() {
