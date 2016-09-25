@@ -6,7 +6,11 @@ var xss = require('xss');
 var TemaModel = require("../model/Tema.model.js").TemaModel;
 var RockolaModel = require("../model/Rockola.model.js");
 var mongoose = require('mongoose');
+var mezclador = require('../utils/mezclador');
+
 mongoose.connect(databaseUrl);
+var bluebird = require('bluebird');
+bluebird.promisifyAll(RockolaModel);
 
 var agregarTema = function (tema, nombreRockola, callback) {
 
@@ -19,46 +23,52 @@ var agregarTema = function (tema, nombreRockola, callback) {
     insertarOrdenado(temaNuevo, nombreRockola, callback);
 };
 
-function insertarOrdenado(temaNuevo, nombreRockola, callback) {
+function insertarOrdenado(temaNuevo, nombreRockola,callback) {
     RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        var arrayTemas = [];
-        var indice;
-        var listaTemasUsuarios = {};
-        var tema = {};
-        try {
-            arrayTemas = rockola.temas;
-        } catch (err) {
-        }
-        var cantidadDeTemasInsertadosDeUsuario = obtenerTemasDeUsuario(temaNuevo.nombreUsuario, arrayTemas);
-
-        if (arrayTemas.length > 0) {
-            for (indice = 0; indice < arrayTemas.length; indice++) {
-                tema = arrayTemas[indice];
-
-                if (tema.nombreUsuario in listaTemasUsuarios) {
-                    listaTemasUsuarios[tema.nombreUsuario]++;
-                } else {
-                    listaTemasUsuarios[tema.nombreUsuario] = 1;
-                }
-
-                if (temaNuevo.nombreUsuario !== tema.nombreUsuario
-                        && listaTemasUsuarios[tema.nombreUsuario] > cantidadDeTemasInsertadosDeUsuario + 1) {
-                    break;
-                }
-
-            }
-
-            if (indice === arrayTemas.length) {
-                arrayTemas.push(temaNuevo);
-            } else {
-                arrayTemas.splice(indice, 0, temaNuevo);
-            }
-
-        } else {
-            arrayTemas.push(temaNuevo);
-        }
-        RockolaModel.update({nombre: nombreRockola}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
+        rockola.temas.push(temaNuevo);
+        var arrayTemas = rockola.temas;
+        arrayMezclado = mezclador(arrayTemas);
+        rockola.temas = arrayMezclado;
+        console.info();
+        rockola.save().then(callback);
     });
+
+//        var listaTemasUsuarios = {};
+//        var tema = {};
+//        try {
+//            arrayTemas = rockola.temas;
+//        } catch (err) {
+//        }
+//        var cantidadDeTemasInsertadosDeUsuario = obtenerTemasDeUsuario(temaNuevo.nombreUsuario, arrayTemas);
+//
+//        if (arrayTemas.length > 0) {
+//            for (indice = 0; indice < arrayTemas.length; indice++) {
+//                tema = arrayTemas[indice];
+//
+//                if (tema.nombreUsuario in listaTemasUsuarios) {
+//                    listaTemasUsuarios[tema.nombreUsuario]++;
+//                } else {
+//                    listaTemasUsuarios[tema.nombreUsuario] = 1;
+//                }
+//
+//                if (temaNuevo.nombreUsuario !== tema.nombreUsuario
+//                        && listaTemasUsuarios[tema.nombreUsuario] > cantidadDeTemasInsertadosDeUsuario + 1) {
+//                    break;
+//                }
+//
+//            }
+//
+//            if (indice === arrayTemas.length) {
+//                arrayTemas.push(temaNuevo);
+//            } else {
+//                arrayTemas.splice(indice, 0, temaNuevo);
+//            }
+//
+//        } else {
+//            arrayTemas.push(temaNuevo);
+//        }
+//        RockolaModel.update({nombre: nombreRockola}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
+    //});
 
 }
 
