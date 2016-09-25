@@ -9,8 +9,13 @@ Info para configurar y correr el proyecto local
 * MongoDB (https://docs.mongodb.com/manual/installation/)
 * Mocha
 
-### Setup MongoDB ###
+### Instalar Nodemon global###
+```
+#!script
+npm install nodemon -g
+```
 
+### Setup MongoDB ###
 * Crear el directorio "data\db"
 * Ejecutar el server de Mongo desde el directorio bin (Por default --dbpath es "\data\db" y el puerto 27019)
 ```
@@ -20,7 +25,7 @@ Info para configurar y correr el proyecto local
 * Conectarse a la base (si no existe, la crea)
 ```
 #!script
->mongo rockola
+>mongo rockolas
 ```
 * Insertar datos de prueba
 ```
