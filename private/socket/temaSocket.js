@@ -17,11 +17,14 @@ module.exports = function (io) {
         });
 
         socket.on('agregarTema', function (tema, nombreRockola) {
-            temaService.agregarTema(tema, nombreRockola, function (doc) {
-                    io.sockets.in(nombreRockola).emit('actualizarLista', doc.temas);
-            });
+            var promise = temaService.agregarTema(tema, nombreRockola);
+            promise.then(fullfilAgregarTema);
         });
 
-    });
+        function fullfilAgregarTema(rockola) {
+            io.sockets.in(rockola.nombre).emit('actualizarLista', rockola.temas);
+        }
 
+    });
 };
+

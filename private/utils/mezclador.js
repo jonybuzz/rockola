@@ -2,7 +2,6 @@ function agrupar(array) {
     var acumulador = {};
     if (array.length > 0) {
         array.forEach(function (item) {
-            console.log(item);
             if (acumulador.hasOwnProperty(item.nombreUsuario)) {
                 acumulador[item.nombreUsuario].push(item);
             } else {
@@ -11,7 +10,7 @@ function agrupar(array) {
             }
         });
     }
-    return merge(acumulador,array.length);
+    return merge(acumulador, array.length);
 }
 
 function merge(acumulador, tamanio) {
@@ -19,9 +18,8 @@ function merge(acumulador, tamanio) {
     var keys = Object.keys(acumulador);
     for (var i = 0; i < tamanio; i++) {
         keys.forEach(function (key) {
-            var item = acumulador[key].splice(0,1)[0];
-            if(item !== undefined) {
-            console.log(item);
+            var item = acumulador[key].splice(0, 1)[0];
+            if (item !== undefined) {
                 arrayMezclado.push(item);
             }
         });
@@ -29,7 +27,7 @@ function merge(acumulador, tamanio) {
     return arrayMezclado;
 }
 
-function mezclador (array) {
+function mezclador(array) {
     return agrupar(array);
 }
 

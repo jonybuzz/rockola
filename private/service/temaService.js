@@ -1,5 +1,3 @@
-/* global module */
-
 //var databaseUrl = "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
 var databaseUrl = "mongodb://localhost:27017/rockola";
 var xss = require('xss');
@@ -12,7 +10,7 @@ mongoose.connect(databaseUrl);
 var bluebird = require('bluebird');
 mongoose.Promise = bluebird;
 
-var agregarTema = function (tema, nombreRockola, callback) {
+var agregarTema = function (tema, nombreRockola) {
 
     var temaNuevo = new TemaModel({
         videoId: tema.videoId,
@@ -20,17 +18,23 @@ var agregarTema = function (tema, nombreRockola, callback) {
         thumbnail: tema.thumbnail,
         nombreUsuario: xss(tema.nombreUsuario)
     });
-    insertarOrdenado(temaNuevo, nombreRockola, callback);
+    return insertarOrdenado(temaNuevo, nombreRockola);
 };
 
-function insertarOrdenado(temaNuevo, nombreRockola, callback) {
-    RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        rockola.temas.push(temaNuevo);
-        var arrayTemas = rockola.temas;
-        arrayMezclado = mezclador(arrayTemas);
-        rockola.temas = arrayMezclado;
-        console.info();
-        rockola.save().then(callback);
+function insertarOrdenado(temaNuevo, nombreRockola) {
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.findOne({nombre: nombreRockola}
+        , function (err, rockola) {
+            if (err) {
+                rechazar(err);
+            } else {
+                rockola.temas.push(temaNuevo);
+                var arrayTemas = rockola.temas;
+                arrayMezclado = mezclador(arrayTemas);
+                rockola.temas = arrayMezclado;
+                rockola.save().then(exito);
+            }
+        });
     });
 }
 
