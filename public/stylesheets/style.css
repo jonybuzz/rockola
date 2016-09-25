@@ -193,7 +193,7 @@ input.validate[type="text"] + label {
 }
 
 .card.rockola-cliente .row {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 .pagination li{
     font-size: .9rem;
