@@ -11,7 +11,6 @@ var bluebird = require('bluebird');
 mongoose.Promise = bluebird;
 
 function agregarTema(tema, nombreRockola) {
-
     var temaNuevo = new TemaModel({
         videoId: tema.videoId,
         titulo: tema.titulo,
@@ -54,14 +53,20 @@ function obtenerTemas(nombreRockola) {
     });
 }
 
-function obtenerPrimerTema(req, res) {
-    var tema;
-    var nombreRockola = req.cookies.rockola;
-    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        tema = rockola.temas[0];
-        res.json({tema: tema});
+function obtenerPrimerTema(cookie) {
+    var nombreRockola = cookie;
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.findOne({nombre: nombreRockola})
+                .then(obtenerPrimerTemaDeRockola)
+                .then(exito)
+                .catch(rechazar);
     });
+}
 
+function obtenerPrimerTemaDeRockola(rockola) {
+    return new Promise(function (exito, rechazar) {
+        exito(rockola.temas[0]);
+    });
 }
 
 function obtenerSiguiente(req, res) {
@@ -70,20 +75,12 @@ function obtenerSiguiente(req, res) {
     return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
         tema = rockola.temas[0];
         if (tema !== undefined && tema.videoId !== undefined) {
-            rockola.update(
-                    {
-                        $pull: {
-                            temas: {
-                                videoId: tema.videoId
-                            }
-                        }
-                    }, function () {
+            rockola.update({$pull: {temas: {videoId: tema.videoId}}}, function () {
                 var temaActual;
                 RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
                     temaActual = rockola.temas[0];
                     res.json({tema: temaActual});
                 });
-
             }
             );
         }
