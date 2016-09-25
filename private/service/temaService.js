@@ -10,7 +10,7 @@ mongoose.connect(databaseUrl);
 var bluebird = require('bluebird');
 mongoose.Promise = bluebird;
 
-var agregarTema = function (tema, nombreRockola) {
+function agregarTema(tema, nombreRockola) {
 
     var temaNuevo = new TemaModel({
         videoId: tema.videoId,
@@ -19,30 +19,42 @@ var agregarTema = function (tema, nombreRockola) {
         nombreUsuario: xss(tema.nombreUsuario)
     });
     return insertarOrdenado(temaNuevo, nombreRockola);
-};
+}
 
 function insertarOrdenado(temaNuevo, nombreRockola) {
     return new Promise(function (exito, rechazar) {
-        RockolaModel.findOne({nombre: nombreRockola}
-        , function (err, rockola) {
-            if (err) {
-                rechazar(err);
-            } else {
-                rockola.temas.push(temaNuevo);
-                var arrayTemas = rockola.temas;
-                arrayMezclado = mezclador(arrayTemas);
-                rockola.temas = arrayMezclado;
-                rockola.save().then(exito);
-            }
+        RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
+            rockola.temas.push(temaNuevo);
+            var arrayTemas = rockola.temas;
+            arrayMezclado = mezclador(arrayTemas);
+            rockola.temas = arrayMezclado;
+            rockola.save()
+                    .then(obtenerListaReproduccion)
+                    .then(exito)
+                    .catch(rechazar);
         });
     });
 }
 
-var obtenerTemas = function (nombreRockola, callback) {
-    RockolaModel.find({nombre: nombreRockola}, {temas: true, _id: false}, callback);
-};
+function obtenerListaReproduccion(rockola) {
+    return new Promise(function (exito, rechazar) {
+        var canalYTemas = {};
+        canalYTemas.canal = rockola.nombre;
+        canalYTemas.temas = rockola.temas;
+        exito(canalYTemas);
+    });
+}
 
-var obtenerPrimerTema = function (req, res) {
+function obtenerTemas(nombreRockola) {
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.findOne({nombre: nombreRockola})
+                .then(exito)
+                .catch(rechazar);
+
+    });
+}
+
+function obtenerPrimerTema(req, res) {
     var tema;
     var nombreRockola = req.cookies.rockola;
     return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
@@ -50,9 +62,9 @@ var obtenerPrimerTema = function (req, res) {
         res.json({tema: tema});
     });
 
-};
+}
 
-var obtenerSiguiente = function (req, res) {
+function obtenerSiguiente(req, res) {
     var tema;
     var nombreRockola = req.cookies.rockola;
     return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
@@ -76,8 +88,7 @@ var obtenerSiguiente = function (req, res) {
             );
         }
     });
-};
-
+}
 
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;

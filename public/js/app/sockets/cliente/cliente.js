@@ -31,7 +31,7 @@ $(document).ready(function () {
         return "";
     }
 
-    socket.on('actualizarLista', function (docs) {
-        actualizarListaTemas(docs);
+    socket.on('actualizarLista', function (temas) {
+        actualizarListaTemas(temas);
     });
 });

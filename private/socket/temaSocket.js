@@ -11,17 +11,20 @@ module.exports = function (io) {
         });
 
         socket.on('actualizame', function (nombreRockola) {
-            temaService.obtenerTemas(nombreRockola, function (err, docs) {
-                io.sockets.in(nombreRockola).emit('actualizarLista', docs[0].temas);
-            });
+            temaService.obtenerTemas(nombreRockola)
+                    .then(emitirListaDesdeRockola);
         });
 
         socket.on('agregarTema', function (tema, nombreRockola) {
-            var promise = temaService.agregarTema(tema, nombreRockola);
-            promise.then(fullfilAgregarTema);
+            temaService.agregarTema(tema, nombreRockola)
+                    .then(emitirActualizarLista);
         });
 
-        function fullfilAgregarTema(rockola) {
+        function emitirActualizarLista(canalYTemas) {
+            io.sockets.in(canalYTemas.canal).emit('actualizarLista', canalYTemas.temas);
+        }
+
+        function emitirListaDesdeRockola(rockola) {
             io.sockets.in(rockola.nombre).emit('actualizarLista', rockola.temas);
         }
 
