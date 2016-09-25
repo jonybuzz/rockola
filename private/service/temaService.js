@@ -10,7 +10,7 @@ var mezclador = require('../utils/mezclador');
 
 mongoose.connect(databaseUrl);
 var bluebird = require('bluebird');
-bluebird.promisifyAll(RockolaModel);
+mongoose.Promise = bluebird;
 
 var agregarTema = function (tema, nombreRockola, callback) {
 
@@ -23,7 +23,7 @@ var agregarTema = function (tema, nombreRockola, callback) {
     insertarOrdenado(temaNuevo, nombreRockola, callback);
 };
 
-function insertarOrdenado(temaNuevo, nombreRockola,callback) {
+function insertarOrdenado(temaNuevo, nombreRockola, callback) {
     RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
         rockola.temas.push(temaNuevo);
         var arrayTemas = rockola.temas;
@@ -32,55 +32,6 @@ function insertarOrdenado(temaNuevo, nombreRockola,callback) {
         console.info();
         rockola.save().then(callback);
     });
-
-//        var listaTemasUsuarios = {};
-//        var tema = {};
-//        try {
-//            arrayTemas = rockola.temas;
-//        } catch (err) {
-//        }
-//        var cantidadDeTemasInsertadosDeUsuario = obtenerTemasDeUsuario(temaNuevo.nombreUsuario, arrayTemas);
-//
-//        if (arrayTemas.length > 0) {
-//            for (indice = 0; indice < arrayTemas.length; indice++) {
-//                tema = arrayTemas[indice];
-//
-//                if (tema.nombreUsuario in listaTemasUsuarios) {
-//                    listaTemasUsuarios[tema.nombreUsuario]++;
-//                } else {
-//                    listaTemasUsuarios[tema.nombreUsuario] = 1;
-//                }
-//
-//                if (temaNuevo.nombreUsuario !== tema.nombreUsuario
-//                        && listaTemasUsuarios[tema.nombreUsuario] > cantidadDeTemasInsertadosDeUsuario + 1) {
-//                    break;
-//                }
-//
-//            }
-//
-//            if (indice === arrayTemas.length) {
-//                arrayTemas.push(temaNuevo);
-//            } else {
-//                arrayTemas.splice(indice, 0, temaNuevo);
-//            }
-//
-//        } else {
-//            arrayTemas.push(temaNuevo);
-//        }
-//        RockolaModel.update({nombre: nombreRockola}, {$set: {temas: arrayTemas}}, {upsert: true, safe: false}, callback);
-    //});
-
-}
-
-function obtenerTemasDeUsuario(nombreUsuario, arrayTemas) {
-    var cantidad = 0;
-    arrayTemas.forEach(function (tema) {
-        if (nombreUsuario === tema.nombreUsuario) {
-            cantidad++;
-        }
-    });
-
-    return cantidad;
 }
 
 var obtenerTemas = function (nombreRockola, callback) {

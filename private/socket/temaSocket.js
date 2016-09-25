@@ -17,10 +17,8 @@ module.exports = function (io) {
         });
 
         socket.on('agregarTema', function (tema, nombreRockola) {
-            temaService.agregarTema(tema, nombreRockola, function (err, doc) {
-                temaService.obtenerTemas(nombreRockola, function (err, docs) {
-                    io.sockets.in(nombreRockola).emit('actualizarLista', docs[0].temas);
-                });
+            temaService.agregarTema(tema, nombreRockola, function (doc) {
+                    io.sockets.in(nombreRockola).emit('actualizarLista', doc.temas);
             });
         });
 
