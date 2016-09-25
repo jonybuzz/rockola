@@ -10,8 +10,6 @@ rockola.ui.reproductor = (function () {
     function onYouTubeIframeAPIReady(data) {
         if (data !== undefined && data.tema !== undefined) {
             player = new YT.Player('player', {
-                height: '390',
-                width: '640',
                 events: {
                     'onReady': function (){
                         reproducir(data);

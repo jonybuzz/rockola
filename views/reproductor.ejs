@@ -13,45 +13,46 @@
         </div>
     </header>
     <main>
-        <br>
-        <div class="container-fluid container-rockola">
-            <div class="row">
-                <div class="col s12 l7">
-                    <div class="row">
-                        <div class="video-container">
-                            <div id="player"></div>
-                        </div>
-                    </div>
-                    <div class="row right">
-                        <div id="js-btn-siguiente" class="col s12">
-                            <a class="waves-effect waves-light btn purple"><i class="material-icons right">fast_forward</i>siguiente</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 l5">
-                    <div class="row">
-                        <div class="col s6">
-                            <span class="white-text text-darken-2">
-                                <h3>
-                                    Listado de Temas
-                                </h3>
-                            </span>
-                        </div>
-                        <div class="input-field col s4 m4 right">
-                            <select id="tiempo-de-reproduccion">
-                                <option value="300">5 Minutos</option>
-                                <option value="600">10 Minutos</option>
-                                <option value="900">15 Minutos</option>
-                                <option value="0">Indefinido</option>
-                            </select>
-                            <label>Tiempo de Reproducción</label>
-                        </div>                        
-                    </div>
-                    <ul class="collection lista-de-temas" id="body-lista-reproductor">
-                    </ul>
-                </div>
+        <div id="main-container">
+            <div class="video-container video-background">
+                <div id="player"></div>
             </div>
-        </div> 
+            <br>
+            <div class="container-fluid container-rockola">
+                <div class="row">
+                    <div class="col s12 l7">
+                        <div class="row right">
+                            <br>
+                            <div id="js-btn-siguiente" class="col s12">
+                                <a class="waves-effect waves-light btn purple"><i class="material-icons right">fast_forward</i>siguiente</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l5">
+                        <div class="row">
+                            <div class="col s6">
+                                <span class="white-text text-darken-2">
+                                    <h3>
+                                        Listado de Temas
+                                    </h3>
+                                </span>
+                            </div>
+                            <div class="input-field col s4 m4 right">
+                                <select id="tiempo-de-reproduccion">
+                                    <option value="300">5 Minutos</option>
+                                    <option value="600">10 Minutos</option>
+                                    <option value="900">15 Minutos</option>
+                                    <option value="0">Indefinido</option>
+                                </select>
+                                <label>Tiempo de Reproducción</label>
+                            </div>                        
+                        </div>
+                        <ul class="collection lista-de-temas" id="body-lista-reproductor">
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </div>
     </main>
 
     <script src="js/lib/socket.io.js"></script>

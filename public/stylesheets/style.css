@@ -1,11 +1,9 @@
 .rockola-container{
-    background-image: url("../img/fondo-rockola4.jpeg");
-    background-size: cover;
+    background-color: black;
 }
-@media only screen and (max-width: 479px) {
-    .rockola-container{
-        background-image: url("../img/fondo-rockola4-xs.jpg");
-    }
+
+#main-container {
+    position: relative;
 }
 
 .nav-rockola{
@@ -34,7 +32,7 @@ h3{
 }
 
 .collection .collection-item {
-    background-color: rgba(82, 7, 76, 0.30);
+    background-color: rgba(82, 7, 76, 0.60);
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
@@ -181,11 +179,20 @@ html {
 }
 
 .rockola-container .container .input-field .prefix{
-   color:  rgba(82,7,76,1);
+    color:  rgba(82,7,76,1);
 }
 
 .rockola-container .container .card .row input{
     color: black;
+}
+
+.video-background {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -99;
+    opacity: 0.4;
 }
 
 input.validate[type="text"] + label {
