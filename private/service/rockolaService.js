@@ -14,7 +14,7 @@ function initRockola(nombreRockola) {
 }
 
 function existeRockola(nombreRockola) {
-    return new Promise(RockolaModel.findOne({nombre: nombreRockola}));
+    return RockolaModel.findOne({nombre: nombreRockola});
 }
 ;
 
