@@ -21,7 +21,7 @@ rockola.ui.login = (function () {
         if (nombreUsuario !== "") {
             document.cookie = "rockolito=" + nombreUsuario;
             rockola.service.reproductor.existe(nombreRockola).done(function (existeRockola) {
-                if (existeRockola.existe === true) {
+                if (existeRockola.existe !== null) {
                     document.cookie = "rockola=" + nombreRockola;
                     window.location.href = "/cliente";
                 } else {
