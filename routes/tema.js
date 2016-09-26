@@ -7,7 +7,10 @@ routerA.route('/todos').get(function (req, res, next) {
 });
 
 routerA.route('/siguiente').get(function (req, res, next) {
-    temaService.obtenerSiguiente(req, res);
+    temaService.obtenerSiguiente(req.cookies.rockola)
+            .then(function (tema) {
+                res.json({tema: tema});
+            });
 });
 
 routerA.route('/obtenerPrimerTema').get(function (req, res) {

@@ -69,23 +69,43 @@ function obtenerPrimerTemaDeRockola(rockola) {
     });
 }
 
-function obtenerSiguiente(req, res) {
-    var tema;
-    var nombreRockola = req.cookies.rockola;
-    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        tema = rockola.temas[0];
-        if (tema !== undefined && tema.videoId !== undefined) {
-            rockola.update({$pull: {temas: {videoId: tema.videoId}}}, function () {
-                var temaActual;
-                RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-                    temaActual = rockola.temas[0];
-                    res.json({tema: temaActual});
+function obtenerSiguiente(nombreCookie) {
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.findOne({nombre: nombreCookie})
+                .then(function (rockola) {
+                    var tema = rockola.temas[0];
+                    if (tema !== undefined && tema.videoId !== undefined) {
+                        rockola.temas = rockola.temas.filter(function (elem) {
+                            return elem.videoId !== tema.videoId;
+                        });
+                        rockola.save().then(function (rockola) {
+                            var temaActual = rockola.temas[0];
+                            if (temaActual !== undefined) {
+                                exito(temaActual);
+                            }
+                        });
+                    }
                 });
-            }
-            );
-        }
     });
 }
+
+//function obtenerSiguiente(req, res) {
+//    var tema;
+//    var nombreRockola = req.cookies.rockola;
+//    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
+//        tema = rockola.temas[0];
+//        if (tema !== undefined && tema.videoId !== undefined) {
+//            rockola.update({$pull: {temas: {videoId: tema.videoId}}}, function () {
+//                var temaActual;
+//                RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
+//                    temaActual = rockola.temas[0];
+//                    res.json({tema: temaActual});
+//                });
+//            }
+//            );
+//        }
+//    });
+//}
 
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;

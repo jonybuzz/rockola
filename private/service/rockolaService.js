@@ -2,7 +2,7 @@
 
 var RockolaModel = require("../model/Rockola.model.js");
 
-function initRockola(nombreRockola, callback) {
+function initRockola(nombreRockola) {
     return new Promise(function (exito, rechazar) {
         RockolaModel.findOne({nombre: nombreRockola}).then(function (rockola) {
             if (rockola === null) {
