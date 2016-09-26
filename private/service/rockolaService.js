@@ -2,34 +2,23 @@
 
 var RockolaModel = require("../model/Rockola.model.js");
 
-var initRockola = function (nombreRockola, callback) {
-    console.log(nombreRockola);
-    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        if (rockola === null) {
-            var rockolaNueva = new RockolaModel({nombre: nombreRockola});
-            rockolaNueva.save(function (err, rockola) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(rockola);
-                    callback(rockola);
-                }
-            });
-        } else {
-            callback(rockola);
-        }
+function initRockola(nombreRockola, callback) {
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.findOne({nombre: nombreRockola}).then(function (rockola) {
+            if (rockola === null) {
+                var nuevaRockola = new RockolaModel({nombre: nombreRockola});
+                nuevaRockola.save().then(exito).catch(rechazar);
+            } else {
+                exito(rockola);
+            }
+        });
     });
-};
+}
 
-var existeRockola = function (nombreRockola, callback){
-    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-        if (rockola === null) {
-            callback(false);
-        } else {
-            callback(true);
-        };
-    });
-};
+function existeRockola(nombreRockola) {
+    return new Promise(RockolaModel.findOne({nombre: nombreRockola}));
+}
+;
 
 module.exports.initRockola = initRockola;
 module.exports.existeRockola = existeRockola;
