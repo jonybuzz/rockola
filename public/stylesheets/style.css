@@ -132,7 +132,7 @@ html {
 }
 
 .rockola-container .grid.listado {
-    max-height: 400px;
+    max-height: 300px;
     background-color: rgba(82, 7, 76, 0.28);
     margin-bottom: 0;
 }
