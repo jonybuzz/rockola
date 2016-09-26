@@ -63,7 +63,7 @@ h3{
 .collection {
     border: none !important;
     overflow-y: auto;
-    max-height: 460px;
+    max-height: 440px;
 }
 
 .collection .collection-item.avatar .title {
