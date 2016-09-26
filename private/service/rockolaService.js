@@ -1,5 +1,3 @@
-/* global module */
-
 var RockolaModel = require("../model/Rockola.model.js");
 
 function initRockola(nombreRockola) {

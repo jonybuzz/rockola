@@ -1,5 +1,3 @@
-/* global module */
-
 var temaService = require('../service/temaService');
 
 module.exports = function (io) {

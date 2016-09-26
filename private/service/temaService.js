@@ -89,24 +89,6 @@ function obtenerSiguiente(nombreCookie) {
     });
 }
 
-//function obtenerSiguiente(req, res) {
-//    var tema;
-//    var nombreRockola = req.cookies.rockola;
-//    return RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-//        tema = rockola.temas[0];
-//        if (tema !== undefined && tema.videoId !== undefined) {
-//            rockola.update({$pull: {temas: {videoId: tema.videoId}}}, function () {
-//                var temaActual;
-//                RockolaModel.findOne({nombre: nombreRockola}, function (err, rockola) {
-//                    temaActual = rockola.temas[0];
-//                    res.json({tema: temaActual});
-//                });
-//            }
-//            );
-//        }
-//    });
-//}
-
 module.exports.agregarTema = agregarTema;
 module.exports.obtenerTemas = obtenerTemas;
 module.exports.obtenerPrimerTema = obtenerPrimerTema;
