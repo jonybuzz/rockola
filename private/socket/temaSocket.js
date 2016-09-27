@@ -5,10 +5,6 @@ module.exports = function (io) {
     io.on('connection', function (socket) {
 
         socket.on('unirse', function (nombreRockola) {
-            socket.join(nombreRockola);
-        });
-
-        socket.on('unirse-reproductor', function () {
             socket.join(socket.handshake.session.rockola);
         });
 

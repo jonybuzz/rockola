@@ -11,7 +11,7 @@ $(document).ready(function () {
     }
     
     var nombreRockola = getCookie("rockola");
-    socket.emit('unirse-reproductor');
+    socket.emit('unirse');
 
     socket.emit('actualizame', nombreRockola);
     
