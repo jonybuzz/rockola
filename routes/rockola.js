@@ -23,6 +23,7 @@ routerB.post('/ingresa', function (req, res) {
     req.session.cliente = {};
     req.session.cliente.guest = req.body.nombreUsuario;
     req.session.cliente.rockola = req.body.nombreRockola;
+    res.status(201).send();
 });
 
 module.exports = routerB;

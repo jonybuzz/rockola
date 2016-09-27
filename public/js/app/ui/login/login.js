@@ -20,20 +20,23 @@ rockola.ui.login = (function () {
         nombreRockola = $('.rockola-input-rockola.cliente').val().trim();
         if (nombreUsuario !== "") {
             document.cookie = "rockolito=" + nombreUsuario;
-            rockola.service.reproductor.existe(nombreRockola).done(function (existeRockola) {
-                if (existeRockola.existe !== null) {
-                    document.cookie = "rockola=" + nombreRockola;
-                    var login = {
-                        nombreUsuario: nombreUsuario,
-                        nombreRockola: nombreRockola
-                    };
-                    rockola.service.reproductor.ingresaCliente(login);
-                    window.location.href = "/cliente";
-                } else {
-                    alert("No existe una rockola con ese nombre");
-                }
+            rockola.service.reproductor.existe(nombreRockola)
+                    .done(function (existeRockola) {
+                        if (existeRockola.existe !== null) {
+                            document.cookie = "rockola=" + nombreRockola;
+                            var login = {
+                                nombreUsuario: nombreUsuario,
+                                nombreRockola: nombreRockola
+                            };
+                            rockola.service.reproductor.ingresaCliente(login)
+                                    .done(function () {
+                                        window.location.href = "/cliente";
+                                    });
+                        } else {
+                            alert("No existe una rockola con ese nombre");
+                        }
 
-            });
+                    });
         }
     }
 
