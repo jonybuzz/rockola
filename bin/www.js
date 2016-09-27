@@ -1,12 +1,14 @@
-var app = require('../app');
+var app = require('../app').app;
+var session = require('../app').session;
 var debug = require('debug')('nodewebapp:server');
 var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
 var server = http.createServer(app);
 
-require('../private/socket/sockets').createSocket(server);
+require('../private/socket/sockets').createSocket(server,session);
 
 server.listen(port);
 server.on('error', onError);

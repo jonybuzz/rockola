@@ -5,14 +5,13 @@ $(document).ready(function () {
     function actualizarListaTemas(temas) {
         var html = $("#bodyListaTemplate").render(temas);
         $("#body-lista-reproductor").html(html);
-
         $(".lista-de-temas .collection-item").first().find("p").css("color", "mediumaquamarine");
         $(".lista-de-temas .collection-item").first().find("p").last().append("Reproduciendo");
 
     }
     
     var nombreRockola = getCookie("rockola");
-    socket.emit('unirse', nombreRockola);
+    socket.emit('unirse-reproductor');
 
     socket.emit('actualizame', nombreRockola);
     

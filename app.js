@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('express-session')({
+var session = require('express-session')({
     name: 'sid',
     secret: 'COOKIE_SECRET',
     cookie: {
@@ -26,7 +26,9 @@ app.use(require('express-session')({
     },
     resave: false,
     saveUninitialized: false
-}));
+});
+
+app.use(session);
 
 app.use('/', routes);
 app.use('/api/tema', routesTema);
@@ -66,4 +68,5 @@ app.use(function (err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports.app = app;
+module.exports.session = session;

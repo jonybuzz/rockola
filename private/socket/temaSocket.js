@@ -8,6 +8,10 @@ module.exports = function (io) {
             socket.join(nombreRockola);
         });
 
+        socket.on('unirse-reproductor', function () {
+            socket.join(socket.handshake.session.reproductor.rockola);
+        });
+
         socket.on('actualizame', function (nombreRockola) {
             temaService.obtenerTemas(nombreRockola)
                     .then(emitirListaDesdeRockola);

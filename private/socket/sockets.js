@@ -1,8 +1,13 @@
-module.exports.createSocket = function(server) {
+var sharedsession = require("express-socket.io-session");
 
-  var io = require('socket.io')(server);
+module.exports.createSocket = function (server, session) {
 
-  require('../socket/temaSocket')(io);
-  require('../socket/loginSocket')(io);
+    var io = require('socket.io')(server);
 
+    io.use(sharedsession(session, {
+        autoSave: true
+    }));
+
+    require('../socket/temaSocket')(io);
+    require('../socket/loginSocket')(io);
 }

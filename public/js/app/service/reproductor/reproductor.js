@@ -16,10 +16,16 @@ rockola.service.reproductor = (function () {
         var url = rockola.service.url() + "rockola/existe";
         return rockola.service.post(url, {nombreRockola: nombreRockola})
     }
+    
+    function ingresaCliente(login) {
+        var url = rockola.service.url() + "rockola/ingresa";
+        return rockola.service.post(url, login);
+    }
 
     return {
         initRockola: initRockola,
-        existe: existe
+        existe: existe,
+        ingresaCliente: ingresaCliente
     };
 
 })();
