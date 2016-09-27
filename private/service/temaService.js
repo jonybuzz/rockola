@@ -1,5 +1,5 @@
-var databaseUrl = "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
-//var databaseUrl = "mongodb://localhost:27017/rockola";
+//var databaseUrl = "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
+var databaseUrl = "mongodb://localhost:27017/rockola";
 var xss = require('xss');
 var TemaModel = require("../model/Tema.model.js").TemaModel;
 var RockolaModel = require("../model/Rockola.model.js");
