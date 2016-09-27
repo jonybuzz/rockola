@@ -9,16 +9,16 @@ module.exports = function (io) {
         });
 
         socket.on('unirse-reproductor', function () {
-            socket.join(socket.handshake.session.reproductor.rockola);
+            socket.join(socket.handshake.session.rockola);
         });
 
         socket.on('actualizame', function (nombreRockola) {
-            temaService.obtenerTemas(nombreRockola)
+            temaService.obtenerTemas(socket.handshake.session.rockola)
                     .then(emitirListaDesdeRockola);
         });
 
         socket.on('agregarTema', function (tema, nombreRockola) {
-            temaService.agregarTema(tema, nombreRockola)
+            temaService.agregarTema(tema, socket.handshake.session.rockola)
                     .then(emitirActualizarLista);
         });
 
