@@ -1,8 +1,8 @@
 var express = require('express');
-var routerB = express.Router();
+var routerRockola = express.Router();
 var rockolaService = require('../private/service/rockolaService');
 
-routerB.put('/', function (req, res) {
+routerRockola.put('/', function (req, res) {
     req.session.reproductor = {};
     rockolaService.initRockola(req.body.nombreRockola)
             .then(function (rockola) {
@@ -11,7 +11,7 @@ routerB.put('/', function (req, res) {
             });
 });
 
-routerB.post('/existe', function (req, res) {
+routerRockola.post('/existe', function (req, res) {
     req.session.reproductor = {};
     rockolaService.existeRockola(req.body.nombreRockola)
             .then(function (rockola) {
@@ -19,10 +19,11 @@ routerB.post('/existe', function (req, res) {
             });
 });
 
-routerB.post('/ingresa', function (req, res) {
-    req.session.guest = req.body.nombreUsuario;
-    req.session.rockola = req.body.nombreRockola;
+routerRockola.post('/ingresa', function (req, res) {
+    req.session.cliente = {};
+    req.session.cliente.nombre = req.body.nombreUsuario;
+    req.session.cliente.rockola = req.body.nombreRockola;
     res.status(201).send();
 });
 
-module.exports = routerB;
+module.exports = routerRockola;

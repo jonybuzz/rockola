@@ -9,7 +9,6 @@ rockola.service.tema = (function () {
             'videoId': videoId,
             'titulo': titulo,
             'thumbnail': thumbnail,
-            'nombreUsuario': nombreUsuario
         };
         socket.emit('agregarTema', tema, nombreRockola);
     }
