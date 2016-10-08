@@ -1,3 +1,5 @@
+/* global YT */
+
 rockola.ui.reproductor = (function () {
 
     var tag = document.createElement('script');
@@ -27,7 +29,7 @@ rockola.ui.reproductor = (function () {
     }
 
     function pasarAlSiguienteTema() {
-        var nombreRockola = getCookie("rockola")
+        var nombreRockola = getCookie("rockola");
         rockola.service.tema.obtenerSiguiente()
                 .done(function (data) {
                     socket.emit("actualizame", nombreRockola);
@@ -40,10 +42,10 @@ rockola.ui.reproductor = (function () {
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
-            while (c.charAt(0) == ' ') {
+            while (c.charAt(0) === ' ') {
                 c = c.substring(1);
             }
-            if (c.indexOf(name) == 0) {
+            if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
             }
         }
@@ -51,7 +53,7 @@ rockola.ui.reproductor = (function () {
     }
 
     function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
+        if (event.data === YT.PlayerState.PLAYING && !done) {
             done = true;
         }
 
