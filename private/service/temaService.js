@@ -78,6 +78,7 @@ function obtenerSiguiente(nombreCookie) {
                         rockola.temas = rockola.temas.filter(function (elem) {
                             return elem.videoId !== tema.videoId;
                         });
+                        rockola.temasHistoricos.push(tema);
                         rockola.save().then(function (rockola) {
                             var temaActual = rockola.temas[0];
                             if (temaActual !== undefined) {
