@@ -71,7 +71,7 @@ h3{
 .collection {
     border: none !important;
     overflow-y: auto;
-    max-height: 460px;
+    max-height: 440px;
 }
 
 .collection .collection-item.avatar .title {
@@ -140,7 +140,7 @@ html {
 }
 
 .rockola-container .grid.listado {
-    max-height: 400px;
+    max-height: 300px;
     background-color: rgba(82, 7, 76, 0.28);
     margin-bottom: 0;
 }
@@ -210,7 +210,7 @@ input.validate[type="text"] + label {
 }
 
 .card.rockola-cliente .row {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 .pagination li{
     font-size: .9rem;

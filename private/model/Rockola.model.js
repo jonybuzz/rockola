@@ -4,7 +4,8 @@ var TemaSchema = require('./Tema.model.js').TemaSchema;
 
 var RockolaSchema = new Schema({
     nombre: {type: String, unique: true},
-    temas: [TemaSchema]
+    temas: [TemaSchema],
+    temasHistoricos: [TemaSchema]
 });
 
 var RockolaModel = mongoose.model('Rockola', RockolaSchema);

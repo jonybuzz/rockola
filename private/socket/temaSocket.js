@@ -1,5 +1,3 @@
-/* global module */
-
 var temaService = require('../service/temaService');
 
 module.exports = function (io) {
@@ -11,19 +9,23 @@ module.exports = function (io) {
         });
 
         socket.on('actualizame', function (nombreRockola) {
-            temaService.obtenerTemas(nombreRockola, function (err, docs) {
-                io.sockets.in(nombreRockola).emit('actualizarLista', docs[0].temas);
-            });
+            temaService.obtenerTemas(nombreRockola)
+                    .then(emitirListaDesdeRockola);
         });
 
         socket.on('agregarTema', function (tema, nombreRockola) {
-            temaService.agregarTema(tema, nombreRockola, function (err, doc) {
-                temaService.obtenerTemas(nombreRockola, function (err, docs) {
-                    io.sockets.in(nombreRockola).emit('actualizarLista', docs[0].temas);
-                });
-            });
+            temaService.agregarTema(tema, nombreRockola)
+                    .then(emitirActualizarLista);
         });
 
-    });
+        function emitirActualizarLista(canalYTemas) {
+            io.sockets.in(canalYTemas.canal).emit('actualizarLista', canalYTemas.temas);
+        }
 
+        function emitirListaDesdeRockola(rockola) {
+            io.sockets.in(rockola.nombre).emit('actualizarLista', rockola.temas);
+        }
+
+    });
 };
+

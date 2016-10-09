@@ -2,7 +2,12 @@
 
 rockola.ui.cliente = (function () {
 
+    var nombreUsuario;
+    var nombreRockola;
+
     function init() {
+        nombreUsuario = getCookie("rockolito");
+        nombreRockola = getCookie("rockola");
         obtenerLista();
         bindearTeclaEnter();
         $("#js-buscar-tema").on("click", buscarContenido);
@@ -11,7 +16,10 @@ rockola.ui.cliente = (function () {
 
     function agregarTodos() {
         $(".grid-tema").each(function (index, data) {
-            $(this).click();
+            var videoId = data.id;
+            var titulo = data.alt;
+            var urlThumbnail = data.src;
+            rockola.service.tema.enviarTema(videoId, titulo, urlThumbnail, nombreUsuario, nombreRockola);
         });
     }
 
@@ -38,9 +46,6 @@ rockola.ui.cliente = (function () {
 
     function enviarTema(event) {
         event.preventDefault();
-        var nombreUsuario = getCookie("rockolito");
-        var nombreRockola = getCookie("rockola");
-
         var videoId = this.id;
         var titulo = this.alt;
         var urlThumbnail = this.src;
