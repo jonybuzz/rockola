@@ -12,11 +12,30 @@
     background-color: black;
 }
 
+.side-nav{
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+.side-nav li{
+    line-height: 19px;
+}
+.side-nav.fixed a{
+    font-size: 20px;
+    color: white;
+}
+
+.lista-de-temas .collection-item {
+    font-size: 13px;
+    border-bottom: 2px solid #121212;
+    padding: 4px 0px;
+    margin: 0;
+}
+
 #main-container {
     position: relative;
 }
 
-.nav-rockola{
+.violeta{
     background-color: rgba(82,7,76,1) !important;
 }
 
@@ -101,7 +120,7 @@ h3{
 }
 
 html {
-    color: #ccc;
+    color: #bbb;
 }
 
 /*
@@ -202,7 +221,7 @@ html {
     top: 0;
     left: 0;
     z-index: -99;
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 input.validate[type="text"] + label {
