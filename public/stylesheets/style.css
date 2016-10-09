@@ -29,6 +29,7 @@
     border-bottom: 2px solid #121212;
     padding: 4px 0px;
     margin: 0;
+    overflow-x: hidden;
 }
 
 #main-container {
