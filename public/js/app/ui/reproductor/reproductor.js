@@ -30,7 +30,7 @@ rockola.ui.reproductor = (function () {
         var nombreRockola = getCookie("rockola")
         rockola.service.tema.obtenerSiguiente()
                 .done(function (data) {
-                    socket.emit("actualizame", nombreRockola);
+                    socket.emit("actualizame");
                     reproducir(data);
                 });
     }
