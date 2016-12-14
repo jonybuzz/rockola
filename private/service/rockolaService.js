@@ -1,4 +1,4 @@
-var RockolaModel = require("../model/Rockola.model.js");
+var RockolaModel = require("../model/Rockola.model").RockolaModel;
 
 function initRockola(nombreRockola) {
     return new Promise(function (exito, rechazar) {

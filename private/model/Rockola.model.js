@@ -10,4 +10,5 @@ var RockolaSchema = new Schema({
 
 var RockolaModel = mongoose.model('Rockola', RockolaSchema);
 
-module.exports = RockolaModel;
+module.exports.RockolaModel = RockolaModel;
+module.exports.RockolaSchema = RockolaSchema;
