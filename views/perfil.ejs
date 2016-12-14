@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <% include ./partials/head %>
+</head>
+<body class="rockola-container">
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper nav-rockola center">
+                    <a href="#!" class="logo">Rockola</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <p>Busca tu Rockola: </p>
+            </div>
+            <div class="col s8">
+                <input type="text" id="rockola-buscada"/>
+            </div>
+            <div class="col s2">
+                <a id="btn-unirme-rockola" class="waves-effect waves-light btn">Unirme</a>
+            </div>                    
+        </div>
+        <br>
+        <div class="row">
+            <div class="listado col s12 m5">
+                <span class="white-text">
+                    <h3>
+                        Rockolas
+                    </h3>
+                </span>
+
+                <ul class="collection lista-de-rockolas" id="body-lista-rockolas">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="js/app/rockola.js"></script>
+    <script src="js/app/service/service.js"></script>
+    <script src="js/app/service/usuario/usuario.js"></script>
+    <script src="js/app/ui/ui.js"></script>
+    <script src="js/app/ui/perfil/perfil.js"></script>
+
+</body>
+
+<script id="rockolasTemplate" type="text/x-jsrender" >
+        <li>{{:nombre}}</li>
+        {{for temas}}
+            {{:titulo}}
+        {{/for}}
+</script>
