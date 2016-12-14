@@ -10,12 +10,7 @@ rockola.ui.profile = (function () {
     }
 
     function mostrarRockolas(rockolas) {
-        var renderRockolas = [];
-
-        $.each(rockolas, function (i, rockola) {
-            renderRockolas.push({nombre: rockola.nombre});
-        });
-        var html = $("#rockolasTemplate").render(renderRockolas);
+        var html = $("#rockolasTemplate").render(rockolas);
         $("#body-lista-rockolas").html(html);
     }
 
