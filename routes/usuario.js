@@ -10,4 +10,11 @@ router.get('/obtenerRockolas', function (req, res) {
     res.json(req.user.rockolas);
 });
 
+router.get('/ingresaPerfil', function (req, res) {
+    req.session.cliente = {};
+    req.session.cliente.nombre = req.user.facebook.name;
+    res.redirect('/perfil');
+});
+
+
 module.exports = router;

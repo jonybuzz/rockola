@@ -18,9 +18,10 @@ rockola.ui.profile = (function () {
     function ingresarARockola() {
         $('.pnt-js-rockola').on("click", function(e) {
            e.preventDefault();
-           rockola.service.reproductor.ingresaClienteConFacebook($(this).data("nombre")).done(function(data) {
-               window.location = "/cliente";
-           });
+           rockola.service.reproductor.ingresaClienteConFacebook($(this).data("nombre"))
+                  .done(function(data) {
+                        window.location = "/cliente";
+                  });
         });
     }
 
