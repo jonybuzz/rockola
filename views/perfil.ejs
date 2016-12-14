@@ -43,11 +43,12 @@
     <script src="js/app/service/usuario/usuario.js"></script>
     <script src="js/app/ui/ui.js"></script>
     <script src="js/app/ui/perfil/perfil.js"></script>
-
+    <script src="js/app/service/reproductor/reproductor.js"></script>
+    
 </body>
 
 <script id="rockolasTemplate" type="text/x-jsrender" >
-        <li><a data-nombre="{{:nombre}}" href="#">{{:nombre}}</a></li>
+        <li><a class="pnt-js-rockola" data-nombre="{{:nombre}}" href="#">{{:nombre}}</a></li>
         {{for temas}}
             {{:titulo}}
         {{/for}}

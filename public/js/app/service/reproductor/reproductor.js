@@ -20,11 +20,17 @@ rockola.service.reproductor = (function () {
         var url = rockola.service.url() + "rockola/ingresa";
         return rockola.service.post(url, login);
     }
+    
+    function ingresaClienteConFacebook(nombreRockola) {
+        var url = rockola.service.url() + "rockola/ingresa/facebook";
+        return rockola.service.post(url, {nombreRockola: nombreRockola});
+    }
 
     return {
         initRockola: initRockola,
         existe: existe,
-        ingresaCliente: ingresaCliente
+        ingresaCliente: ingresaCliente,
+        ingresaClienteConFacebook: ingresaClienteConFacebook
     };
 
 })();

@@ -26,4 +26,12 @@ routerRockola.post('/ingresa', function (req, res) {
     res.status(201).send();
 });
 
+routerRockola.post('/ingresa/facebook', function (req, res) {
+    req.session.cliente = {};
+    console.log(req.user);
+    req.session.cliente.nombre = req.user.facebook.name;
+    req.session.cliente.rockola = req.body.nombreRockola;
+    res.status(201).send();
+});
+
 module.exports = routerRockola;
