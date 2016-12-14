@@ -8,7 +8,35 @@
     }
 }
 
-.nav-rockola{
+.rockola-container-reproductor {
+    background-color: black;
+}
+
+.side-nav{
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+.side-nav li{
+    line-height: 19px;
+}
+.side-nav.fixed a{
+    font-size: 20px;
+    color: white;
+}
+
+.lista-de-temas .collection-item {
+    font-size: 13px;
+    border-bottom: 2px solid #121212;
+    padding: 4px 0px;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#main-container {
+    position: relative;
+}
+
+.violeta{
     background-color: rgba(82,7,76,1) !important;
 }
 
@@ -34,7 +62,7 @@ h3{
 }
 
 .collection .collection-item {
-    background-color: rgba(82, 7, 76, 0.30);
+    background-color: rgba(82, 7, 76, 0.60);
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
@@ -93,7 +121,7 @@ h3{
 }
 
 html {
-    color: #ccc;
+    color: #bbb;
 }
 
 /*
@@ -181,11 +209,20 @@ html {
 }
 
 .rockola-container .container .input-field .prefix{
-   color:  rgba(82,7,76,1);
+    color:  rgba(82,7,76,1);
 }
 
 .rockola-container .container .card .row input{
     color: black;
+}
+
+.video-background {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -99;
+    opacity: 0.5;
 }
 
 input.validate[type="text"] + label {

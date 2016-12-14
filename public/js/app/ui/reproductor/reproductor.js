@@ -1,3 +1,5 @@
+/* global YT */
+
 rockola.ui.reproductor = (function () {
 
     var tag = document.createElement('script');
@@ -10,8 +12,6 @@ rockola.ui.reproductor = (function () {
     function onYouTubeIframeAPIReady(data) {
         if (data !== undefined && data.tema !== undefined) {
             player = new YT.Player('player', {
-                height: '390',
-                width: '640',
                 events: {
                     'onReady': function (){
                         reproducir(data);
@@ -32,10 +32,11 @@ rockola.ui.reproductor = (function () {
                     socket.emit("actualizame");
                     reproducir(data);
                 });
+
     }
 
     function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
+        if (event.data === YT.PlayerState.PLAYING && !done) {
             done = true;
         }
 
