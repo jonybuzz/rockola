@@ -2,27 +2,27 @@
     <div class="form-group">
 
         <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="input-cliente-nombre" name="login" type="text" class="rockola-input-nombre cliente validate form-control" required>
-                <label for="input-cliente-nombre">Ingresá tu nombre</label>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 input-cliente">
                 <i class="material-icons prefix">library_music</i>
-                <input id="input-cliente-rockola" name="login" type="text" class="rockola-input-rockola cliente validate form-control" required>
-                <label for="input-cliente-rockola">Nombre de la rockola</label>
+                <input type="text" id="cliente-nombre-rockola" class="autocomplete-rockolas" required>
+                <label for="cliente-nombre-rockola">Nombre de la rockola</label>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="input-field col s12 center-align">
-                <button class="btn waves-effect waves-light right" id="js-boton-logear-cliente" type="submit" name="action">Unirse!
+                <button class="btn waves-effect waves-light right" id="js-boton-logear-cliente" type="submit" name="action">Unirme!
                     <i class="material-icons right">fast_forward</i>
                 </button>
             </div>
         </div>
+        
+        <br>
+
+        <div class="row center">
+            <a href="/auth/facebook" class="btn btn-primary white teal-text">
+                <span class="fa fa-facebook"></span> o ingresá con Facebook</a>
+        </div>
+
     </div>
 </div>

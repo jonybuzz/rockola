@@ -31,4 +31,11 @@ routerRockola.post('/ingresa/facebook', function (req, res) {
     res.status(201).send();
 });
 
+routerRockola.get('', function (req, res) {
+    rockolaService.obtenerRockolas()
+            .then(function (rockolas) {
+                res.status(200).json({rockolas: rockolas});
+            });
+});
+
 module.exports = routerRockola;

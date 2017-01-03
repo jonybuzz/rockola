@@ -25,12 +25,18 @@ rockola.service.reproductor = (function () {
         var url = rockola.service.url() + "rockola/ingresa/facebook";
         return rockola.service.post(url, {nombreRockola: nombreRockola});
     }
+    
+    function obtenerRockolas(){
+        var url = rockola.service.url() + "rockola";
+        return rockola.service.get(url);
+    }
 
     return {
         initRockola: initRockola,
         existe: existe,
         ingresaCliente: ingresaCliente,
-        ingresaClienteConFacebook: ingresaClienteConFacebook
+        ingresaClienteConFacebook: ingresaClienteConFacebook,
+        obtenerRockolas: obtenerRockolas
     };
 
 })();

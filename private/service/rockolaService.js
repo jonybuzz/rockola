@@ -13,6 +13,14 @@ function initRockola(nombreRockola) {
     });
 }
 
+function obtenerRockolas() {
+    return new Promise(function (exito, rechazar) {
+        RockolaModel.find({}, 'nombre')
+                .then(exito)
+                .catch(rechazar);
+    });
+}
+
 function existeRockola(nombreRockola) {
     return RockolaModel.findOne({nombre: nombreRockola});
 }
@@ -20,4 +28,5 @@ function existeRockola(nombreRockola) {
 
 module.exports.initRockola = initRockola;
 module.exports.existeRockola = existeRockola;
+module.exports.obtenerRockolas = obtenerRockolas;
 
