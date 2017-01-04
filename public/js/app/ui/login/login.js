@@ -32,7 +32,7 @@ rockola.ui.login = (function () {
     }
 
     function unirseARockolaAnonimo() {
-        nombreRockola = $('.input-cliente. autocomplete-rockolas').val().trim();
+        nombreRockola = $('.input-cliente .autocomplete-rockolas').val().trim();
         document.cookie = "rockolito=Anonimo";
         rockola.service.reproductor.existe(nombreRockola)
                 .done(function (existeRockola) {
