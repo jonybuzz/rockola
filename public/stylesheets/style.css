@@ -1,10 +1,10 @@
 .rockola-container{
-    background-image: url("../img/fondo-rockola4.jpeg");
+    background-image: url("../img/fondo-rockola5.jpg");
     background-size: cover;
 }
 @media only screen and (max-width: 479px) {
     .rockola-container{
-        background-image: url("../img/fondo-rockola4-xs.jpg");
+        background-image: url("../img/fondo-rockola5-xs.jpg");
     }
 }
 
@@ -41,7 +41,7 @@
 }
 
 p {
-    font-weight: 300
+    font-weight: 200
 }
 
 h3, h2 {
@@ -61,7 +61,7 @@ h2{
 }
 
 .collection .collection-item {
-    background-color: rgba(82, 7, 76, 0.60);
+    background-color: rgba(90,25,90, 0.50);
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
@@ -120,7 +120,7 @@ h2{
 }
 
 html {
-    color: #bbb;
+    color: #ccc;
 }
 
 /*
