@@ -49,7 +49,6 @@ function obtenerTemas(nombreRockola) {
         RockolaModel.findOne({nombre: nombreRockola})
                 .then(exito)
                 .catch(rechazar);
-
     });
 }
 

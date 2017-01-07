@@ -15,6 +15,7 @@ $(document).ready(function () {
     socket.emit('actualizame');
 
     socket.on('actualizarLista', function (temas) {
+        console.log(temas);
         actualizarListaTemas(temas);
     });
 });

@@ -10,4 +10,4 @@ module.exports.createSocket = function (server, session) {
 
     require('../socket/temaSocket')(io);
     require('../socket/loginSocket')(io);
-}
+};

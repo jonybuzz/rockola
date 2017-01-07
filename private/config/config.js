@@ -5,5 +5,6 @@ module.exports.config = {
         appId: '169801373463876',
         secret: 'eb6e67552f004fcf25d31a91c03cbe62',
         callbackURL: 'http://localhost:3000/auth/facebook/callback'
-    }
-}
+    },
+    nombreUsuarioAnonimo: "Anonimo"
+};

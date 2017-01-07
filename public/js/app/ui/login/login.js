@@ -1,7 +1,6 @@
 /* global rockola */
 
 rockola.ui.login = (function () {
-    var nombreUsuario;
     var nombreRockola;
 
     function init() {
@@ -33,16 +32,10 @@ rockola.ui.login = (function () {
 
     function unirseARockolaAnonimo() {
         nombreRockola = $('.input-cliente .autocomplete-rockolas').val().trim();
-        document.cookie = "rockolito=Anonimo";
         rockola.service.reproductor.existe(nombreRockola)
-                .done(function (existeRockola) {
-                    if (existeRockola.existe !== null) {
-                        document.cookie = "rockola=" + nombreRockola;
-                        var login = {
-                            nombreUsuario: nombreUsuario,
-                            nombreRockola: nombreRockola
-                        };
-                        rockola.service.reproductor.ingresaCliente(login)
+                .done(function (res) {
+                    if (res.existe !== null) {
+                        rockola.service.reproductor.ingresaClienteAnonimo(nombreRockola)
                                 .done(function () {
                                     window.location.href = "/cliente";
                                 });

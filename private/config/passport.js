@@ -1,4 +1,5 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
+var AnonymousStrategy = require('passport-anonymous').Strategy;
 var UsuarioModel = require("../model/Usuario.model");
 var configFacebook = require('../config/config').config.facebook;
 
@@ -47,5 +48,7 @@ module.exports = function (passport) {
         clientSecret: configFacebook.secret,
         callbackURL: configFacebook.callbackURL
     }, crearUsuario));
+    
+    passport.use(new AnonymousStrategy());
 };
 

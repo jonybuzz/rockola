@@ -1,4 +1,5 @@
 var temaService = require('../service/temaService');
+var config = require('../config/config');
 
 module.exports = function (io) {
 
@@ -9,7 +10,8 @@ module.exports = function (io) {
         });
 
         socket.on('actualizame', function () {
-            temaService.obtenerTemas(obtenerNombreRockola())
+            obtenerNombreRockola()
+                    .then(temaService.obtenerTemas)
                     .then(emitirListaDesdeRockola);
         });
 
@@ -28,21 +30,22 @@ module.exports = function (io) {
         }
 
         function obtenerNombreRockola() {
-            var nombreRockola;
-            if (socket.handshake.session.rockola) {
-                nombreRockola = socket.handshake.session.rockola;
-            } else if (socket.handshake.session.cliente && socket.handshake.session.cliente.nombre
-                    && socket.handshake.session.cliente.rockola) {
-                nombreRockola = socket.handshake.session.cliente.rockola;
-            }
-            return nombreRockola;
+            return new Promise(function (exito, rechazar) {
+                if (socket.handshake.session.cliente && socket.handshake.session.cliente.nombre
+                        && socket.handshake.session.cliente.rockola) {
+                    exito(socket.handshake.session.cliente.rockola);
+                } else {
+                    exito("RockolaPNT");
+                }
+            });
         }
 
         function obtenerUsuario() {
             if (socket.handshake.session.cliente && socket.handshake.session.cliente.nombre
                     && socket.handshake.session.cliente.rockola) {
                 return socket.handshake.session.cliente.nombre;
-            }
+            } else
+                return config.nombreUsuarioAnonimo;
         }
     });
 };

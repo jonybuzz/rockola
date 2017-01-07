@@ -21,7 +21,7 @@ routerRockola.post('/existe', function (req, res) {
 
 routerRockola.post('/ingresa', function (req, res) {
     req.session.cliente = {};
-    req.session.cliente.nombre = req.body.nombreUsuario;
+    req.session.cliente.nombre = "anonimato";
     req.session.cliente.rockola = req.body.nombreRockola;
     res.status(201).send();
 });

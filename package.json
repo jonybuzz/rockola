@@ -18,6 +18,7 @@
     "express-sessions": "^1.0.6",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
+    "passport-anonymous": "1.0.1",
     "method-override": "^2.3.5",
     "mongojs": "^2.4.0",
     "mongoose": "^4.6.1",

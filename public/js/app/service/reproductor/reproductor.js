@@ -16,9 +16,9 @@ rockola.service.reproductor = (function () {
         return rockola.service.post(url, {nombreRockola: nombreRockola})
     }
     
-    function ingresaCliente(login) {
+    function ingresaClienteAnonimo(nombreRockola) {
         var url = rockola.service.url() + "rockola/ingresa";
-        return rockola.service.post(url, login);
+        return rockola.service.post(url, {nombreRockola: nombreRockola});
     }
     
     function ingresaClienteConFacebook(nombreRockola) {
@@ -34,7 +34,7 @@ rockola.service.reproductor = (function () {
     return {
         initRockola: initRockola,
         existe: existe,
-        ingresaCliente: ingresaCliente,
+        ingresaClienteAnonimo: ingresaClienteAnonimo,
         ingresaClienteConFacebook: ingresaClienteConFacebook,
         obtenerRockolas: obtenerRockolas
     };
