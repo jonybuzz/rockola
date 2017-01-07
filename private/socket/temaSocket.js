@@ -5,9 +5,7 @@ module.exports = function (io) {
 
     io.on('connection', function (socket) {
 
-        socket.on('unirse', function () {
-            socket.join(obtenerNombreRockola());
-        });
+        socket.join(socket.handshake.session.cliente.rockola);
 
         socket.on('actualizame', function () {
             obtenerNombreRockola()
@@ -35,7 +33,7 @@ module.exports = function (io) {
                         && socket.handshake.session.cliente.rockola) {
                     exito(socket.handshake.session.cliente.rockola);
                 } else {
-                    exito("RockolaPNT");
+                    rechazar("No hay un cliente en la sesion.");
                 }
             });
         }

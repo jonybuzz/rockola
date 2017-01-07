@@ -65,7 +65,6 @@ rockola.ui.cliente = (function () {
     }
 
     function actualizarListaTemas(lista) {
-        console.log(lista);
         var html = $("#bodyListaTemplate").render(lista.temas);
         $("#body-lista-reproduccion").html(html);
     }

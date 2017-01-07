@@ -11,11 +11,9 @@ $(document).ready(function () {
         itemReproduciendo.find("span").last().append("Reproduciendo");
     }
 
-    socket.emit('unirse');
     socket.emit('actualizame');
 
     socket.on('actualizarLista', function (temas) {
-        console.log(temas);
         actualizarListaTemas(temas);
     });
 });
