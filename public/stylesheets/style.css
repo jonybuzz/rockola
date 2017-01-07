@@ -37,24 +37,23 @@
 }
 
 .violeta{
-    background-color: rgba(82,7,76,1) !important;
+    background-color: rgba(90,25,90,1) !important
+}
+
+p {
+    font-weight: 300
+}
+
+h3, h2 {
+    font-weight: 200    
 }
 
 h3{
-    font-size: 30px;
-    font-weight: 300;
+    font-size: 2.5rem
 }
-@media only screen and (max-width: 992px) {
-    h3{
-        font-size: 25px;
-        font-weight: 400;
-    }
-}
-@media only screen and (max-width: 600px) {
-    h3{
-        font-size: 20px;
-        font-weight: 400;
-    }
+
+h2{
+    font-size: 3.5rem
 }
 
 .chip {
@@ -159,6 +158,21 @@ html {
     width : inherit;
 }
 
+#cliente-nombre-rockola {
+    font-size: 3rem;
+    font-weight: 300;
+    height: 60px;
+}
+
+#reproductor-nombre-rockola {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+#js-boton-logear-cliente{
+    height: 60px;
+}
+
 .rockola-container .grid.listado {
     max-height: 300px;
     background-color: rgba(82, 7, 76, 0.28);
@@ -202,7 +216,7 @@ html {
 }
 
 .rockola-container .container .input-field .prefix{
-    color:  rgba(82,7,76,1);
+    font-size: 3rem;
 }
 
 .rockola-container .container .card .row input{

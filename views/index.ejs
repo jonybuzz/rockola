@@ -1,8 +1,68 @@
+<!DOCTYPE html>
 <head>
-<!-- Para mas ejs template, visitar https://scotch.io/tutorials/use-ejs-to-template-your-node-application-->
+    <% include ./partials/head %>
 </head>
-<body>
-<div>
-     Hola mundo!
-</div>
+<body class="rockola-container">
+    <header>
+        <div class="navbar">
+            <nav>
+                <div class="nav-wrapper violeta center">
+                    <a href="#!" class="logo">Rockola</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <span class="white-text center"><h2>Empezá a agregar temas</h2></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m9 offset-m1 input-cliente">
+                    <input type="text" id="cliente-nombre-rockola" class="autocomplete-rockolas" required>
+                    <label for="cliente-nombre-rockola">Nombre de la rockola</label>
+                </div>
+                <div class="input-field col s12 m1">
+                    <button class="violeta btn waves-effect waves-light right" id="js-boton-logear-cliente" type="submit" name="action">
+                        <i class="material-icons">fast_forward</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <span class="white-text center"><h3>Reproducí</h3></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m7 offset-m2 input-rockola">
+                    <input id="reproductor-nombre-rockola" name="login" type="text" class="autocomplete-rockolas" required>
+                    <label for="reproductor-nombre-rockola">Nombre de la rockola</label>
+                </div>
+                <div class="input-field col s12 m1">
+                    <button class="violeta btn waves-effect waves-light right" id="js-boton-ingresar-rockola" type="submit" name="action">
+                        <i class="material-icons">library_music</i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <span class="white-text center"><p>Si no existe, se crea una nueva.</p></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/app/rockola.js"></script>
+    <script src="js/app/ui/ui.js"></script>
+    <script src="js/app/ui/login/login.js"></script>
+    <script src="js/app/service/service.js"></script>
+    <script src="js/app/service/reproductor/reproductor.js"></script>
+
 </body>
