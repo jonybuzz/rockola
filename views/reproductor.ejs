@@ -3,15 +3,9 @@
     <% include ./partials/head %>
 </head>
 <body class="rockola-container-reproductor">
-    <header>
-        <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper violeta center">
-                    <a href="#!" class="logo">Rockola</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+
+    <% include ./partials/navbar %>
+
     <main>
         <div id="main-container">
             <div class="video-container video-background">
@@ -40,14 +34,14 @@
                         </div>
                     </div>
                 </div>
-                    <br>
-                    <div class="container">
-                        <a href="#" data-activates="body-lista-reproductor" class="button-collapse top-nav full hide-on-large-only">
-                            <i class="material-icons">list</i>
-                        </a>
-                    </div>
-                    <ul id="body-lista-reproductor" class="side-nav fixed lista-de-temas">
-                    </ul>
+                <br>
+                <div class="container">
+                    <a href="#" data-activates="body-lista-reproductor" class="button-collapse top-nav full hide-on-large-only">
+                        <i class="material-icons">list</i>
+                    </a>
+                </div>
+                <ul id="body-lista-reproductor" class="side-nav fixed lista-de-temas">
+                </ul>
             </div> 
         </div>
     </main>
