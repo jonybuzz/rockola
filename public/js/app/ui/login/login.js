@@ -5,14 +5,20 @@ rockola.ui.login = (function () {
 
     function init() {
         initListaDeRockolas();
-        setearCookie();
         bindearEventos();
     }
 
-    function setearCookie() {
+    function bindearEventos() {
         $("#js-boton-logear-cliente").on('click', unirseARockolaAnonimo);
 
-        $("#js-boton-ingresar-rockola").on('click', ingresarRockola);
+        $("#js-boton-ingresar-rockola").on('click', ingresarAReproductor);
+        
+        $(".rockola-reproductor .activator").on('click', function () {
+            $(".rockola-cliente .deactivator").click();
+        });
+        $(".rockola-cliente .activator").on('click', function () {
+            $(".rockola-reproductor .deactivator").click();
+        });
     }
 
     function initListaDeRockolas() {
@@ -40,27 +46,21 @@ rockola.ui.login = (function () {
                                     window.location.href = "/cliente";
                                 });
                     } else {
-                        alert("No existe una rockola con ese nombre");
+                        alert('No existe la rockola ' + nombreRockola + 
+                                '. Podés crearla y reproducir música escribiendo un nuevo nombre en "Reproducir"');
                     }
 
                 });
     }
 
-    function ingresarRockola() {
+    function ingresarAReproductor() {
         nombreRockola = $('.input-rockola .autocomplete-rockolas').val().trim();
         if (nombreRockola !== "") {
-            rockola.service.reproductor.initRockola(nombreRockola);
+            rockola.service.reproductor.ingresaClienteAnonimo(nombreRockola)
+                    .done(function () {
+                        rockola.service.reproductor.initRockola(nombreRockola);
+                    });
         }
-    }
-
-    function bindearEventos() {
-
-        $(".rockola-reproductor .activator").on('click', function () {
-            $(".rockola-cliente .deactivator").click();
-        });
-        $(".rockola-cliente .activator").on('click', function () {
-            $(".rockola-reproductor .deactivator").click();
-        });
     }
 
     return{

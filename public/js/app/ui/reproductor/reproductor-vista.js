@@ -1,3 +1,5 @@
+/* global rockola */
+
 rockola.ui.reproductorVista = (function () {
 
     function init() {

@@ -13,7 +13,7 @@ rockola.service.reproductor = (function () {
 
     function existe(nombreRockola) {
         var url = rockola.service.url() + "rockola/existe";
-        return rockola.service.post(url, {nombreRockola: nombreRockola})
+        return rockola.service.post(url, {nombreRockola: nombreRockola});
     }
     
     function ingresaClienteAnonimo(nombreRockola) {

@@ -15,7 +15,8 @@ module.exports = function (io) {
 
         socket.on('agregarTema', function (tema) {
             tema.nombreUsuario = obtenerUsuario();
-            temaService.agregarTema(tema, obtenerNombreRockola())
+            obtenerNombreRockola()
+                    .then(temaService.agregarTema.bind(null, tema))
                     .then(emitirActualizarLista);
         });
 

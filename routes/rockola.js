@@ -3,7 +3,6 @@ var routerRockola = express.Router();
 var rockolaService = require('../private/service/rockolaService');
 
 routerRockola.put('/', function (req, res) {
-    req.session.reproductor = {};
     rockolaService.initRockola(req.body.nombreRockola)
             .then(function (rockola) {
                 req.session.rockola = rockola.nombre;
@@ -12,7 +11,6 @@ routerRockola.put('/', function (req, res) {
 });
 
 routerRockola.post('/existe', function (req, res) {
-    req.session.reproductor = {};
     rockolaService.existeRockola(req.body.nombreRockola)
             .then(function (rockola) {
                 res.status(200).send({existe: rockola});
@@ -21,7 +19,7 @@ routerRockola.post('/existe', function (req, res) {
 
 routerRockola.post('/ingresa', function (req, res) {
     req.session.cliente = {};
-    req.session.cliente.nombre = "anonimato";
+    req.session.cliente.nombre = "Anonimo";
     req.session.cliente.rockola = req.body.nombreRockola;
     res.status(201).send();
 });

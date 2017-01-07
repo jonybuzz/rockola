@@ -4,13 +4,13 @@ rockola.service.tema = (function () {
 
     var socket = io();
 
-    function enviarTema(videoId, titulo, thumbnail, nombreRockola) {
+    function enviarTema(videoId, titulo, thumbnail) {
         var tema = {
             'videoId': videoId,
             'titulo': titulo,
             'thumbnail': thumbnail
         };
-        socket.emit('agregarTema', tema, nombreRockola);
+        socket.emit('agregarTema', tema);
     }
 
     function obtenerLista() {
