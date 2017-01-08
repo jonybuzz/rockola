@@ -5,7 +5,7 @@ var rockolaService = require('../private/service/rockolaService');
 routerRockola.put('/', function (req, res) {
     rockolaService.initRockola(req.body.nombreRockola)
             .then(function (rockola) {
-                req.session.rockola = rockola.nombre;
+                req.session.passport.rockola = rockola.nombre;
                 res.status(201).send(rockola);
             });
 });
@@ -18,14 +18,10 @@ routerRockola.post('/existe', function (req, res) {
 });
 
 routerRockola.post('/ingresa', function (req, res) {
-    req.session.cliente = {};
-    req.session.cliente.nombre = "Anonimo";
-    req.session.cliente.rockola = req.body.nombreRockola;
-    res.status(201).send();
-});
-
-routerRockola.post('/ingresa/facebook', function (req, res) {
-    req.session.cliente.rockola = req.body.nombreRockola;
+    if (!req.session.passport.user) {
+        req.session.passport.nombre = "Anonimo";
+    }
+    req.session.passport.rockola = req.body.nombreRockola;
     res.status(201).send();
 });
 

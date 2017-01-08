@@ -16,13 +16,8 @@ rockola.service.reproductor = (function () {
         return rockola.service.post(url, {nombreRockola: nombreRockola});
     }
     
-    function ingresaClienteAnonimo(nombreRockola) {
+    function ingresaCliente(nombreRockola) {
         var url = rockola.service.url() + "rockola/ingresa";
-        return rockola.service.post(url, {nombreRockola: nombreRockola});
-    }
-    
-    function ingresaClienteConFacebook(nombreRockola) {
-        var url = rockola.service.url() + "rockola/ingresa/facebook";
         return rockola.service.post(url, {nombreRockola: nombreRockola});
     }
     
@@ -34,8 +29,7 @@ rockola.service.reproductor = (function () {
     return {
         initRockola: initRockola,
         existe: existe,
-        ingresaClienteAnonimo: ingresaClienteAnonimo,
-        ingresaClienteConFacebook: ingresaClienteConFacebook,
+        ingresaCliente: ingresaCliente,
         obtenerRockolas: obtenerRockolas
     };
 

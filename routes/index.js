@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 function isAuthenticated(req, res, next) {
-    if (req.session.cliente)
+    if (req.user)
         return next();
     res.redirect('/');
-    
 }
 
 

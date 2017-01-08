@@ -1,10 +1,10 @@
 module.exports = function (app, passport) {
 
-    app.get('/sesion', function (req, res) {
+    app.get('/api/sesion', function (req, res) {
         if (req.user) {
-            res.json({username: req.session, email: req.user.email});
+            res.json({anonimo: false, session: req.session});
         } else {
-            res.json({anonymous: true, session: req.session});
+            res.json({anonimo: true, session: req.session});
         }
     });
 
@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
 
     app.get('/auth/facebook/callback',
             passport.authenticate('facebook', {
-                successRedirect: '/api/usuario/ingresaPerfil',
+                successRedirect: '/api/usuario/login-facebook',
                 failureRedirect: '/'
             }));
 

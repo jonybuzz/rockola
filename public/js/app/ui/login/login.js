@@ -6,10 +6,11 @@ rockola.ui.login = (function () {
     function init() {
         initListaDeRockolas();
         bindearEventos();
+        rockola.ui.usuario.initMenu();
     }
 
     function bindearEventos() {
-        $("#js-boton-logear-cliente").on('click', unirseARockolaAnonimo);
+        $("#js-boton-logear-cliente").on('click', unirseARockola);
 
         $("#js-boton-ingresar-rockola").on('click', ingresarAReproductor);
         
@@ -36,18 +37,18 @@ rockola.ui.login = (function () {
         });
     }
 
-    function unirseARockolaAnonimo() {
+    function unirseARockola() {
         nombreRockola = $('.input-cliente .autocomplete-rockolas').val().trim();
         rockola.service.reproductor.existe(nombreRockola)
                 .done(function (res) {
                     if (res.existe !== null) {
-                        rockola.service.reproductor.ingresaClienteAnonimo(nombreRockola)
+                        rockola.service.reproductor.ingresaCliente(nombreRockola)
                                 .done(function () {
                                     window.location.href = "/cliente";
                                 });
                     } else {
-                        alert('No existe la rockola ' + nombreRockola + 
-                                '. Podés crearla y reproducir música escribiendo un nuevo nombre en "Reproducir"');
+                        alert('No existe la rockola "' + nombreRockola + 
+                                '". Podés crearla y reproducir música escribiendo un nuevo nombre abajo');
                     }
 
                 });
@@ -56,7 +57,7 @@ rockola.ui.login = (function () {
     function ingresarAReproductor() {
         nombreRockola = $('.input-rockola .autocomplete-rockolas').val().trim();
         if (nombreRockola !== "") {
-            rockola.service.reproductor.ingresaClienteAnonimo(nombreRockola)
+            rockola.service.reproductor.ingresaCliente(nombreRockola)
                     .done(function () {
                         rockola.service.reproductor.initRockola(nombreRockola);
                     });

@@ -5,8 +5,12 @@ module.exports = function (io) {
 
     io.on('connection', function (socket) {
 
-        socket.join(socket.handshake.session.cliente.rockola);
-
+        if (socket.handshake.session.passport.rockola) {
+            socket.join(socket.handshake.session.passport.rockola);
+        }else{
+            console.log("No se pudo conectar a la rockola");
+        }
+        
         socket.on('actualizame', function () {
             obtenerNombreRockola()
                     .then(temaService.obtenerTemas)
@@ -30,9 +34,8 @@ module.exports = function (io) {
 
         function obtenerNombreRockola() {
             return new Promise(function (exito, rechazar) {
-                if (socket.handshake.session.cliente && socket.handshake.session.cliente.nombre
-                        && socket.handshake.session.cliente.rockola) {
-                    exito(socket.handshake.session.cliente.rockola);
+                if (socket.handshake.session.passport.user) {
+                    exito(socket.handshake.session.passport.rockola);
                 } else {
                     rechazar("No hay un cliente en la sesion.");
                 }
@@ -40,9 +43,8 @@ module.exports = function (io) {
         }
 
         function obtenerUsuario() {
-            if (socket.handshake.session.cliente && socket.handshake.session.cliente.nombre
-                    && socket.handshake.session.cliente.rockola) {
-                return socket.handshake.session.cliente.nombre;
+            if (socket.handshake.session.passport.user) {
+                return socket.handshake.session.passport.nombre;
             } else
                 return config.nombreUsuarioAnonimo;
         }

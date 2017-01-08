@@ -101,13 +101,8 @@ h2{
 
 .logo {
     font-family: 'Oleo Script Swash Caps', cursive;
-    font-size: 45px;
+    font-size: 3rem;
     font-weight: 700;
-}
-@media only screen and (max-width: 600px) {
-    .logo {
-        font-size: 40px;
-    }
 }
 
 .listado {
