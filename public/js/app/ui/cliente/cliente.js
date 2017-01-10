@@ -8,6 +8,8 @@ rockola.ui.cliente = (function () {
     function init() {
         nombreUsuario = getCookie("rockolito");
         nombreRockola = getCookie("rockola");
+        rockola.ui.usuario.initMenu();
+        rockola.ui.usuario.setNombreRockola();
         obtenerLista();
         bindearTeclaEnter();
         $("#js-buscar-tema").on("click", buscarContenido);

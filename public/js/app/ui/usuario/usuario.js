@@ -6,7 +6,7 @@ rockola.ui.usuario = (function () {
 
     function setNombreRockola() {
         rockola.service.usuario.obtenerSesion().done(function (sesion) {
-            if (sesion.session.passport.nombre) {
+            if (sesion.session.passport.rockola) {
                 nombreRockola = sesion.session.passport.rockola;
                 $('.navbar .nombre-rockola').html(nombreRockola);
             }
@@ -15,11 +15,11 @@ rockola.ui.usuario = (function () {
 
     function initMenu() {
         rockola.service.usuario.obtenerSesion().done(function (sesion) {
-            if (sesion.session.passport.nombre) {
+            if (sesion.session.passport.user) {
                 nombreUsuario = sesion.session.passport.nombre;
                 $('.navbar .usuario-logueado').html(nombreUsuario);
-                alternarLoginLogut(sesion.session.passport);
             }
+            alternarLoginLogut(sesion.session.passport);
         });
     }
 
@@ -30,7 +30,7 @@ rockola.ui.usuario = (function () {
         if (passport.user) {
             login.addClass('hide');
             logout.removeClass('hide');
-        } else{
+        } else {
             login.removeClass('hide');
             logout.addClass('hide');
         }

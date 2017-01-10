@@ -7,6 +7,8 @@ rockola.ui.reproductorVista = (function () {
             menuWidth: 320,
             edge: 'right'
         });
+        rockola.ui.usuario.initMenu();
+        rockola.ui.usuario.setNombreRockola();
     }
 
     return {

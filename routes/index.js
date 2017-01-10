@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 function isAuthenticated(req, res, next) {
-    if (req.user)
+    if (req.session.passport.rockola)
         return next();
     res.redirect('/');
 }
