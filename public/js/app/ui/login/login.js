@@ -23,12 +23,12 @@ rockola.ui.login = (function () {
     }
 
     function initListaDeRockolas() {
-        rockola.service.reproductor.obtenerRockolas().done(function (data) {
+        rockola.service.usuario.obtenerRockolas().done(function (data) {
 
             var nombresDeRockolas = {};
 
-            $.each(data.rockolas, function (i, el) {
-                nombresDeRockolas[el.nombre] = null;
+            $.each(data, function (i, rockola) {
+                nombresDeRockolas[rockola.nombre] = null;
             });
 
             $('input.autocomplete-rockolas').autocomplete({

@@ -13,8 +13,8 @@ rockola.service.usuario = (function () {
     }
 
     function obtenerRockolas() {
-        var usuarioLogueadoUri = rockola.service.url() + "usuario/obtenerRockolas";
-        return rockola.service.get(usuarioLogueadoUri);
+        var obtenerRockolasUri = rockola.service.url() + "usuario/obtenerRockolas";
+        return rockola.service.get(obtenerRockolasUri);
     }
 
     return {

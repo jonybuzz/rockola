@@ -2,7 +2,7 @@ module.exports = function (app, passport) {
 
     app.get('/api/sesion', function (req, res) {
         if (req.user) {
-            res.json({anonimo: false, session: req.session});
+            res.json({anonimo: false, session: req.session, user:req.user});
         } else {
             res.json({anonimo: true, session: req.session});
         }

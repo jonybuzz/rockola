@@ -7,7 +7,11 @@ router.post('/rockola', function (req, res) {
 });
 
 router.get('/obtenerRockolas', function (req, res) {
-    res.json(req.user.rockolas);
+    if (req.user) {
+        res.json(req.user.rockolas);
+    } else {
+        res;
+    }
 });
 
 router.get('/login-facebook', function (req, res) {
