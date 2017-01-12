@@ -24,13 +24,16 @@ rockola.ui.usuario = (function () {
     }
 
     function alternarLoginLogut(passport) {
+        var perfil = $('.navbar .perfil').parent('li');
         var login = $('.navbar .login').parent('li');
         var logout = $('.navbar .logout').parent('li');
 
         if (passport.user) {
+            perfil.removeClass('hide');
             login.addClass('hide');
             logout.removeClass('hide');
         } else {
+            perfil.addClass('hide');
             login.removeClass('hide');
             logout.addClass('hide');
         }

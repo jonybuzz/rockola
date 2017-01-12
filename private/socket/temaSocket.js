@@ -12,15 +12,13 @@ module.exports = function (io) {
         }
         
         socket.on('actualizame', function () {
-            obtenerNombreRockola()
-                    .then(temaService.obtenerTemas)
+            temaService.obtenerTemas(socket.handshake.session.passport.rockola)
                     .then(emitirListaDesdeRockola);
         });
 
         socket.on('agregarTema', function (tema) {
-            tema.nombreUsuario = obtenerUsuario();
-            obtenerNombreRockola()
-                    .then(temaService.agregarTema.bind(null, tema))
+            tema.nombreUsuario = socket.handshake.session.passport.nombre;
+            temaService.agregarTema(tema, socket.handshake.session.passport.rockola)
                     .then(emitirActualizarLista);
         });
 
@@ -32,22 +30,6 @@ module.exports = function (io) {
             io.sockets.in(rockola.nombre).emit('actualizarLista', rockola.temas);
         }
 
-        function obtenerNombreRockola() {
-            return new Promise(function (exito, rechazar) {
-                if (socket.handshake.session.passport.user) {
-                    exito(socket.handshake.session.passport.rockola);
-                } else {
-                    rechazar("No hay un cliente en la sesion.");
-                }
-            });
-        }
-
-        function obtenerUsuario() {
-            if (socket.handshake.session.passport.user) {
-                return socket.handshake.session.passport.nombre;
-            } else
-                return config.nombreUsuarioAnonimo;
-        }
     });
 };
 

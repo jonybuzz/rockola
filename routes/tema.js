@@ -7,14 +7,14 @@ routerA.route('/todos').get(function (req, res, next) {
 });
 
 routerA.route('/siguiente').get(function (req, res, next) {
-    temaService.obtenerSiguiente(req.session.rockola)
+    temaService.obtenerSiguiente(req.session.passport.rockola)
             .then(function (tema) {
                 res.json({tema: tema});
             });
 });
 
 routerA.route('/obtenerPrimerTema').get(function (req, res) {
-    temaService.obtenerPrimerTema(req.session.rockola)
+    temaService.obtenerPrimerTema(req.session.passport.rockola)
             .then(function (tema) {
                 res.status(200).json({tema: tema});
             });
