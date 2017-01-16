@@ -5,7 +5,7 @@ module.exports = function (io) {
 
     io.on('connection', function (socket) {
 
-        if (socket.handshake.session.passport.rockola) {
+        if (socket.handshake.session.passport && socket.handshake.session.passport.rockola) {
             socket.join(socket.handshake.session.passport.rockola);
         }else{
             console.log("No se pudo conectar a la rockola");
