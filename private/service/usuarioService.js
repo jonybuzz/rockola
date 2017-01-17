@@ -1,6 +1,7 @@
 var RockolaModel = require("../model/Rockola.model.js").RockolaModel;
+var UsuarioModel = require("../model/Usuario.model.js").UsuarioModel;
 
-var agregarRockola = function (req, res) {
+var agregarRockola = function (req, success, error) {
     var usuario = req.user;
 
     RockolaModel.findOne({nombre: req.body.nombreRockola}, function (err, rockola) {
@@ -12,13 +13,17 @@ var agregarRockola = function (req, res) {
             if (rockolasUsuario.length === 0) {
                 usuario.rockolas.push({nombre: req.body.nombreRockola, temas: []})
                 usuario.save(function (err, result) {
-                    res.status(201).send(result);
+                    if (result)
+                        success(result);
+                    if (err)
+                        console.log(err.message);
                 });
+
             } else {
-                res.status(204).send("Ya estás unido a esta Rockola");
+                error("Ya estás unido a esta Rockola");
             }
         } else {
-            res.status(204).send("No existe la rockola seleccionada");
+            error("No existe la rockola seleccionada");
         }
     });
 

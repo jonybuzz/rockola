@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
     res.render('index');
 });
 
-router.get('/reproductor',  isAuthenticated, function (req, res) {
+router.get('/reproductor', isAuthenticated, function (req, res) {
     res.render('reproductor');
 });
 
@@ -24,7 +24,7 @@ router.get('/login', function (req, res, next) {
     res.render('login');
 });
 
-router.get('/perfil', isAuthenticated, function (req, res, next) {
+router.get('/perfil', function (req, res, next) {
     res.render('perfil');
 });
 

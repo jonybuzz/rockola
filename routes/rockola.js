@@ -1,6 +1,7 @@
 var express = require('express');
 var routerRockola = express.Router();
 var rockolaService = require('../private/service/rockolaService');
+var usuarioService = require('../private/service/usuarioService');
 
 routerRockola.put('/', function (req, res) {
     rockolaService.initRockola(req.body.nombreRockola)
@@ -18,11 +19,18 @@ routerRockola.post('/existe', function (req, res) {
 });
 
 routerRockola.post('/ingresa', function (req, res) {
-    if (!req.session.passport.user) {
-        req.session.passport.nombre = "Anonimo";
-    }
     req.session.passport.rockola = req.body.nombreRockola;
-    res.status(201).send();
+
+    if (req.session.passport.user) {
+        usuarioService.agregarRockola(req, function (result) {
+            res.status(201).send(result);
+        }, function (msjError) {
+            res.status(204).send(msjError);
+        });
+    } else {
+        req.session.passport.nombre = "Anonimo";
+        res.status(201).send();
+    }
 });
 
 routerRockola.get('', function (req, res) {
