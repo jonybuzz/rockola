@@ -1,7 +1,7 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var AnonymousStrategy = require('passport-anonymous').Strategy;
 var UsuarioModel = require("../model/Usuario.model");
-var configFacebook = require('../config/config').config.facebook;
+var configFacebook = require('../config/config').facebook;
 
 var crearUsuarioFacebook = function (token, refreshToken, profile, done) {
 

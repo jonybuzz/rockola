@@ -1,4 +1,4 @@
-module.exports.config = {
+module.exports = {
     dbUrl: (process.env.MONGOURL || 'mongodb://localhost:27017') + '/rockola',
     facebook: {
         clientID: (process.env.FBAPPID || '1774831262842815'),

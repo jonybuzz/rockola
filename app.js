@@ -14,7 +14,7 @@ var routesFacebook = require('./routes/facebook');
 var routesUsuario = require('./routes/usuario');
 var session = require('express-session');
 var app = express();
-var config = require('./private/config/config').config;
+var config = require('./private/config/config');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

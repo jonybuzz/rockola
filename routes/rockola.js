@@ -2,6 +2,7 @@ var express = require('express');
 var routerRockola = express.Router();
 var rockolaService = require('../private/service/rockolaService');
 var usuarioService = require('../private/service/usuarioService');
+var config = require('../private/config/config');
 
 routerRockola.put('/', function (req, res) {
     rockolaService.initRockola(req.body.nombreRockola)
@@ -28,7 +29,7 @@ routerRockola.post('/ingresa', function (req, res) {
             res.status(204).send(msjError);
         });
     } else {
-        req.session.passport.nombre = "Anonimo";
+        req.session.passport.nombre = config.nombreUsuarioAnonimo;
         res.status(201).send();
     }
 });

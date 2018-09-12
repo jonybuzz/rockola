@@ -1,5 +1,4 @@
 var temaService = require('../service/temaService');
-var config = require('../config/config');
 
 module.exports = function (io) {
 
