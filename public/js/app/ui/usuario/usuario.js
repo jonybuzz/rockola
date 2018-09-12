@@ -16,7 +16,7 @@ rockola.ui.usuario = (function () {
     function initMenu() {
         rockola.service.usuario.obtenerSesion().done(function (sesion) {
             if (sesion.session.passport.user) {
-                nombreUsuario = sesion.session.passport.nombre;
+                nombreUsuario = sesion.user.nombre;
                 $('.navbar .usuario-logueado').html(nombreUsuario);
             }
             alternarLoginLogut(sesion.session.passport);

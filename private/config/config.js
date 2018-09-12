@@ -1,10 +1,9 @@
 module.exports.config = {
-    mongoUrl: "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin",
-    //mongoUrl: "mongodb://localhost:27017/rockola",
+    dbUrl: (process.env.MONGOURL || 'mongodb://localhost:27017') + '/rockola',
     facebook: {
-        appId: '169801373463876',
-        secret: 'eb6e67552f004fcf25d31a91c03cbe62',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback'
+        clientID: (process.env.FBAPPID || '1774831262842815'),
+        clientSecret: (process.env.FBSECRET || 'feaa44c8995b61e48b55ce66bd1a5074'),
+        callbackURL: (process.env.SERVERURL || 'http://localhost:3000') + '/auth/facebook/callback'
     },
     nombreUsuarioAnonimo: "Anonimo"
 };

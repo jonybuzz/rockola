@@ -1,6 +1,8 @@
+/* global __dirname */
+
 var express = require('express');
 var path = require('path');
-//var favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -12,16 +14,23 @@ var routesFacebook = require('./routes/facebook');
 var routesUsuario = require('./routes/usuario');
 var session = require('express-session');
 var app = express();
+var config = require('./private/config/config').config;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//DATABASE
+var mongoose = require('mongoose');
+mongoose.connect(config.dbUrl);
+var bluebird = require('bluebird');
+mongoose.Promise = bluebird;
 
 //SESSION
 var expressSession = require('express-session')({
@@ -34,7 +43,11 @@ var expressSession = require('express-session')({
     saveUninitialized: false
 });
 app.use(expressSession);
-app.use(session({secret: 'somosPNTsecret'}));
+app.use(session({
+    secret: 'RockolaSecret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 //PASSPORT
 app.use(passport.initialize());

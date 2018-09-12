@@ -1,14 +1,7 @@
-var databaseUrl = "mongodb://rockola:deb0d3f9c3e6e1fc0b8792c1a10f69538256978afd7e9c95b6ca2227a8de781d@localhost:27017/rockola?authSource=admin";
-//var databaseUrl = "mongodb://localhost:27017/rockola";
-var xss = require('xss');
 var TemaModel = require("../model/Tema.model").TemaModel;
-var RockolaModel = require("../model/Rockola.model").RockolaModel;
-var mongoose = require('mongoose');
+var RockolaModel = require("../model/Rockola.model");
 var mezclador = require('../utils/mezclador');
-
-mongoose.connect(databaseUrl);
-var bluebird = require('bluebird');
-mongoose.Promise = bluebird;
+var xss = require('xss');
 
 function agregarTema(tema, nombreRockola) {
     var temaNuevo = new TemaModel({

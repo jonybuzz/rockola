@@ -30,7 +30,7 @@ rockola.service.tema = (function () {
 
 
     function buscarTemas(busqueda) {
-        var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
+        var key = "key=AIzaSyD6GvN4zeEbIwp0Jk_46teK15BV1a-h_A0";
         var urlBase = "https://www.googleapis.com/youtube/v3/search";
         var filtros = "part=snippet&maxResults=50&type=video&videoEmbeddable=true&videoSyndicated=true";
         var q = "q=" + busqueda.replace(" ", "+");
@@ -39,7 +39,7 @@ rockola.service.tema = (function () {
     }
 
     function buscarPlayListPorBanda(busqueda) {        
-        var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
+        var key = "key=AIzaSyD6GvN4zeEbIwp0Jk_46teK15BV1a-h_A0";
         var urlBase = "https://www.googleapis.com/youtube/v3/search";
         var type = "type=playlist&";
         var filtros = "part=snippet&maxResults=50";
@@ -50,7 +50,7 @@ rockola.service.tema = (function () {
 
     function buscarTemasDePlayList(playListItems, pagina) {
         var playListId = playListItems.items[pagina].id.playlistId;
-        var key = "key=AIzaSyBeKd3kWCtAnj07nF2_Gf1IGRcm_GKMZwo";
+        var key = "key=AIzaSyD6GvN4zeEbIwp0Jk_46teK15BV1a-h_A0";
         var urlBase = "https://www.googleapis.com/youtube/v3/playlistItems";
         var filtros = "part=snippet&maxResults=50";
         var q = "playlistId=" + playListId;

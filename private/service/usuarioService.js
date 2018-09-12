@@ -1,32 +1,29 @@
-var RockolaModel = require("../model/Rockola.model.js").RockolaModel;
-var UsuarioModel = require("../model/Usuario.model.js").UsuarioModel;
+var RockolaModel = require("../model/Rockola.model.js");
 
 var agregarRockola = function (req, success, error) {
-    var usuario = req.user;
 
-    RockolaModel.findOne({nombre: req.body.nombreRockola}, function (err, rockola) {
-        if (rockola) {
-            var rockolasUsuario = usuario.rockolas.filter(function (rockola) {
-                return rockola.nombre === req.body.nombreRockola;
+    RockolaModel.findOne({nombre: req.body.nombreRockola}, function (err, rockolaEncontrada) {
+        if (rockolaEncontrada) {
+
+            var usuariosCoincidentesDeRockola = rockolaEncontrada.usuarios.filter(function (idUsuario) {
+                return idUsuario.equals(req.user._id);
             });
 
-            if (rockolasUsuario.length === 0) {
-                usuario.rockolas.push({nombre: req.body.nombreRockola, temas: []})
-                usuario.save(function (err, result) {
+            if (usuariosCoincidentesDeRockola.length === 0) {
+                rockolaEncontrada.usuarios.push(req.user._id);
+                rockolaEncontrada.save(function (err, result) {
                     if (result)
                         success(result);
                     if (err)
                         console.log(err.message);
                 });
-
-            } else {
-                error("Ya estás unido a esta Rockola");
             }
+            
         } else {
             error("No existe la rockola seleccionada");
         }
     });
-
+    
 };
 
 

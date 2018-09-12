@@ -5,10 +5,8 @@ var TemaSchema = require('./Tema.model').TemaSchema;
 var RockolaSchema = new Schema({
     nombre: {type: String, unique: true},
     temas: [TemaSchema],
-    temasHistoricos: [TemaSchema]
+    temasHistoricos: [TemaSchema],
+    usuarios: [{type: Schema.Types.ObjectId, ref: 'Usuario'}]
 });
 
-var RockolaModel = mongoose.model('Rockola', RockolaSchema);
-
-module.exports.RockolaModel = RockolaModel;
-module.exports.RockolaSchema = RockolaSchema;
+module.exports = mongoose.model('Rockola', RockolaSchema);
