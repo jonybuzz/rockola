@@ -5,5 +5,10 @@ module.exports = {
         clientSecret: (process.env.FBSECRET || 'feaa44c8995b61e48b55ce66bd1a5074'),
         callbackURL: (process.env.SERVERURL || 'http://localhost:3000') + '/auth/facebook/callback'
     },
+    google: {
+        clientID: (process.env.FBAPPID || '1774831262842815'),
+        clientSecret: (process.env.FBSECRET || 'feaa44c8995b61e48b55ce66bd1a5074'),
+        callbackURL: (process.env.SERVERURL || 'http://localhost:3000') + '/auth/google/callback'
+    },
     nombreUsuarioAnonimo: "Anonimo"
 };

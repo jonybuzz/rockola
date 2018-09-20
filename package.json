@@ -22,6 +22,7 @@
     "passport": "~0.1.17",
     "passport-anonymous": "1.0.1",
     "passport-facebook": "~1.0.2",
+    "passport-google-oauth": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.7.2",
     "xss": "^0.2.13",

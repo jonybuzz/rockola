@@ -5,6 +5,9 @@ var UsuarioSchema = new Schema({
     nombre: String,
     facebook: {
         id: String
+    },
+    google: {
+        id: String
     }
 });
 

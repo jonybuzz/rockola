@@ -19,7 +19,12 @@ router.get('/rockolas', function (req, res) {
 });
 
 router.get('/login-facebook', function (req, res) {
-    req.session.passport.nombre = req.user.facebook.name;
+    req.session.passport.nombre = req.user.nombre;
+    res.redirect('/');
+});
+
+router.get('/login-google', function (req, res) {
+    req.session.passport.nombre = req.user.nombre;
     res.redirect('/');
 });
 
